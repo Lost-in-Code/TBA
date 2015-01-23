@@ -55,3 +55,4 @@ target/
 
 #pycharm
 .idea
+database.db

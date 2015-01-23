@@ -1,7 +1,15 @@
 __author__ = 'Atle'
 from flask import Flask, request, render_template
+from backend.database import *
 
 app = Flask(__name__)
+
+
+
+@app.route('/create_db')
+def createDb():
+    create_db()
+    return "OK, Database (re)created"
 
 @app.route('/')
 def index():
@@ -27,4 +35,5 @@ def join():
     return render_template("/client/client.html")
 
 if __name__ == '__main__':
+    app.Debug = True
     app.run()
