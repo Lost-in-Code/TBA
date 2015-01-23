@@ -1,0 +1,30 @@
+Role 'Tank':
+    Properties: ['Health']
+    Description: 'You may not have the most damage, but nobody can take a blow quite like you'
+    Actions:
+        Taunt: 'You taunt the enemy with quick slashes and scathing words, dealing no damage but forcing it's attention
+            on you for the next round.'
+        Boost Defense: 'You adapt a defensive stance which greatly boosts your ability to negate incoming damage for
+            {x} rounds.'
+        Attack: 'You smash your shield into the enemy, dealing moderate damage, but reduce the chance you will be
+            targeted this round.'
+
+Role 'Damager':
+    Properties: ['Health']
+    Description: 'You live by the old proverb "The best defense is a good offense" and focus on dealing as much damage
+        to the enemy as possible'
+    Actions:
+        Melee attack: 'The air around your daggers sing with the song of slaughter as you close in and deal heavy damage
+            to the enemy.'
+        Ranged attack: 'You retreat to a distance and let loose an arrow from your trusty bow, dealing moderate damage
+            to the enemy.'
+        Boost attack: 'By taking a quick break and focusing your mind you boost your damage for the next {x} rounds.
+
+Role 'Healer':
+    Properties: ['Health', 'Mana']
+    Description: 'Your innate magic enables you to heal your group by spending mana on powerful spells that can close
+        wounds and knit bones.'
+    Actions:
+        Focused Heal: 'You focus your energies on the most injured tank, healing {x} damage.'
+        Group Heal: 'You blanket the group with a massive wave of healing energy, healing everyone for {x} damage each.'
+        Recover Mana: 'You retreat temporarily retreat from combat to rest and recover a portion of your mana.'
