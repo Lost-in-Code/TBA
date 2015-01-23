@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    $('.countdown').toggle();
     $('#role_dps').click(function() {
         $('#chooseClass').addClass("classSet");
         $('#chooseClass').html("DPS <span class=\"caret\"></span>");
@@ -23,13 +24,14 @@ $(document).ready(function() {
                 cache: false,
                 success: function(response) {
                     if (response.result == true) {
-                        $('body').load($('#urlForCountdownHTML').text());
+                        $('.countdown').toggle();
+                        $('.joinPage').toggle();
+                        
+                        console.log(response.uid)
                     } else {
-                        alert("error! same nick different class?");
+                        alert("Error on join, same nick different class?");
                         console.log(response.uid);
-                    }
-                    // Set HTML to logged in user
-                    
+                    } 
                 },
                 error: function(error) {
                     console.log(error);
@@ -40,6 +42,12 @@ $(document).ready(function() {
             // Set HTML code to user logged in: Ready button/countdown
         } else {
             $('#chooseClass').html("Select a class! <span class=\"caret\"></span>");
+        }
+    });
+    $('.readyButton').click(function() {
+        if (!$(this).hasClass("active")) {
+            $(this).addClass("active");
+        } else {
         }
     });
 });
