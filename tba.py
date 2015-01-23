@@ -3,6 +3,7 @@ from flask import Flask, request, render_template
 import json
 from backend.database import *
 from backend.host.host import *
+from backend.client.client import *
 
 app = Flask(__name__)
 
@@ -26,7 +27,7 @@ def joinGame():
     room = request.args.get('room')
     nick = request.args.get('nick')
     role = request.args.get('role')
-    return ' - '.join([room, nick, role])
+    return json.dumps(join_game(room, nick, role))
 
 @app.route('/host')
 def host():

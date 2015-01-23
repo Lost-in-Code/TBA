@@ -1,3 +1,5 @@
+import random
+
 __author__ = 'Atle'
 import sqlite3
 
@@ -14,7 +16,7 @@ def create_db():
     c.execute('''DROP TABLE IF EXISTS games''')
     c.execute('''DROP TABLE IF EXISTS players''')
     c.execute('''CREATE TABLE players
-                (room_id, nick, role)''')
+                (room_id, nick, role, uid)''')
     c.execute(''' CREATE TABLE games
                 (room_id)''')
     db_close_conn(conn)
@@ -31,3 +33,18 @@ def db_insert_game(room_id):
     db_close_conn(conn)
     return False
 
+def insert_player(room_id, nick, role):
+    conn = db_get_conn()
+    c = conn.cursor()
+    c.execute('''SELECT * FROM players WHERE room_id = ? AND nick = ?''', [room_id, nick])
+    row = c.fetchone()
+    if row is None:
+        uid = random.randint(10000,99999)
+        while c.execute('''SELECT * FROM players WHERE uid = ?''', [uid]).fetchone() != None:
+            uid = random.randint(10000, 99999)
+        c.execute('''INSERT INTO players VALUES(?, ?, ?, ?)''', [room_id, nick, role, uid])
+        db_close_conn(conn)
+        return (True, uid)
+    if row[2] == role:
+        return (True, row[3])
+    return (False, 0)
