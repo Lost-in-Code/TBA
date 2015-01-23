@@ -15,16 +15,21 @@ $(document).ready(function() {
         if ($('#chooseClass').hasClass("classSet")) {
             var userNick = $('.userNick').val();
             var gameID   = $('.userID').val();
-            var userClass   = $('#chooseClass').text();
+            var userClass= $('#chooseClass').text();
             $.ajax({
                 url: '/game/join',
                 data: { room: gameID, nick: userNick, role: userClass},
-                type: 'GET',
+                dataType: 'json',
                 cache: false,
                 success: function(response) {
-                    console.log(response);
+                    if (response.result == true) {
+                        $('body').load($('#urlForCountdownHTML').text());
+                    } else {
+                        alert("error! same nick different class?");
+                        console.log(response.uid);
+                    }
                     // Set HTML to logged in user
-                    $('body').load("{{ url_for('templates', filename='client/clientcountdown.html') }}")
+                    
                 },
                 error: function(error) {
                     console.log(error);
