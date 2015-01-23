@@ -1,6 +1,8 @@
 __author__ = 'Atle'
 from flask import Flask, request, render_template
+import json
 from backend.database import *
+from backend.host.host import *
 
 app = Flask(__name__)
 
@@ -17,7 +19,7 @@ def index():
 
 @app.route('/game/create')
 def createGame():
-    return "GameCreated"
+    return json.dumps(create_game())
 
 @app.route('/game/join')
 def joinGame():
