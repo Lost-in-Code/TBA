@@ -44,10 +44,9 @@ def create_db():
     c.execute('''CREATE TABLE games
                 (room_id, ready_countdown, state, round_countdown, event)''')
     c.execute('''CREATE TABLE bosses
-                (room_id, name, hp)''')
+                (room_id, name, hp, action)''')
     db_close_conn(conn)
     logging.info("Created DB")
-
 
 def db_insert_game(room_id):
     db_setup_logging()
@@ -171,7 +170,6 @@ def db_set_roundResultDone(room_id):
     c.execute('''UPDATE players SET state = 4 WHERE room_id = ?''', [room_id])
     db_close_conn(conn)
     return True
-    # Implement new states based on stuff that has happend. HP on people, boss etc.
 
 def db_do_client_action(uid, action):
     conn = db_get_conn()
@@ -199,3 +197,37 @@ def db_set_randomEvent(room_id, event_id):
     c.execute('''UPDATE games SET event = ? WHERE room_id = ?''', [event_id, room_id])
     db_close_conn(conn)
     return True
+
+def db_insert_boss(room_id, boss_name):
+    conn = db_get_conn()
+    c = conn.cursor()
+    c.execute('''SELECT * FROM games WHERE room_id = ?''', [room_id])
+    if c.fetchone() is None: return False
+    c.execute('''INSERT INTO games(room_id, name, hp, action) VALUES (?, ?, 100, 0)''', [room_id, boss_name])
+    db_close_conn(conn)
+    return True
+
+def db_get_boss_id(room_id):
+    conn = db_get_conn()
+    c = conn.cursor()
+    c.execute('''SELECT * FROM games WHERE room_id = ?''', [room_id])
+    if c.fetchone() is None: return False
+    c.execute('''SELECT count(*) FROM bosses WHERE room_id = ?''', [room_id])
+    return c.fetchone()[0]
+
+def db_boss_attack(room_id, action):
+    conn = db_get_conn()
+    c = conn.cursor()
+    c.execute('''SELECT * FROM games WHERE room_id = ?''', [room_id])
+    if c.fetchone() is None: return False
+    c.execute('''UPDATE bosses SET action = ? WHERE room_id = ? AND hp > 0''', [action, room_id])
+    db_close_conn(conn)
+    return True
+
+def db_get_boss_action(room_id):
+    conn = db_get_conn()
+    c = conn.cursor()
+    c.execute('''SELECT * FROM games WHERE room_id = ?''', [room_id])
+    if c.fetchone() is None: return False
+    c.execute('''SELECT action FROM bosses WHERE room_id = ? AND hp > 0''', [room_id])
+    return c.fetchone()[0]
