@@ -50,12 +50,12 @@ def get_host_questStory(room_id):
 def get_host_round(room_id):
     json_data = open('content/encounters.json')
     data = json.load(json_data)
-    boss_id = database.get_boss_id(room_id)
+    boss_id = database.db_get_boss_id(room_id)
     actions = data['encounters'][boss_id - 1]['actions']
-    action = random.choice(actions['actions'])
+    action = random.choice(actions)
     attack = data['actions'][action]
-    database.db_boss_attack(room_id, attack)
-    return {"Target": action['target']}
+    database.db_boss_attack(room_id, action)
+    return {"Target": attack['target']}
 
 def get_host_round_result(room_id):
     json_data = open('content/encounters.json')

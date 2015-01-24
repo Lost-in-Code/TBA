@@ -203,7 +203,7 @@ def db_insert_boss(room_id, boss_name):
     c = conn.cursor()
     c.execute('''SELECT * FROM games WHERE room_id = ?''', [room_id])
     if c.fetchone() is None: return False
-    c.execute('''INSERT INTO games(room_id, name, hp, action) VALUES (?, ?, 100, 0)''', [room_id, boss_name])
+    c.execute('''INSERT INTO bosses (room_id, name, hp, action) VALUES (?, ?, 100, 0)''', [room_id, boss_name])
     db_close_conn(conn)
     return True
 

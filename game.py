@@ -50,10 +50,14 @@ def round_countdown_done(room_id):
     num_heal_action2 = c.fetchone()[0]
     c.execute('''SELECT count(*) FROM players WHERE room_id = ? AND role = 3 AND action = 3 AND hp > 0''', [room_id])
     num_heal_action3 = c.fetchone()[0]
-    c.execute('''SELECT * FROM bosses WHERE room_id = ? AND hp > 0''')
+    c.execute('''SELECT * FROM bosses WHERE room_id = ? AND hp > 0''', [room_id])
     boss = c.fetchone()
     dmg_taken_tank = 0
     dmg_taken_group = 0
+    dmg_done_melee = 0
+    dmg_done_range = 0
+    healing_done_tank = 0
+    healing_done_group = 0
     if boss['action'] == 1:
         dmg_taken_tank = max(40 * (1 - (num_tank_action1 / num_players / 3)), 0)
         dmg_done_range = abs(max(7 * (-1 + (num_dps_action2 / num_players / 3)), 0))
@@ -77,8 +81,9 @@ def round_countdown_done(room_id):
         healing_done_tank = abs(max(30 * (-1 + (num_heal_action1 / num_players / 3)), 0))
         healing_done_group = abs(max(15 * (-1 + (num_heal_action2 / num_players / 3)), 0))
 
-    c.execute('''UPDATE bosses SET hp = ?, WHERE room_id = ? AND hp > 0''', [boss['hp'] - (dmg_done_melee + dmg_done_range), room_id])
-    c.execute('''SELECT * FROM players WHERE room_id = ?''')
+    c.execute('''UPDATE bosses SET hp = ? WHERE room_id = ? AND hp > 0''', [boss['hp'] - (dmg_done_melee + dmg_done_range), room_id])
+    c.execute('''SELECT * FROM players WHERE room_id = ?''', ['room_id'])
+    print("Group did %s damage, took %s dmg and healed %s" % (dmg_done_range + dmg_done_melee, dmg_taken_tank + dmg_taken_group, healing_done_group + healing_done_tank))
     players = c.fetchall()
     for player in players:
         if player['role'] == 1:
