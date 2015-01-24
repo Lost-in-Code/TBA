@@ -41,7 +41,7 @@ def create_db():
     c.execute('''DROP TABLE IF EXISTS games''')
     c.execute('''DROP TABLE IF EXISTS players''')
     c.execute('''CREATE TABLE players
-                (room_id, nick, role, uid, ready, state)''')
+                (room_id, nick, role, uid, ready, state, hp)''')
     c.execute(''' CREATE TABLE games
                 (room_id, ready_countdown, state)''')
     db_close_conn(conn)
@@ -71,7 +71,7 @@ def db_insert_player(room_id, nick, role):
         uid = random.randint(10000,99999)
         while c.execute('''SELECT * FROM players WHERE uid = ?''', [str(uid)]).fetchone() != None:
             uid = random.randint(10000, 99999)
-        c.execute('''INSERT INTO players (room_id, nick, role, uid, ready, state) VALUES(?, ?, ?, ?, 0, 0)''', [room_id, nick, role, str(uid)])
+        c.execute('''INSERT INTO players (room_id, nick, role, uid, ready, state) VALUES(?, ?, ?, ?, 0, 0, 100)''', [room_id, nick, role, str(uid)])
         db_close_conn(conn)
         logging.info("Added new player %s to room %s with nick %s and role %s" % (uid, room_id, nick, role))
         return (True, uid)
@@ -109,6 +109,19 @@ def db_game_ready(uid):
             logging.info("Countdown started for room %s" % (room_id))
         db_close_conn(conn)
     return True
+
+def db_get_host_status(room_id):
+    conn = db_get_conn()
+    c = conn.cursor()
+    c.execute('''SELECT nick, ready, role FROM players WHERE room_id=?''', [room_id])
+    returnValue = {"Players": [{"nick": row[0], "ready": row[1], "role": row[2] } for row in c.fetchall()]}
+    return returnValue
+
+def db_get_host_state(room_id):
+    conn = db_get_conn()
+    c = conn.cursor()
+    c.execute('''SELECT state FROM games WHERE room_id=?''', [room_id])
+    return c.fetchone()[0]
 
 def db_get_status(uid):
     conn = db_get_conn()

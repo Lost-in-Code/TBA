@@ -39,6 +39,16 @@ def gameStatus():
     uid = request.args.get('uid')
     return json.dumps(get_player_status(uid))
 
+@app.route('/game/getHostState')
+def getHostState():
+    room_id = request.args.get('room_id')
+    return json.dumps(get_host_state(room_id))
+
+@app.route('/game/getHostStatus')
+def getHostStatus():
+    room_id = request.args.get('room_id')
+    return json.dumps(get_host_status(room_id))
+
 @app.route('/host')
 def host():
     return render_template('/host/host.html')
