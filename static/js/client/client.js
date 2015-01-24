@@ -4,9 +4,9 @@ var userClass = "";
 var uid       = 0;
 var userState = 0;
 var oldState  = 0;
-var counter   = 7;
 var selClass  = 0;
-
+var hp        = 100;
+var mana      = 100;
 
 
 $(document).ready(function() {
@@ -88,12 +88,14 @@ setInterval(function() {
    // if (userState != oldState) {
         if (userState === 1) {
             readyPage();
-        } else if (userState === 2 || userState === 3) {
+        } else if (userState === 2){
             goWaiting();
+        } else if (userState === 3) {
+            startRound();
         } else if (userState === 4) {
             startRound();
         } else if (userState === 5) {
-            roundResultPoll();
+            goWaiting();
         } else if(!userState) {
             joinPage();
         }
@@ -108,8 +110,16 @@ setInterval(function() {
             userState = response;
             console.log("State: " + response);
         },
-        
-        });
+    });
+    $.ajax({
+        url: '/game/getPlayerStatus',
+        data: {uid: uid},
+        dataType: 'json',
+        cache: false,
+        success: function(response) {
+            hp = response.HP;
+            mana = response.Mana;
+        }
 }, 2000);
 
 
@@ -133,13 +143,67 @@ function startRound() {
     $('.joinPage').hide();
     $('.game').show();
     $('.waiting').hide();
-}
+    $('.mana').hide();
+    if (selClass === 1) {
+        $('.action1').text("Melee Attack");
+        $('.action2').text("Ranged Attack");
+        $('.action3').text("Boost Attack");
+    } else if (selClass === 2) {
+        $('.action1').text("Taunt");
+        $('.action2').text("Boost Defense");
+        $('.action3').text("Attack");
+    } else if (selClass === 3) {
+        $('.action1').text("Focused Heal");
+        $('.action2').text("Group Heal");
+        $('.action3').text("Recover Mana");
+        $('.mana').show();
+        
+        
+    }
+    
+    $('.action1').click(function() {
+        $.ajax({
+            url: '/game/doClientAction',
+            data: {uid:uid, action: 1},
+            dataType: 'json',
+            cache: false,
+            error: function(response) {
+                alert("Could not send your action!");
+                console.log(response);
+            }
+        });
+    });
+    $('.action2').click(function() {
+        $.ajax({
+            url: '/game/doClientAction',
+            data: {uid:uid, action: 2},
+            dataType: 'json',
+            cache: false,
+            error: function(response) {
+                alert("Could not send your action!");
+                console.log(response);
+            }
+        });
+    });
+    $('.action3').click(function() {
+        $.ajax({
+            url: '/game/doClientAction',
+            data: {uid:uid, action: 3},
+            dataType: 'json',
+            cache: false,
+            error: function(response) {
+                alert("Could not send your action!");
+                console.log(response);
+            }
+        });
+    });
 
 function goWaiting() {
     $('.readyPage').hide();
     $('.joinPage').hide();
     $('.game').hide();
     $('.waiting').show();
+    startRound();
 }
 
 
