@@ -125,7 +125,7 @@ def db_get_host_state(room_id):
     c.execute('''SELECT state FROM games WHERE room_id=?''', [room_id])
     return c.fetchone()[0]
 
-def db_get_state(uid):
+def db_get_status(uid):
     conn = db_get_conn()
     c = conn.cursor()
     c.execute('''SELECT state FROM players WHERE uid=?''', [uid])
