@@ -3,13 +3,14 @@ var gameID    = "";
 var userClass = "";
 var uid       = 0;
 var userState = 0;
-var counter   = 15;
-var roomState = 0;
+var oldState  = 0;
+var counter   = 7;
 var selClass  = 0;
 
 
 
 $(document).ready(function() {
+    
     $('.countdown').toggle();
     $('#role_dps').click(function() {
         $('#chooseClass').addClass("classSet");
@@ -37,10 +38,10 @@ $(document).ready(function() {
                 cache: false,
                 success: function(response) {
                     if (response.result == true) {
-                        $('.countdown').toggle();
-                        $('.joinPage').toggle();
+                        questCountdown();
                         uid = response.uid;
                         console.log(uid);
+                        userState = 1;
                         
                     } else {
                         alert("Error on join, same nick different class?");
@@ -66,15 +67,12 @@ $(document).ready(function() {
                 success: function(response) {
                     console.log(response);
                     // State is 2
-                    countdownPoll();
                 },
                 error: function(response) {
                     alert("Couldn't set player as ready");
                     console.log(response);
                 }
             });
-            // TODO: Make backend check how many players are ready before this
-            // Run this until state is 3
             
         } else {
             // Make toggleable?
@@ -82,61 +80,42 @@ $(document).ready(function() {
     });
 }); 
 
-
-function countdownPoll() {
-        setTimeout (function() {
-            if (userState < 3) {
-                $.ajax({
-                    url: '/game/getPlayerState',
-                    data: {uid: uid},
-                    dataType: 'json',
-                    cache: false,
-                    success: function(response) {
-                        $('#theCountdown').text("Game starts in: " + counter);
-                        counter--;
-                        userState = response;
-                        console.log("State: " + response);
-                    },
-                    error: function(response) {
-                        alert("Failed to get player state!");
-                        console.log("State: " + response);
-                        return false;
-                    },
-                    complete: countdownPoll
-                });
-            } else {
-                gameReadyPoll();
-            }
-            
-        }, 1000);
-}
-
-function gameReadyPoll() {
-    setTimeout(function() {
-        if (userState < 4) {
-            $.ajax({
-                url: '/game/getPlayerState',
-                data: {uid: uid},
-                dataType: 'json',
-                cache: false,
-                success: function(response) {
-                    userState = response;
-                    console.log("state: " + response);
-                },
-                error: function(response) {
-                    alert("Failed to get player state!");
-                    console.log("State: " + response);
-                    return false;
-                    
-                },
-                complete: gameReadyPoll
-            });
-        } else {
-            startGame();
+setInterval(function() {
+    if (userState != oldState) {
+        if (userState === 2) {
+            questCountdown();
+        } else if (userState === 4) {
+            startRound();
+        } else if (userState === 5) {
+            roundResultPoll();
         }
-    }, 2000);
+    }
+    $.ajax({
+        url: '/game/getPlayerState',
+        data: {uid: uid},
+        dataType: 'json',
+        cache: false,
+        success: function(response) {
+            if (userState == 2) {
+                $('#theCountdown').text("Game starts in: " + counter);
+                counter--;
+                if (counter < 0) { counter = 0; }
+            }
+            oldState = userState;
+            userState = response;
+            console.log("State: " + response);
+        }
+        });
+}, 2000);
+
+function questCountdown() {
+    $('.countdown').show();
+    $('.joinPage').hide();
+    $('.game').hide();
 }
-function startGame() {
+
+
+function startRound() {
     console.log("'Started' game");
 }
 
