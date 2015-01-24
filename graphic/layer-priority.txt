@@ -1,0 +1,7 @@
+Boss Layer Priority - where 5 is top and 1 is bottom
+6 - LeftArm
+5 - Weapon
+4 - RightArm
+3 - Legs
+2 - Torso
+1 - Head (y 80 for better integration with torso)
