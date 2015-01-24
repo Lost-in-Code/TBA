@@ -1,0 +1,28 @@
+{
+    'roles' : [{                        // Array of roles
+        'roleId' : 1,                   // Unique ID for this role
+        'name' : 'Tank',                // Role name
+        'actions' : [{                  // Array of actions
+            'actionId' : 0,             // Unique action ID (not unique across roles)
+            'name' : 'Taunt',           // Action name
+            'target' : 'enemy'          // Target of action. Possible targets: enemy, self, tank, allAllies
+            'type' : 'control',         // Type of action. Possible types: control, damage, buffDef, buffAtk, resource, heal
+            'baseEffect' : 0,           // Base effect of action. What this value affects depends on the action type
+            'duration' : 1              // Duration of the action effect in number of rounds.
+        } , {
+            'actionId' : 1,
+            'name' : 'Boost Defense',
+            'target' : 'self',
+            'type' : 'buffDef',
+            'baseEffect' : 30,
+            'duration' : 3
+        } , {
+            'actionId' : 2,
+            'name' : 'Attack',
+            'target' : 'enemy',
+            'type' : 'damage',
+            'baseEffect' : 5,
+            'duration' : 0
+        }]
+    }]
+}

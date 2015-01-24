@@ -54,7 +54,7 @@ def db_insert_game(room_id):
     c = conn.cursor()
     c.execute('''SELECT * FROM games WHERE room_id = ?''', [room_id])
     if c.fetchone() is None:
-        c.execute('''INSERT INTO games VALUES (?, 0)''', [str(room_id)])
+        c.execute('''INSERT INTO games VALUES (?, 0, 0)''', [str(room_id)])
         db_close_conn(conn)
         logging.info("Created new room with ID: %s" % (room_id))
         return True

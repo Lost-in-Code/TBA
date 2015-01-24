@@ -1,0 +1,78 @@
+{
+    "roles" : [{
+        "roleId": 1,
+        "name": "Tank",
+        "actions": [{
+            "actionId": 0,
+            "name": "Taunt",
+            "target": "enemy",
+            "type": "control",
+            "baseEffect": 0,
+            "duration": 1
+        } , {
+            "actionId": 1,
+            "name": "Boost Defense",
+            "target": "self",
+            "type": "buffDef",
+            "baseEffect": 30,
+            "duration": 3
+        } , {
+            "actionId": 2,
+            "name": "Attack",
+            "target": "enemy",
+            "type": "damage",
+            "baseEffect": 5,
+            "duration": 0
+        }]
+    } , {
+        "roleId": 2,
+        "name": "Damager",
+        "actions": [{
+            "actionId": 0,
+            "name": "Melee Attack",
+            "target": "enemy",
+            "type": "damage",
+            "baseEffect": 10,
+            "duration": 0
+        } , {
+            "actionId": 1,
+            "name": "Ranged Attack",
+            "target": "enemy",
+            "type": "damage",
+            "baseEffect": 5,
+            "duration": 0
+        } , {
+            "actionId": 2,
+            "name": "Boost Attack",
+            "target": "self",
+            "type": "buffAtk",
+            "baseEffect": 15,
+            "duration": 3
+        }]
+    } , {
+        "roleId": 3,
+        "name": "Healer",
+        "actions": [{
+            "actionId": 0,
+            "name": "Focused Heal",
+            "target": "tank",
+            "type": "heal",
+            "baseEffect": 40,
+            "duration": 0
+        } , {
+            "actionId": 1,
+            "name": "Group Heal",
+            "target": "allAllies",
+            "type": "heal",
+            "baseEffect": 20,
+            "duration": 0
+        } , {
+            "actionId": 2,
+            "name": "Recover Mana",
+            "target": "self",
+            "type": "resource",
+            "baseEffect": 30,
+            "duration": 0
+        }]
+    }]
+}
