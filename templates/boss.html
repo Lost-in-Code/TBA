@@ -8,6 +8,15 @@ $(document).ready(function () {
 	CharacterAnim("weapon", "10", 1200);
 	CharacterAnim("torso", "5", 1500);
 	CharacterAnim("head", "5", 1500);
+	
+	$("#CharacterAttack").click(function() {
+		var attacks = ["claws.png", "shield.png", "slash.png", "swipe.png"];
+		var num = Math.floor( Math.random() * attacks.length );
+		var img = attacks[ num ];
+		
+		$(".attack").attr('src', 'static\\images\\boss\\attack\\' + img);
+		$(".attack").fadeIn().delay(500).fadeOut();
+	});
 });
 
 function CharacterAnim(elem, dist, speed) {
@@ -24,8 +33,9 @@ overflow: hidden;
 }
 
 #character img { float:left; position:relative; border:0; }
+.attack { top:180px; left:35px; z-index: 200; position: absolute; }
 
-.head { top: 40px; left: 153px; z-index: 50; }
+.head { top: 40px; clear:left; left: 153px; z-index: 50; }
 .leftArm { clear:left; left: 80px; z-index: 100; }
 .rightArm { left: -80px; z-index: 80; }
 .legs { top: -75px; clear: left; z-index: 70; }
@@ -43,10 +53,13 @@ overflow: hidden;
 </head>
 
 <body>
+<button type="button" id="CharacterAttack">Hit me bitch!</button>
+<img class="attack">
+
 <div id="character">
     <img src="static\images\boss\head\{{ head }}" class="head">
     <img src="static\images\boss\leftarm\{{ leftarm }}" class="leftarm">  
-    <img src="static\images\boss\torso\{{ torso }}" class="torso">  
+    <img src="static\images\boss\torso\{{ torso }}" class="torso">
     <img src="static\images\boss\rightarm\{{ rightarm }}" class="rightarm">  
     <img src="static\images\boss\legs\{{ legs }}" class="legs">
     <img src="static\images\boss\weapon\{{ weapon }}" class="weapon">
