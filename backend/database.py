@@ -166,8 +166,24 @@ def db_set_roundResultDone(room_id):
     c = conn.cursor()
     c.execute('''SELECT * FROM games WHERE room_id = ?''', [room_id])
     if c.fetchone() is None: return False
-    c.execute('''UPDATE games SET state = 5 WHERE room_id = ?''', [room_id])
-    c.execute('''UPDATE players SET state = 4 WHERE room_id = ?''', [room_id])
+    c.execute('''SELECT hp FROM bosses WHERE room_id = ? AND hp > 0''', [room_id])
+    boss_dead = c.fetchone() is None
+    c.execute('''SELECT hp FROM players WHERE room_id = ? AND hp > 0''', [room_id])
+    players_dead = c.fetchone() is None
+    if boss_dead is True:
+        num_bosses = c.execute('''SELECT count(*) FROM bosses WHERE room_id = ?''', [room_id]).fetchone()[0]
+        if num_bosses < 4:
+            c.execute('''UPDATE games SET state = 3 WHERE room_id = ?''', [room_id])
+            c.execute('''UPDATE players SET state = 3 WHERE room_id = ?''', [room_id])
+        else:
+            c.execute('''UPDATE games SET state = 7 WHERE room_id = ?''', [room_id])
+            c.execute('''UPDATE players SET state = 0 WHERE room_id = ?''', [room_id])
+    elif players_dead:
+        c.execute('''UPDATE games SET state = 99 WHERE room_id = ?''', [room_id])
+        c.execute('''UPDATE players SET state = 0 WHERE room_id = ?''', [room_id])
+    else:
+        c.execute('''UPDATE games SET state = 5 WHERE room_id = ?''', [room_id])
+        c.execute('''UPDATE players SET state = 4 WHERE room_id = ?''', [room_id])
     db_close_conn(conn)
     return True
 
