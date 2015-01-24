@@ -136,6 +136,7 @@ function joinPage() {
     $('.waiting').hide();
 }
 function readyPage() {
+    document.title = "Are you ready?";
     $('.readyPage').show();
     $('.joinPage').hide();
     $('.waiting').hide();
@@ -149,6 +150,7 @@ function startRound() {
     $('.game').show();
     $('.waiting').hide();
     $('.mana').hide();
+    document.title = 'Battle!';
     if (selClass === 1) {
         $('.action1').text("Melee Attack");
         $('.action2').text("Ranged Attack");
@@ -162,18 +164,16 @@ function startRound() {
         $('.action2').text("Group Heal");
         $('.action3').text("Recover Mana");
         $('.mana').show();
-        
-        
-    }
-    
+    }  
     $('.action1').click(function() {
+        $(this).prop("disabled", true);
         $.ajax({
             url: '/game/doClientAction',
             data: {uid:uid, action: 1},
             dataType: 'json',
             cache: false,
             success: function() {
-                console.log("sent attack");
+                console.log("sent attack "+uid);
             },
             error: function(response) {
                 alert("Could not send your action!");
@@ -182,6 +182,7 @@ function startRound() {
         });
     });
     $('.action2').click(function() {
+        $(this).prop("disabled", true);
         $.ajax({
             url: '/game/doClientAction',
             data: {uid:uid, action: 2},
@@ -197,6 +198,7 @@ function startRound() {
         });
     });
     $('.action3').click(function() {
+        $(this).prop("disabled", true);
         $.ajax({
             url: '/game/doClientAction',
             data: {uid:uid, action: 3},
@@ -213,14 +215,12 @@ function startRound() {
     });
 }
 
-
-
 function goWaiting() {
+    document.title = 'Waiting...';
     $('.readyPage').hide();
     $('.joinPage').hide();
     $('.game').hide();
     $('.waiting').show();
-    startRound();
 }
 
 

@@ -44,3 +44,9 @@ def get_host_questStory(room_id):
     json_data = open('content/quests.json')
     data = json.load(json_data)
     return random.choice(data['quests'])
+
+def get_host_round(room_id):
+    return "pew"
+
+def get_host_round_result(room_id):
+    return "pew"
