@@ -1,0 +1,58 @@
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script>
+$(document).ready(function () {
+    CharacterAnim("leftarm", "10", 1200);
+	CharacterAnim("rightarm", "10", 1200);
+	CharacterAnim("weapon", "10", 1200);
+	CharacterAnim("torso", "5", 1500);
+	CharacterAnim("head", "5", 1500);
+});
+
+function CharacterAnim(elem, dist, speed) {
+    $("."+elem).animate({ top: "+="+dist+"px" }, speed, 'linear', function () {
+        $("."+elem).animate({ top: "-="+dist+"px" }, speed, 'linear', function() { CharacterAnim(elem, dist, speed); });	    
+    });
+}
+</script>
+<style type="text/css">
+#character {
+ms-transform: scale(0.5,0.5);
+-ms-transform-origin: 0 0;
+-webkit-transform: scale(0.5,0.5);
+-webkit-transform-origin: 0 0;
+transform: scale(0.5,0.5);
+transform-origin: 0 0;
+}
+
+#character img { float:left; position:relative; }
+
+.head { top: 40px; left: 153px; z-index: 50; }
+.leftArm { clear:left; left: 80px; z-index: 100; }
+.rightArm { left: -80px; z-index: 80; }
+.legs { top: -75px; clear: left; z-index: 70; }
+.torso { z-index: 60; }
+.weapon {
+	-ms-transform: rotate(80deg);
+    -webkit-transform: rotate(80deg);
+    transform: rotate(80deg);
+	left: -250px;
+	top: -500px;
+	z-index: 90;
+}
+
+</style>
+</head>
+
+<body>
+<div id="character">
+    <img src="static\images\boss\head\{{ head }}" class="head">
+    <img src="static\images\boss\leftarm\{{ leftarm }}" class="leftarm">  
+    <img src="static\images\boss\torso\{{ torso }}" class="torso">  
+    <img src="static\images\boss\rightarm\{{ rightarm }}" class="rightarm">  
+    <img src="static\images\boss\legs\{{ legs }}" class="legs">
+    <img src="static\images\boss\weapon\{{ weapon }}" class="weapon">
+</div>
+</body>
+</html>
