@@ -87,10 +87,10 @@ setInterval(function() {
         } else if (userState === 2){
             oldState = userState;
             goWaiting();
-        } else if (userState === 4) {
+        } else if (userState === 3) {
             oldState = userState;
             goWaiting();
-        } else if (userState === 3) {
+        } else if (userState === 4) {
             oldState = userState;
             startRound();
         } else if (userState === 5) {
