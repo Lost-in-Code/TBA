@@ -1,3 +1,10 @@
+var userNick  = "";
+var gameID    = "";
+var userClass = "";
+var uid       = 0;
+var userState = 0;
+var counter   = 15;
+
 $(document).ready(function() {
     $('.countdown').toggle();
     $('#role_dps').click(function() {
@@ -17,7 +24,6 @@ $(document).ready(function() {
             userNick  = $('.userNick').val();
             gameID    = $('.userID').val();
             userClass = $('#chooseClass').text();
-            uid       = 0;
             $.ajax({
                 url: '/game/join',
                 data: { room: gameID, nick: userNick, role: userClass},
@@ -27,8 +33,6 @@ $(document).ready(function() {
                     if (response.result == true) {
                         $('.countdown').toggle();
                         $('.joinPage').toggle();
-                        // Tell the server our uid and that we are ready to join
-                        countdownCheck();
                         uid = response.uid;
                         console.log(response.uid)
                     } else {
@@ -40,9 +44,6 @@ $(document).ready(function() {
                     console.log(error);
                 }
             });
-            // Somehow check with the server when to start the countdown, when countdown ends:
-            // Hide .countdown, toggle .game
-            // 
         } else {
             $('#chooseClass').html("Select a class!<span class=\"caret\"></span>");
         }
@@ -50,26 +51,49 @@ $(document).ready(function() {
     $('.readyButton').click(function() {
         if (!$(this).hasClass("active")) {
             $(this).addClass("active");
-           /* .ajax({
-                url: 'game/playerIsReady', // Not a real URL, expect how many are ready?
-                data: {room: gameID, uid: uid, player_ready: true},
+           $.ajax({
+                url: '/game/start',
+                data: {uid: uid},
                 dataType: 'json',
                 cache: false,
                 success: function(response) {
-                    startCountdown();   */
+                    console.log(response);
+                },
+                error: function(response) {
+                    alert("Couldn't set player as ready");
+                    console.log(response);
+                }
+            });
+            // TODO: Make backend check how many players are ready before this
+            countdownPoll();
         } else {
             // Make toggleable?
         }
     });
 });
 
+function countdownPoll() {
+    setTimeout(function() {
+        if (userState != 3) {
+            $.ajax({
+                url: '/game/player_status',
+                data: {uid: uid},
+                dataType: 'json',
+                cache: false,
+                success: function(response) {
+                    userState = response;  
+                    console.log(response);
+                    $('#theCountdown').text("Game starts in: " + counter);
+                    counter--;
+                },
+                complete: countdownPoll
+                
+            });
+        }
+    }, 1000);
 
-// Check the number of ready players and start countdown if more than half
-
-function countdownCheck() {
-    
 }
 
-function startCountdown() {
+function startGame() {
     
 }

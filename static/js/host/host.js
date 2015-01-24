@@ -7,6 +7,7 @@ $(document).ready(function() {
             var gameID = response.room_id;
             $('#gameID').text(gameID);
             addPlayersToLists(gameID);
+            console.log(gameID);
         },
         failure: function(response){
             alert("Error hosting game, could not retrieve game ID");
