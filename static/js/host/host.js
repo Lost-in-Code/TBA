@@ -1,9 +1,9 @@
 $(document).ready(function () {
 
-    var gameId;
+    var gameID;
 
     $.ajax({
-        url: 'http://127.0.0.0:5000/game/create',
+        url: '/game/create',
         dataType: 'json',
         cache: false,
         success: function (response)
