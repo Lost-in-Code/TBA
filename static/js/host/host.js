@@ -3,7 +3,7 @@ $(document).ready(function () {
     var gameId;
 
     $.ajax({
-        url: 'http://127.0.0.0:5000/game/create',
+        url: 'http://127.0.0.1:5000/game/create',
         dataType: 'json',
         cache: false,
         success: function (response)
