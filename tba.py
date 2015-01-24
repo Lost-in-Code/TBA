@@ -32,9 +32,9 @@ def joinGame():
 @app.route('/game/start')
 def startGame():
     uid = request.args.get('uid')
-    return start_game(uid)
+    return json.dumps(start_game(uid))
 
-@app.route('game/player_status')
+@app.route('/game/player_status')
 def gameStatus():
     uid = request.args.get('uid')
     return json.dumps(get_player_status(uid))
