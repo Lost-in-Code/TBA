@@ -104,7 +104,8 @@ setInterval(function() {
             oldState = userState;
             userState = response;
             console.log("State: " + response);
-        }
+        },
+        
         });
 }, 2000);
 
