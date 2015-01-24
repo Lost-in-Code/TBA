@@ -61,7 +61,7 @@ $(document).ready(function() {
         }
     });
     $('.readyButton').click(function() {
-        $('.readyButton').attr("disable", true);
+        $('.readyPage').find('button').attr('disabled', true);
         $.ajax({
             url: '/game/start',
             data: {uid: uid},
@@ -80,21 +80,26 @@ $(document).ready(function() {
 }); 
 
 setInterval(function() {
-   // if (userState != oldState) {
+   if (userState != oldState) {
         if (userState === 1) {
+            oldState = userState;
             readyPage();
         } else if (userState === 2){
-            goWaiting();
-        } else if (userState === 3) {
+            oldState = userState;
             goWaiting();
         } else if (userState === 4) {
+            oldState = userState;
+            goWaiting();
+        } else if (userState === 3) {
+            oldState = userState;
             startRound();
         } else if (userState === 5) {
+            oldState = userState;
             goWaiting();
         } else if(!userState) {
             joinPage();
         }
-   // }
+    }
     $.ajax({
         url: '/game/getPlayerState',
         data: {uid: uid},
@@ -132,6 +137,7 @@ function joinPage() {
 }
 function readyPage() {
     document.title = "Are you ready?";
+    $('.readyPage').find('button').attr('disabled', false);
     $('.readyPage').show();
     $('.joinPage').hide();
     $('.waiting').hide();
