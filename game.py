@@ -58,24 +58,24 @@ def round_countdown_done(room_id):
     dmg_done_range = 0
     healing_done_tank = 0
     healing_done_group = 0
-    if boss['action'] == 1:
+    if boss['action'] == 0:
         dmg_taken_tank = max(40 * (1 - (num_tank_action1 / num_players / 3)), 0)
         dmg_done_range = abs(max(7 * (-1 + (num_dps_action2 / num_players / 3)), 0))
         dmg_done_melee = abs(max(13 * (-1 + (num_dps_action1 / num_players / 3)), 0))
         healing_done_tank = abs(max(30 * (-1 + (num_heal_action1 / num_players / 3)), 0))
         healing_done_group = abs(max(15 * (-1 + (num_heal_action2 / num_players / 3)), 0))
-    elif boss['action'] == 2:
+    elif boss['action'] == 1:
         dmg_taken_group = max(20 * (1 - (num_tank_action2 / num_players / 3)), 0)
         dmg_done_range = abs(max(13 * (-1 + (num_dps_action2 / num_players / 3)), 0))
         dmg_done_melee = abs(max(7 * (-1 + (num_dps_action1 / num_players / 3)), 0))
         healing_done_tank = abs(max(30 * (-1 + (num_heal_action1 / num_players / 3)), 0))
         healing_done_group = abs(max(15 * (-1 + (num_heal_action2 / num_players / 3)), 0))
-    elif boss['action'] == 3:
+    elif boss['action'] == 2:
         dmg_done_range = abs(max(0 * (-1 + (num_dps_action2 / num_players / 3)), 0))
         dmg_done_melee = abs(max(0 * (-1 + (num_dps_action1 / num_players / 3)), 0))
         healing_done_tank = abs(max(30 * (-1 + (num_heal_action1 / num_players / 3)), 0))
         healing_done_group = abs(max(15 * (-1 + (num_heal_action2 / num_players / 3)), 0))
-    elif boss['action'] == 4:
+    elif boss['action'] == 3:
         dmg_done_range = abs(max(7 * (-1 + (num_dps_action2 / num_players / 3)), 0))
         dmg_done_melee = abs(max(13 * (-1 + (num_dps_action1 / num_players / 3)), 0))
         healing_done_tank = abs(max(30 * (-1 + (num_heal_action1 / num_players / 3)), 0))
