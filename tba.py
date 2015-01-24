@@ -93,6 +93,16 @@ def setRoundResultDone():
     room_id = request.args.get('room_id')
     return json.dumps(set_host_roundResultDone(room_id))
 
+@app.route('/game/getHostRound')
+def getHostRound():
+    room_id = request.args.get('room_id')
+    return json.dumps(get_host_round(room_id))
+
+@app.route('/game/getHostRoundResult')
+def getHostRoundResult():
+    room_id = request.args.get('room_id')
+    return json.dumps(get_host_round_result(room_id))
+
 @app.route('/host')
 def host():
     return render_template('/host/host.html')
