@@ -2,6 +2,6 @@
   "quests" : [{
     "title" : "Niflheim Rising",
     "text" : "<p><i>You have been summoned to hall of High Lord Odin of Asgard, which is considered a great honor for a band of adventurers.</i></p><p>The great lord waits for everyone to gather in front of the throne before he finally speaks: <br />I imagine you wonder why I had you summoned here.. Simply put, we have a situation in Niflheim that requires your unique brand of attention.<br />A new warlord has risen to power and is gathering an army outside the old citadel. Our forces are occupied elsewhere so we need to to infiltrate the fortress and kill their leaders.<br />Our agents in the area can help you get inside, but the actual mission is yours, and yours alone.</p><p>If you return victorious you will be richly rewarded.<br /><b>Good luck, and may the ancestors watch over you.</b></p>",
-    "imageUrl" : "bg_cave_blur_10.jpg"
+    "imageUrl" : "stages/bg_cave_blur_10.jpg"
   }]
 }
