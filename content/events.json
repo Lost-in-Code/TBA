@@ -22,7 +22,7 @@
   } , {
     "id" : 5,
     "Title" : "Enemy Patrols",
-    "Text" : "<p>You stumble into an enemy patrol!<br />They are easily dispatch, but not before they managed to do some damage to your party before dying.</p>",
+    "Text" : "<p>You stumble into an enemy patrol!<br />They are easily dispatched, but they manage to do some damage to your party before dying.</p>",
     "Imageurl" : "stages/bg_cave_blur_10.jpg"
   } , {
     "id" : 6,

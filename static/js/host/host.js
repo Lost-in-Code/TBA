@@ -6,6 +6,9 @@ var countDownTimer = 10;
 
 $(document).ready(function () {
 
+    //<!-- Hide all pages -->
+    $("#content").children().hide();
+
     ShowPage("PreGameScreen");
 
     $.ajax({
@@ -324,4 +327,11 @@ function CountDownTimerCountDown()
     countDownTimer -= 1;
 
     if (countDownTimer >= 0) setTimeout(CountDownTimerCountDown, 1000);
+}
+
+function ShowPage(id)
+{
+    $("#content").children().hide();
+
+    $("#" + id).show();
 }
