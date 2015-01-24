@@ -19,14 +19,11 @@
     <![endif]-->
   </head>
   <body>
-
-  <center><h1>TBA</h1></center>
+  <marquee><center><h1>TBA</h1></center></marquee>
    <hr />
    
    
-    <div class="container countdown">    
-        <center><h2 id="theCountdown">Game starts in: 7</h2>
-        <span>Countdown will start when half of the players are ready.</span>
+    <div class="container readyPage">    
         <button type="button" class="btn btn-default readyButton">Ready</button>
         </center>
     </div>
@@ -56,7 +53,23 @@
     </div>
     
     <div class="container game">
-       <!-- THE GAME GOES HERE -->
+       <center>
+        <div class="progress">
+          <div class="progress-bar" role="progressbar"  style="width: 90%;">
+            60%
+          </div>
+        </div>
+       <div class="btn-group-vertical" rule="group" aria-label="...">
+       
+        <button type="button" class="btn btn-default action1">Action 1</button>
+        <button type="button" class="btn btn-default action2">Action 2</button>
+        <button type="button" class="btn btn-default action3">Action 3</button>
+       </div>
+       </center>
+    </div>
+    
+    <div class="container waiting">
+    <center><h2>Waiting...</h2></center>
     </div>
   </body>
 </html>

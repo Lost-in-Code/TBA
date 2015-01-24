@@ -10,8 +10,11 @@ var selClass  = 0;
 
 
 $(document).ready(function() {
+    $('.readyPage').hide();
+    $('.game').hide();
+    $('.waiting').hide();
+    $('.joinPage').show();
     
-    $('.countdown').toggle();
     $('#role_dps').click(function() {
         $('#chooseClass').addClass("classSet");
         $('#chooseClass').html("DPS<span class=\"caret\"></span>");
@@ -27,6 +30,7 @@ $(document).ready(function() {
         $('#chooseClass').html("Healer<span class=\"caret\"></span>");
         selClass = 3;
     });
+    
     $('#joinGame').click(function() {
         if ($('#chooseClass').hasClass("classSet")) {
             userNick  = $('.userNick').val();
@@ -38,7 +42,7 @@ $(document).ready(function() {
                 cache: false,
                 success: function(response) {
                     if (response.result == true) {
-                        questCountdown();
+                        readyPage();
                         uid = response.uid;
                         console.log(uid);
                         userState = 1;
@@ -81,26 +85,25 @@ $(document).ready(function() {
 }); 
 
 setInterval(function() {
-    if (userState != oldState) {
-        if (userState === 2) {
-            questCountdown();
+   // if (userState != oldState) {
+        if (userState === 1) {
+            readyPage();
+        } else if (userState === 2 || userState === 3) {
+            goWaiting();
         } else if (userState === 4) {
             startRound();
         } else if (userState === 5) {
             roundResultPoll();
+        } else if(!userState) {
+            joinPage();
         }
-    }
+   // }
     $.ajax({
         url: '/game/getPlayerState',
         data: {uid: uid},
         dataType: 'json',
         cache: false,
         success: function(response) {
-            if (userState == 2) {
-                $('#theCountdown').text("Game starts in: " + counter);
-                counter--;
-                if (counter < 0) { counter = 0; }
-            }
             oldState = userState;
             userState = response;
             console.log("State: " + response);
@@ -109,17 +112,34 @@ setInterval(function() {
         });
 }, 2000);
 
-function questCountdown() {
-    $('.countdown').show();
+
+
+function joinPage() {
+    $('.readyPage').hide();
+    $('.joinPage').show();
+    $('.game').hide();
+    $('.waiting').hide();
+}
+function readyPage() {
+    $('.readyPage').show();
     $('.joinPage').hide();
+    $('.waiting').hide();
     $('.game').hide();
 }
 
 
 function startRound() {
-    console.log("'Started' game");
+    $('.readyPage').hide();
+    $('.joinPage').hide();
+    $('.game').show();
+    $('.waiting').hide();
 }
 
-
+function goWaiting() {
+    $('.readyPage').hide();
+    $('.joinPage').hide();
+    $('.game').hide();
+    $('.waiting').show();
+}
 
 
