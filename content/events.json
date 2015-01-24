@@ -1,21 +1,33 @@
 {
   "events" : [{
+    "id" : 1,
     "title" : "Treasure!",
-    "text" : "<p>You have found a chest with various enchanted weapons.</p>"
+    "text" : "<p>You have found a chest with various enchanted weapons.</p>",
+    "imageUrl" : "stages/bg_cave_blur_10.jpg"
   } , {
+    "id" : 2,
     "title" : "Well of Tranquility",
-    "text" : "<p>You stumble upon a Well of Tranquility where you can rest and recover before the next challenge.</p>"
+    "text" : "<p>You stumble upon a Well of Tranquility where you can rest and recover before the next challenge.</p>",
+    "imageUrl" : "stages/bg_cave_blur_10.jpg"
   } , {
+    "id" : 3,
     "title" : "An Abandoned Armory",
-    "text" : "<p>An abandoned armory provides you with an opportunity to pilfer some new armor and weapons.</p>"
+    "text" : "<p>An abandoned armory provides you with an opportunity to pilfer some new armor and weapons.</p>",
+    "imageUrl" : "stages/bg_cave_blur_10.jpg"
   } , {
+    "id" : 4,
     "title" : "Rockslide!",
-    "text" : "<p>A sudden rockslide injures some of your party.</p>"
+    "text" : "<p>A sudden rockslide injures some of your party.</p>",
+    "imageUrl" : "stages/bg_cave_blur_10.jpg"
   } , {
+    "id" : 5,
     "title" : "Enemy Patrols",
-    "text" : "<p>You stumble into an enemy patrol!<br />They are easily dispatch, but not before they managed to do some damage to your party before dying.</p>"
+    "text" : "<p>You stumble into an enemy patrol!<br />They are easily dispatch, but not before they managed to do some damage to your party before dying.</p>",
+    "imageUrl" : "stages/bg_cave_blur_10.jpg"
   } , {
+    "id" : 6,
     "title" : "Magical Wards",
-    "text" : "<p>The way is trapped with magical wards that dispels all your beneficent status effects.</p>"
+    "text" : "<p>The way is trapped with magical wards that dispels all your beneficent status effects.</p>",
+    "imageUrl" : "stages/bg_cave_blur_10.jpg"
   }]
 }
