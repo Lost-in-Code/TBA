@@ -13,3 +13,15 @@ def get_host_status(room_id):
 
 def get_host_state(room_id):
     return database.db_get_host_state(room_id)
+
+def set_host_preGameDone(room_id):
+    return database.db_set_preGameDone(room_id)
+
+def set_host_randomEventDone(room_id):
+    return database.db_set_randomEventDone(room_id)
+
+def set_host_bossStoryDone(room_id):
+    return database.db_set_bossStoryDone(room_id)
+
+def set_host_roundResultDone(room_id):
+    return database.db_set_roundResultDone(room_id)

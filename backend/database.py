@@ -1,8 +1,6 @@
 __author__ = 'Atle'
 import sqlite3
 import random
-import multiprocessing
-import time
 import logging
 
 '''
@@ -41,9 +39,9 @@ def create_db():
     c.execute('''DROP TABLE IF EXISTS games''')
     c.execute('''DROP TABLE IF EXISTS players''')
     c.execute('''CREATE TABLE players
-                (room_id, nick, role, uid, ready, state, hp)''')
+                (room_id, nick, role, uid, ready, state, hp, mana)''')
     c.execute(''' CREATE TABLE games
-                (room_id, ready_countdown, state)''')
+                (room_id, ready_countdown, state, round_countdown)''')
     db_close_conn(conn)
     logging.info("Created DB")
 
@@ -73,7 +71,7 @@ def db_insert_player(room_id, nick, role):
         uid = random.randint(10000,99999)
         while c.execute('''SELECT * FROM players WHERE uid = ?''', [str(uid)]).fetchone() != None:
             uid = random.randint(10000, 99999)
-        c.execute('''INSERT INTO players (room_id, nick, role, uid, ready, state, hp) VALUES(?, ?, ?, ?, 0, 0, 100)''', [room_id, nick, role, str(uid)])
+        c.execute('''INSERT INTO players (room_id, nick, role, uid, ready, state, hp, mana) VALUES(?, ?, ?, ?, 0, 1, 100, 100)''', [room_id, nick, role, str(uid)])
         db_close_conn(conn)
         logging.info("Added new player %s to room %s with nick %s and role %s" % (uid, room_id, nick, role))
         return (True, uid)
@@ -85,7 +83,7 @@ def db_set_ready(uid):
     db_setup_logging()
     conn = db_get_conn()
     c = conn.cursor()
-    c.execute('''UPDATE players SET ready=1, state=1 WHERE uid=?''', [uid])
+    c.execute('''UPDATE players SET ready=1, state=2 WHERE uid=?''', [uid])
     if c.rowcount == 1:
         db_close_conn(conn)
         logging.info("Player %s ready" % (uid))
@@ -106,7 +104,7 @@ def db_game_ready(uid):
     num_players_ready = c.fetchone()[0]
     if num_players_ready >= num_players / 2:
         c.execute('''UPDATE players SET state = 2 WHERE room_id=?''', [room_id])
-        c.execute('''UPDATE games SET ready_countdown = 1 WHERE room_id=? and ready_countdown = 0''', [room_id])
+        c.execute('''UPDATE games SET ready_countdown = 1 WHERE room_id=? and ready_countdown = 0 and state = 0''', [room_id])
         if c.rowcount == 1:
             logging.info("Countdown started for room %s" % (room_id))
         db_close_conn(conn)
@@ -132,3 +130,40 @@ def db_get_status(uid):
     state = c.fetchone()
     if state == None: return False
     return state[0]
+
+def db_set_preGameDone(room_id):
+    conn = db_get_conn()
+    c = conn.cursor()
+    c.execute('''SELECT * FROM games WHERE room_id = ?''', [room_id])
+    if c.fetchone() is None: return False
+    c.execute('''UPDATE games SET state = 3 WHERE room_id = ?''', [room_id])
+    db_close_conn(conn)
+    return True
+
+def db_set_randomEventDone(room_id):
+    conn = db_get_conn()
+    c = conn.cursor()
+    c.execute('''SELECT * FROM games WHERE room_id = ?''', [room_id])
+    if c.fetchone() is None: return False
+    c.execute('''UPDATE games SET state = 4 WHERE room_id = ?''', [room_id])
+    db_close_conn(conn)
+    return True
+
+def db_set_bossStoryDone(room_id):
+    conn = db_get_conn()
+    c = conn.cursor()
+    c.execute('''SELECT * FROM games WHERE room_id = ?''', [room_id])
+    if c.fetchone() is None: return False
+    c.execute('''UPDATE games SET state = 5 WHERE room_id = ?''', [room_id])
+    db_close_conn(conn)
+    return True
+
+def db_set_roundResultDone(room_id):
+    conn = db_get_conn()
+    c = conn.cursor()
+    c.execute('''SELECT * FROM games WHERE room_id = ?''', [room_id])
+    if c.fetchone() is None: return False
+    c.execute('''UPDATE games SET state = 1 WHERE room_id = ?''', [room_id])
+    db_close_conn(conn)
+    return True
+    # Implement new states based on stuff that has happend. HP on people, boss etc.
