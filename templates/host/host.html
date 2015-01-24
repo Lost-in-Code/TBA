@@ -10,8 +10,6 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="{{ url_for('static', filename='js/host/host.js') }}"></script>
-    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css" rel="stylesheet"> 
-    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -20,19 +18,18 @@
     <![endif]-->
   </head>
   <body>
-    <span id="urlForCountdownHTML" style="display:none;">{{ url_for('static', filename='html/clientcountdown.html') }}</span>
-    <div class="container">
-        <center><h1>TBA</h1></center>
+    <div class="container initial">
+        <center><h1>TBA, join link: {{ url_for('join') }}</h1></center>
         <hr />
-        <div class="col-md-4 centered">
+        <div class="col-md-4 dps">
             <h1>DPS</h1>
             <p>* List of players with role *</p>
         </div>
-        <div class="col-md-4 centered">
+        <div class="col-md-4 tanks">
             <h2>Tank</h2>
             <p>* List of players with role *</p>
         </div>
-        <div class="col-md-4 col-centered">
+        <div class="col-md-4 healers">
             <h2>Healer</h2>
             <p>* List of players with role *</p>
         </div>

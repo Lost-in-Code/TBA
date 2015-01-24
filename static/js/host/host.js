@@ -6,6 +6,7 @@ $(document).ready(function() {
         success: function(response){
             var gameID = response.room_id;
             $('#gameID').text(gameID);
+            addPlayersToLists(gameID);
         },
         failure: function(response){
             alert("Error hosting game, could not retrieve game ID");
@@ -13,3 +14,17 @@ $(document).ready(function() {
         }
     });
 });
+
+function addPlayersToLists(gameID) {
+   /* $.ajax( {
+            // Get list of players from server in a loop, pseudocode:
+            for player in players:
+                if player.room_id == gameID:
+                    if player.role == "DPS":
+                        $('.dps').append("<p>" + player.nick   + "</p>")
+                    if player.role == "Tank":
+                        $('.tanks').append("<p>" + player.nick   + "</p>")
+                    if player.role == "Support":
+                        $('.healers').append("<p>" + player.nick   + "</p>")
+        }); */
+}

@@ -7,11 +7,10 @@
     <title>Log in to game</title>
     <!-- Bootstrap -->
     <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/client/custom.css') }}" rel="stylesheet">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="{{ url_for('static', filename='js/client/client.js') }}"></script>
-    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css" rel="stylesheet"> 
-    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -27,6 +26,7 @@
    
     <div class="container countdown">    
         <center><h2>* COUNTDOWN GOES HERE *</h2>
+        <span>Countdown will start when half of the players are ready.</span>
         <button type="button" class="btn btn-default readyButton">Ready</button>
         </center>
     </div>
@@ -44,7 +44,7 @@
         <div class="col-md-4 col-centered">
             <h2>Class</h2>
             <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle" type="button" id="chooseClass" data-toggle="dropdown">Choose class <span class="caret"></span></button>
+                <button class="btn btn-default dropdown-toggle" type="button" id="chooseClass" data-toggle="dropdown">Choose class<span class="caret"></span></button>
                 <ul class="dropdown-menu" role="menu" aria-labelledby="chooseClass">
                     <li id = "role_dps" role="presentation"><a role="menuitem" tabindex="-1" href="#">DPS</a></li>
                     <li id = "role_support" role="presentation"><a role="menuitem" tabindex="-1" href="#">Support</a></li>
