@@ -1,13 +1,11 @@
 __author__ = 'Atle'
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, url_for
 import json
 from backend.database import *
 from backend.host.host import *
 from backend.client.client import *
 
 app = Flask(__name__)
-
-
 
 @app.route('/create_db')
 def createDb():
@@ -48,6 +46,11 @@ def getHostState():
 def getHostStatus():
     room_id = request.args.get('room_id')
     return json.dumps(get_host_status(room_id))
+
+@app.route('/game/getHostQuestStory')
+def getHostQuestStory():
+    room_id = request.args.get('room_id')
+    return json.dumps({"Title": "Lorem Ipsum", "Text": "There once was a BEEP doing BEEP to a BEEP while singing", "Imgurl": url_for('static', filename="images/bg_cave_blur_10.jpg")})
 
 @app.route('/host')
 def host():

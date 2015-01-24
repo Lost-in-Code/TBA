@@ -18,7 +18,7 @@ def ready_countdown_done(room_id):
     conn = db_get_conn()
     conn.row_factory = sqlite3.Row
     c = conn.cursor()
-    c.execute('''UPDATE players SET state=3 WHERE room_id=?''', [room_id])
+    c.execute('''UPDATE players SET state = 3 WHERE room_id=?''', [room_id])
     c.execute('''UPDATE games SET state = 2 WHERE room_id=?''', [room_id])
     logging.info("Updated state for players in game: %s" % (room_id))
     print("Updated state for players in game: %s" % (room_id))
