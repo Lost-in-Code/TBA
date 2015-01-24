@@ -27,7 +27,7 @@
   } , {
     "name" : "Harden",
     "target" : "self",
-    "type" : "buff",
+    "type" : "buffDef",
     "baseEffect" : 60,
     "duration" : 3
   } , {
