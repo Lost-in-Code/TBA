@@ -1,0 +1,21 @@
+{
+  "events" : [{
+    "title" : "Treasure!",
+    "text" : "<p>You have found a chest with various enchanted weapons.</p>"
+  } , {
+    "title" : "Well of Tranquility",
+    "text" : "<p>You stumble upon a Well of Tranquility where you can rest and recover before the next challenge.</p>"
+  } , {
+    "title" : "An Abandoned Armory",
+    "text" : "<p>An abandoned armory provides you with an opportunity to pilfer some new armor and weapons.</p>"
+  } , {
+    "title" : "Rockslide!",
+    "text" : "<p>A sudden rockslide injures some of your party.</p>"
+  } , {
+    "title" : "Enemy Patrols",
+    "text" : "<p>You stumble into an enemy patrol!<br />They are easily dispatch, but not before they managed to do some damage to your party before dying.</p>"
+  } , {
+    "title" : "Magical Wards",
+    "text" : "<p>The way is trapped with magical wards that dispels all your beneficent status effects.</p>"
+  }]
+}
