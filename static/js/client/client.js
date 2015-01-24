@@ -61,26 +61,21 @@ $(document).ready(function() {
         }
     });
     $('.readyButton').click(function() {
-        if (!$(this).hasClass("active")) {
-            $(this).addClass("active");
-           $.ajax({
-                url: '/game/start',
-                data: {uid: uid},
-                dataType: 'json',
-                cache: false,
-                success: function(response) {
-                    console.log(response);
-                    // State is 2
-                },
-                error: function(response) {
-                    alert("Couldn't set player as ready");
-                    console.log(response);
-                }
-            });
-            
-        } else {
-            // Make toggleable?
-        }
+        $('.readyButton').attr("disable", true);
+        $.ajax({
+            url: '/game/start',
+            data: {uid: uid},
+            dataType: 'json',
+            cache: false,
+            success: function(response) {
+                console.log(response);
+                // State is 2
+            },
+            error: function(response) {
+                alert("Couldn't set player as ready");
+                console.log(response);
+            }
+        });
     });
 }); 
 
@@ -117,12 +112,12 @@ setInterval(function() {
         dataType: 'json',
         cache: false,
         success: function(response) {
-            hp = response.HP;
+            if (response.hp < 0) { hp = 0;} else {hp = response.HP;}
             $('.hp_bar').text(hp + "%");
             $('.hp_bar').css("width", hp+"%");
             mana = response.Mana;
             $('.mana_bar').text(mana + "%");
-            $('.mana_bar').css("width", hp+"%");
+            $('.mana_bar').css("width", mana+"%");
         }
     });
 }, 2000);
@@ -150,7 +145,9 @@ function startRound() {
     $('.game').show();
     $('.waiting').hide();
     $('.mana').hide();
+    $('.attack_buttons').find('button').attr('disabled', false);
     document.title = 'Battle!';
+    
     if (selClass === 1) {
         $('.action1').text("Melee Attack");
         $('.action2').text("Ranged Attack");
@@ -165,15 +162,15 @@ function startRound() {
         $('.action3').text("Recover Mana");
         $('.mana').show();
     }  
-    $('.action1').click(function() {
-        $(this).prop("disabled", true);
+    $('.action1').unbind().bind('click', function() {
         $.ajax({
             url: '/game/doClientAction',
             data: {uid:uid, action: 1},
             dataType: 'json',
             cache: false,
             success: function() {
-                console.log("sent attack "+uid);
+                console.log("sent attack");
+                $('.attack_buttons').find('button').attr('disabled', true);
             },
             error: function(response) {
                 alert("Could not send your action!");
@@ -181,8 +178,7 @@ function startRound() {
             }
         });
     });
-    $('.action2').click(function() {
-        $(this).prop("disabled", true);
+    $('.action2').unbind().bind('click', function() {
         $.ajax({
             url: '/game/doClientAction',
             data: {uid:uid, action: 2},
@@ -190,6 +186,7 @@ function startRound() {
             cache: false,
             success: function() {
                 console.log("sent attack");
+                $('.attack_buttons').find('button').attr('disabled', true);
             },
             error: function(response) {
                 alert("Could not send your action!");
@@ -197,8 +194,8 @@ function startRound() {
             }
         });
     });
-    $('.action3').click(function() {
-        $(this).prop("disabled", true);
+    $('.action3').unbind().bind('click', function() {
+
         $.ajax({
             url: '/game/doClientAction',
             data: {uid:uid, action: 3},
@@ -206,6 +203,7 @@ function startRound() {
             cache: false,
             success: function() {
                 console.log("sent attack");
+                $('.attack_buttons').find('button').attr('disabled', true);
             },
             error: function(response) {
                 alert("Could not send your action!");
