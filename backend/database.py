@@ -18,9 +18,14 @@ import logging
             -> Monster not dead -> 3
             -> Monster dead -> 1
 
+    game state
+        0 - Init...
+            -> > Half players ready ->
+        1 - Ready countdown going
+
 '''
 def db_get_conn():
-    return sqlite3.connect('database.db')
+    return sqlite3.connect('database.db', timeout=15)
 
 def db_setup_logging():
     logging.basicConfig(filename='tba.log',level=logging.INFO)
@@ -38,7 +43,7 @@ def create_db():
     c.execute('''CREATE TABLE players
                 (room_id, nick, role, uid, ready, state)''')
     c.execute(''' CREATE TABLE games
-                (room_id, ready_countdown)''')
+                (room_id, ready_countdown, state)''')
     db_close_conn(conn)
     logging.info("Created DB")
 
@@ -85,12 +90,6 @@ def db_set_ready(uid):
         return True
     return False
 
-def db_set_game_start(room_id):
-    db_setup_logging()
-    time.sleep(15)
-    logging.info("Countdown stopped for room %s" % (room_id))
-
-
 def db_game_ready(uid):
     db_setup_logging()
     conn = db_get_conn()
@@ -107,8 +106,6 @@ def db_game_ready(uid):
         c.execute('''UPDATE players SET state = 2 WHERE room_id=?''', [room_id])
         c.execute('''UPDATE games SET ready_countdown = 1 WHERE room_id=? and ready_countdown = 0''', [room_id])
         if c.rowcount == 1:
-            p = multiprocessing.Process(target = db_set_game_start, args=(room_id,))
-            p.start()
             logging.info("Countdown started for room %s" % (room_id))
         db_close_conn(conn)
     return True
