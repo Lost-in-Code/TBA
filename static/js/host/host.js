@@ -4,6 +4,16 @@ var countDownToGameStart = null;
 
 $(document).ready(function () {
 
+    $.sammy('#main', function () {
+
+        this.get('#/', function (context) {
+            ShowPage("PreGameScreen");
+        });
+
+    }).run("#/");
+
+    // ko.applyBindings(new InitGamePage());
+
     $.ajax({
         url: '/game/create',
         dataType: 'json',
@@ -107,16 +117,35 @@ function GetGameState(id)
                 case 2:
                     $.ajax(
                     {
-                        url: '/game/getHostStatus',
+                        url: '/game/getHostQuestStory',
                         data: { room_id: id },
                         dataType: 'json',
                         cache: false,
                         success: function (response) {
 
+                            console.log(response);
+
+                            // load viewmodel 
+                            var vm = {
+                                Title: ko.observable(response.Title),
+                                Text: ko.observable(response.Text)
+                            };
+                            ko.applyBindings(vm);
+
                             // navigate to new screen
+                            ShowPage("QuestBackgroundScreen");
+
+                            // start timer to move to next state
+                            setTimer(function ()
+                            {
+                                // timeout finished, move to state 3
+                                $.ajax(
+                                {
+
+                                });
 
 
-
+                            }, 10000);
                         },
                         failure: function (response) {
                             alert("State 2 fail");
