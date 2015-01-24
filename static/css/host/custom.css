@@ -1,3 +1,35 @@
-.roledesc {
-    height: 25%;
+.dps, .healers, .tanks {
+    min-height: 100% !important;
+}
+
+.roledescText {
+    padding-bottom: 2%;
+}
+
+.roleimg {
+    vertical-align: middle;
+    display: inline;
+    height: 7.5%;
+    width: 7.5%;
+}
+
+.roleheader h2 {
+    vertical-align: middle;
+    display: inline;
+}
+
+.actionslist {
+    padding-left: 2%;
+    padding-right: 2%;
+    list-style-type: none;
+}
+
+.actionheader {
+    font-style: oblique;
+    font-weight: bold;
+}
+
+.actiondesc {
+    font-size: small;
+    padding-left: 1%;
 }
