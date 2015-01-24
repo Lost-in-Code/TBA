@@ -27,7 +27,7 @@ def round_countdown_done(room_id):
     conn = db_get_conn()
     c = conn.cursor()
     c.execute('''UPDATE players SET state = 5 WHERE room_id=?''', [room_id])
-    c.execute('''UPDATE games SET state = 6 WHERE room_id=?''', [room_id])
+    c.execute('''UPDATE games SET state = 6, round_countdown = 0 WHERE room_id=?''', [room_id])
     logging.info("Updated round state for players in game: %s" % (room_id))
     print("Updated round state for players in game: %s" % (room_id))
     db_close_conn(conn)

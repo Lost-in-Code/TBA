@@ -155,6 +155,7 @@ def db_set_bossStoryDone(room_id):
     c.execute('''SELECT * FROM games WHERE room_id = ?''', [room_id])
     if c.fetchone() is None: return False
     c.execute('''UPDATE games SET state = 5 WHERE room_id = ?''', [room_id])
+    c.execute('''UPDATE players SET state = 4 WHERE room_id = ?''', [room_id])
     db_close_conn(conn)
     return True
 
@@ -163,7 +164,8 @@ def db_set_roundResultDone(room_id):
     c = conn.cursor()
     c.execute('''SELECT * FROM games WHERE room_id = ?''', [room_id])
     if c.fetchone() is None: return False
-    c.execute('''UPDATE games SET state = 1 WHERE room_id = ?''', [room_id])
+    c.execute('''UPDATE games SET state = 5 WHERE room_id = ?''', [room_id])
+    c.execute('''UPDATE players SET state = 4 WHERE room_id = ?''', [room_id])
     db_close_conn(conn)
     return True
     # Implement new states based on stuff that has happend. HP on people, boss etc.
