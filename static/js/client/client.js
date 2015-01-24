@@ -173,7 +173,7 @@ function startRound() {
             dataType: 'json',
             cache: false,
             success: function() {
-                console.log("sent attack");
+                console.log("sent attack "+uid);
             },
             error: function(response) {
                 alert("Could not send your action!");
@@ -220,7 +220,6 @@ function goWaiting() {
     $('.joinPage').hide();
     $('.game').hide();
     $('.waiting').show();
-    startRound();
 }
 
 
