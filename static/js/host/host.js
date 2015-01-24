@@ -153,6 +153,8 @@ function GetGameState(id)
                             // update UI
                             $("#randTitle").html(response.Title);
                             $("#randText").html(response.Text);
+							//$("#randImg").html('background-image', 'url(/static/images/' + response.Imageurl + ')');
+							
 
                             // navigate to new screen
                             ShowPage("RandEventScreen");
