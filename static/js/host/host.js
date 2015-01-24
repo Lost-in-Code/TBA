@@ -114,7 +114,7 @@ function GetGameState(id)
                             $("#questText").html(response.Text);
                             $("body").css('background-image', 'url(/static/images/' + response.Imageurl + ')');
                             $("body").css('-webkit-background-size', 'cover');
-                            console.log(response.Imageurl);
+
                             // navigate to new screen
                             ShowPage("QuestBackgroundScreen");
 
