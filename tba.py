@@ -52,6 +52,26 @@ def getHostQuestStory():
     room_id = request.args.get('room_id')
     return json.dumps({"Title": "Lorem Ipsum", "Text": "There once was a BEEP doing BEEP to a BEEP while singing", "Imgurl": url_for('static', filename="images/bg_cave_blur_10.jpg")})
 
+@app.route('/game/preGameDone')
+def setPreGameDone():
+    room_id = request.args.get('room_id')
+    return json.dumps(set_host_preGameDone(room_id))
+
+@app.route('/game/randomEventDone')
+def setRandomEventDone():
+    room_id = request.args.get('room_id')
+    return json.dumps(set_host_randomEventDone(room_id))
+
+@app.route('/game/bossStoryDone')
+def setBossStoryDone():
+    room_id = request.args.get('room_id')
+    return json.dumps(set_host_bossStoryDone(room_id))
+
+@app.route('/game/roundResultDone')
+def setRoundResultDone():
+    room_id = request.args.get('room_id')
+    return json.dumps(set_host_roundResultDone(room_id))
+
 @app.route('/host')
 def host():
     return render_template('/host/host.html')
