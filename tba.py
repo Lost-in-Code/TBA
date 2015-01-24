@@ -29,6 +29,16 @@ def joinGame():
     role = request.args.get('role')
     return json.dumps(join_game(room, nick, role))
 
+@app.route('/game/start')
+def startGame():
+    uid = request.args.get('uid')
+    return start_game(uid)
+
+@app.route('game/player_status')
+def gameStatus():
+    uid = request.args.get('uid')
+    return json.dumps(get_player_status(uid))
+
 @app.route('/host')
 def host():
     return render_template('/host/host.html')
