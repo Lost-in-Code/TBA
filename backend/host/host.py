@@ -1,6 +1,8 @@
 __author__ = 'Atle'
 from backend import database
 import random
+from flask import url_for
+import json
 
 def create_game():
     room_id = random.randint(1000, 9999)
@@ -25,3 +27,10 @@ def set_host_bossStoryDone(room_id):
 
 def set_host_roundResultDone(room_id):
     return database.db_set_roundResultDone(room_id)
+
+def get_host_randomEvent(room_id):
+    json_data = open('content/events.json')
+    data = json.load(json_data)
+    event = random.choice(data['events'])
+    database.db_set_randomEvent(room_id, event['id'])
+    return event

@@ -66,7 +66,7 @@ def getHostQuestStory():
 @app.route('/game/getHostRandomEvent')
 def getHostRandomEvent():
     room_id = request.args.get('room_id')
-    return json.dumps("Pew")
+    return json.dumps(get_host_randomEvent(room_id))
 
 @app.route('/game/getHostBossStory')
 def getHostBossStory():
