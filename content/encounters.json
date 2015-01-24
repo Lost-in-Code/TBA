@@ -1,0 +1,40 @@
+{
+  "encounters" : [{
+    "id" : 1,
+    "actions" : [0]
+  } , {
+    "id" : 2,
+    "actions" : [0, 1]
+  } , {
+    "id" : 3,
+    "actions" : [0, 1, 2]
+  } , {
+    "id" : 4,
+    "actions" : [0, 1, 2, 3]
+  }],
+  "actions" : [{
+    "name" : "Focused Attack",
+    "target" : "onePlayer",
+    "type" : "damage",
+    "baseEffect" : 40,
+    "duration" : 0
+  } , {
+    "name" : "Swipe Attack",
+    "target" : "allPlayer",
+    "type" : "damage",
+    "baseEffect" : 20,
+    "duration" : 0
+  } , {
+    "name" : "Harden",
+    "target" : "self",
+    "type" : "buff",
+    "baseEffect" : 60,
+    "duration" : 3
+  } , {
+    "name" : "Mana Drain",
+    "target" : "allPlayers",
+    "type" : "drain",
+    "baseEffect" : 15,
+    "duration" : 0
+  }]
+}
