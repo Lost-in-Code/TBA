@@ -38,6 +38,7 @@ def create_db():
     c = conn.cursor()
     c.execute('''DROP TABLE IF EXISTS games''')
     c.execute('''DROP TABLE IF EXISTS players''')
+    c.execute('''DROP TABLE IF EXISTS bosses''')
     c.execute('''CREATE TABLE players
                 (room_id, nick, role, uid, ready, state, hp, mana, action)''')
     c.execute('''CREATE TABLE games
