@@ -14,6 +14,7 @@ $(document).ready(function() {
     $('.game').hide();
     $('.waiting').hide();
     $('.joinPage').show();
+    $('.bars').hide();
     
     $('#role_dps').click(function() {
         $('#chooseClass').addClass("classSet");
@@ -134,6 +135,7 @@ function joinPage() {
     $('.joinPage').show();
     $('.game').hide();
     $('.waiting').hide();
+    $('.bars').hide();
 }
 function readyPage() {
     document.title = "Are you ready?";
@@ -142,6 +144,7 @@ function readyPage() {
     $('.joinPage').hide();
     $('.waiting').hide();
     $('.game').hide();
+    $('.bars').hide();
 }
 
 
@@ -150,7 +153,11 @@ function startRound() {
     $('.joinPage').hide();
     $('.game').show();
     $('.waiting').hide();
-    $('.mana').hide();
+    $('.bars').show();
+    if (selClass != 3) {
+        $('.mana').hide();
+    }
+    
     $('.attack_buttons').find('button').attr('disabled', false);
     document.title = 'Battle!';
     
@@ -222,6 +229,11 @@ function startRound() {
 function goWaiting() {
     document.title = 'Waiting...';
     $('.readyPage').hide();
+    $('.bars').show();
+    if (selClass != 3) {
+        $('.mana').hide();
+    }
+        
     $('.joinPage').hide();
     $('.game').hide();
     $('.waiting').show();
