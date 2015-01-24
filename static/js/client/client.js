@@ -7,33 +7,7 @@ var counter   = 15;
 var roomState = 0;
 var selClass  = 0;
 
-function pollForState(i) {
-    var r = $.Deferred();
-        setInterval (function() {
-            if (userState < i) {
-                $.ajax({
-                    url: '/game/player_status',
-                    data: {uid: uid},
-                    dataType: 'json',
-                    cache: false,
-                    success: function(response) {
-                        userState = response;
-                        console.log("state: " + response);
-                    },
-                    error: function(response) {
-                        alert("Failed to get player state!");
-                        console.log("State: " + response);
-                        return false;
-                    },
-                    complete: pollForState
-                });
-            } else {
-                r.resolve();
-                return r;
-            }
-            
-        }, 1000);
-}
+
 
 $(document).ready(function() {
     $('.countdown').toggle();
@@ -49,7 +23,7 @@ $(document).ready(function() {
     });
     $('#role_support').click(function() {
         $('#chooseClass').addClass("classSet");
-        $('#chooseClass').html("Support<span class=\"caret\"></span>");
+        $('#chooseClass').html("Healer<span class=\"caret\"></span>");
         selClass = 3;
     });
     $('#joinGame').click(function() {
@@ -66,7 +40,8 @@ $(document).ready(function() {
                         $('.countdown').toggle();
                         $('.joinPage').toggle();
                         uid = response.uid;
-                        // State is 1
+                        console.log(uid);
+                        
                     } else {
                         alert("Error on join, same nick different class?");
                         console.log(response.uid);
@@ -91,6 +66,7 @@ $(document).ready(function() {
                 success: function(response) {
                     console.log(response);
                     // State is 2
+                    countdownPoll();
                 },
                 error: function(response) {
                     alert("Couldn't set player as ready");
@@ -100,9 +76,6 @@ $(document).ready(function() {
             // TODO: Make backend check how many players are ready before this
             // Run this until state is 3
             
-            pollForState(3).done(function() {
-                $('body').html('');
-            });
         } else {
             // Make toggleable?
         }
@@ -110,25 +83,59 @@ $(document).ready(function() {
 }); 
 
 
+function countdownPoll() {
+        setTimeout (function() {
+            if (userState < 3) {
+                $.ajax({
+                    url: '/game/player_status',
+                    data: {uid: uid},
+                    dataType: 'json',
+                    cache: false,
+                    success: function(response) {
+                        $('#theCountdown').text("Game starts in: " + counter);
+                        counter--;
+                        userState = response;
+                        console.log("State: " + response);
+                    },
+                    error: function(response) {
+                        alert("Failed to get player state!");
+                        console.log("State: " + response);
+                        return false;
+                    },
+                    complete: countdownPoll
+                });
+            } else {
+                gameReadyPoll();
+            }
+            
+        }, 1000);
+}
 
-
-/*function gameReadyPoll() {
+function gameReadyPoll() {
     setTimeout(function() {
-        if (roomState < 2) {
+        if (userState < 4) {
             $.ajax({
-                url: '/game/room_status',
-                data: {room_id: gameID},
+                url: '/game/player_status',
+                data: {uid: uid},
                 dataType: 'json',
                 cache: false,
                 success: function(response) {
-                    roomState = response;
-                    console.log("Room state: " + response);
-                    startGame();
-                }
+                    userState = response;
+                    console.log("state: " + response);
+                },
+                error: function(response) {
+                    alert("Failed to get player state!");
+                    console.log("State: " + response);
+                    return false;
+                    
+                },
+                complete: gameReadyPoll
             });
+        } else {
+            startGame();
         }
-    }, 500);
-}*/
+    }, 2000);
+}
 function startGame() {
     console.log("'Started' game");
 }
