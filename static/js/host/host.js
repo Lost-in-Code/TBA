@@ -1,5 +1,6 @@
 var gameID;
 var players = [];
+var countDownToGameStart = null;
 
 $(document).ready(function () {
 
@@ -29,7 +30,7 @@ $(document).ready(function () {
 
 function GetGameState(id)
 {
-    //console.log("Getting game state");
+    console.log("Getting game state");
 
     $.ajax({
         url: '/game/getHostState',
@@ -38,7 +39,7 @@ function GetGameState(id)
         cache: false,
         success: function (response)
         {
-            //console.log("State: " + response);
+            console.log("State: " + response);
 
             switch(response)
             {
@@ -54,10 +55,10 @@ function GetGameState(id)
                         {
                             // add the player in the right group onscreen
                             var arrayLength = response.Players.length;
-                            for (var i = 0; i < arrayLength; i++) {
-                                
+                            for (var i = 0; i < arrayLength; i++)
+                            {                                
                                 var player = response.Players[i];                              
-                                //console.log(player);
+
                                 if ($.inArray(player.Nick, players) == -1)
                                 {
                                     console.log("Player " + player.Nick + " (role "+ player.Role +") joined the game.")
@@ -80,7 +81,7 @@ function GetGameState(id)
                             }
 
                             // fetch new status
-                            setTimeout(GetGameState(id), 5000);
+                            GetNewGameState();
                         },
                         failure: function (response) {
                             alert("Could not fetch players for game " + id);
@@ -90,6 +91,40 @@ function GetGameState(id)
                     });
 
                     break;
+
+                case 1:     // COUNT DOWN TO GAME START STATE
+                    console.log("got count down");
+                    if (countDownToGameStart == null)
+                    {
+                        countDownToGameStart = 10;
+
+                        CountDownToGameStart();
+                    }
+
+                    // fetch new status
+                    GetNewGameState();
+                    break;
+                case 2:
+                    $.ajax(
+                    {
+                        url: '/game/getHostStatus',
+                        data: { room_id: id },
+                        dataType: 'json',
+                        cache: false,
+                        success: function (response) {
+
+                            // navigate to new screen
+
+
+
+                        },
+                        failure: function (response) {
+                            alert("State 2 fail");
+
+                            console.log(response);
+                        }
+                    });
+                    break;
             }
         },
         failure: function (response)
@@ -97,4 +132,20 @@ function GetGameState(id)
             Alert("Could not get game status");
         }
     });
+}
+
+function GetNewGameState()
+{
+    setTimeout(function () { GetGameState(gameID); }, 2000);
+}
+
+function CountDownToGameStart()
+{
+    $("#countDown").text(countDownToGameStart);
+
+    countDownToGameStart -= 1;
+
+    if (countDownToGameStart < 0) countDownToGameStart = 0;
+
+    setTimeout(CountDownToGameStart, 1000);
 }
