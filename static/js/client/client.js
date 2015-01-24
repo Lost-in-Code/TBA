@@ -87,7 +87,7 @@ function countdownPoll() {
         setTimeout (function() {
             if (userState < 3) {
                 $.ajax({
-                    url: '/game/player_status',
+                    url: '/game/getPlayerState',
                     data: {uid: uid},
                     dataType: 'json',
                     cache: false,
@@ -115,7 +115,7 @@ function gameReadyPoll() {
     setTimeout(function() {
         if (userState < 4) {
             $.ajax({
-                url: '/game/player_status',
+                url: '/game/getPlayerState',
                 data: {uid: uid},
                 dataType: 'json',
                 cache: false,
