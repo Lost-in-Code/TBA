@@ -215,11 +215,23 @@ function GetGameState(id)
 
                     console.log("GAME STATE 5: ROUND");
 
-                    // navigate to new screen
-                    ShowPage("RoundScreen");
+                    $.ajax(
+                    {
+                        url: '/game/getHostRound',
+                        data: { room_id: gameID },
+                        dataType: 'json',
+                        cache: false,
+                        success: function(response) 
+                        {
+                            // update UI
 
-                    // fetch new status
-                    GetNewGameState();
+                            // navigate to new screen
+                            ShowPage("RoundScreen");
+
+                            // fetch new status
+                            GetNewGameState();
+                        }
+                    });                    
 
                     break;
 
@@ -227,26 +239,55 @@ function GetGameState(id)
 
                     console.log("GAME STATE 6: ROUND RESULT");
 
-                    // tell the server we are done (10 sec)
-                    countDownTimer = 10;
-                    CountDownTimerCountDown();
+                    $.ajax(
+                    {
+                        url: '/game/getHostRoundResult',
+                        data: { room_id: gameID },
+                        dataType: 'json',
+                        cache: false,
+                        success: function (response)
+                        {
+                            // update UI
+
+                            // tell the server we are done (10 sec)
+                            countDownTimer = 10;
+                            CountDownTimerCountDown();
+
+                            // navigate to new screen
+                            ShowPage("RoundResultScreen");
+
+                            setTimeout(function () {
+                                $.ajax(
+                                {
+                                    url: 'game/roundResultDone',
+                                    data: { room_id: id },
+                                    dataType: 'json'
+                                });
+
+                                // fetch new status
+                                GetNewGameState();
+
+                            }, 10000);
+                        }
+                    });                    
+
+                    break;
+
+                case 7:
+
+                    console.log("GAME STATE 7: ROUND");
 
                     // navigate to new screen
-                    ShowPage("RoundResultScreen");
+                    ShowPage("VictoryScreen");
 
-                    setTimeout(function ()
-                    {
-                        $.ajax(
-                        {
-                            url: 'game/roundResultDone',
-                            data: { room_id: id },
-                            dataType: 'json'
-                        });
+                    break;
 
-                        // fetch new status
-                        GetNewGameState();
+                case 99:
 
-                    }, 10000);
+                    console.log("GAME STATE 99: ROUND");
+
+                    // navigate to new screen
+                    ShowPage("DeathScreen");
 
                     break;
             }
