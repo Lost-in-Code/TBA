@@ -16,5 +16,6 @@ def boss():
     return render_template('boss.html', head=head, torso=torso, leftarm=leftarm, rightarm=rightarm, legs=legs, weapon=weapon)
 
 if __name__ == "__main__":
+    app.port = 5050
     app.debug = True
     app.run()
