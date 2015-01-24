@@ -2,6 +2,8 @@ var gameID;
 var players = [];
 var countDownToGameStart = null;
 
+var vm;
+
 $(document).ready(function () {
 
     $.sammy('#main', function () {
@@ -123,10 +125,8 @@ function GetGameState(id)
                         cache: false,
                         success: function (response) {
 
-                            console.log(response);
-
                             // load viewmodel 
-                            var vm = {
+                            vm = {
                                 Title: ko.observable(response.Title),
                                 Text: ko.observable(response.Text)
                             };
@@ -135,16 +135,89 @@ function GetGameState(id)
                             // navigate to new screen
                             ShowPage("QuestBackgroundScreen");
 
-                            // start timer to move to next state
-                            setTimer(function ()
+                            // start timer to move to next state (random event screen)
+                            setTimeout(function ()
                             {
                                 // timeout finished, move to state 3
                                 $.ajax(
                                 {
+                                    url: '/game/preGameDone',
+                                    data: { room_id: id },
+                                    dataType: 'json',
+                                    cache: false,
+                                    success: function (response)
+                                    {
+                                        // load viewmodel
+                                        /*
+                                        var vm = {
+                                            Title: ko.observable(response.Title),
+                                            Text: ko.observable(response.Text)
+                                        };
+                                        */
+                                        vm.Title = "FRAKK";
+
+                                        //ko.applyBindings(vm);
+
+                                        // navigate to new screen
+                                        ShowPage("RandEventScreen");
+
+                                        // start timer to move to next state ( pre boss screen )
+                                        setTimeout(function ()
+                                        {
+                                            console.log("Random event screen done");
+
+                                            $.ajax(
+                                            {
+                                                url: 'game/randomEventDone',
+                                                data: { room_id: id },
+                                                dataType: 'json',
+                                                cache: false,
+                                                success: function (response)
+                                                {
+                                                    // load viewmodel
+                                                    var vm = {
+                                                        Title: ko.observable(response.Title),
+                                                        Text: ko.observable(response.Text)
+                                                    };
+                                                    //ko.cleanNode();
+                                                    //ko.applyBindings(vm);
+
+                                                    // navigate to new screen
+                                                    ShowPage("BossStoryScreen");
+
+                                                    // tell the server we are done (10 sec)
+                                                    setTimeout(function ()                                                       
+                                                    {
+                                                        console.log("Boss story screen done");
+
+                                                        $.ajax(
+                                                        {
+                                                            url: 'game/bossStoryDone',
+                                                            data: { room_id: id },
+                                                            cache: false,
+                                                            success: function (response) {
+                                                                // fetch new status
+                                                                GetNewGameState();
+                                                            }
+                                                        });
+
+                                                    }, 10000);
+                                                },
+                                                failure: function (response) {
+                                                    alert("State 4 fail");
+
+                                                    console.log(response);
+                                                }
+                                            });
+                                        }, 10000);
+                                    },
+                                    failure: function (response) {
+                                        alert("State 3 fail");
+
+                                        console.log(response);
+                                    }
 
                                 });
-
-
                             }, 10000);
                         },
                         failure: function (response) {
@@ -153,6 +226,31 @@ function GetGameState(id)
                             console.log(response);
                         }
                     });
+                    break;
+                case 5:
+                    console.log("REACHED ROUND LOOP");
+
+                    // fetch new status
+                    GetNewGameState();
+
+                    break;
+
+                case 6:
+
+                    setTimeout(function ()
+                    {
+                        $.ajax(
+                        {
+                            url: 'game/roundResultDone',
+                            data: { room_id: id },
+                            dataType: 'json'
+                        });
+
+                        // fetch new status
+                        GetNewGameState();
+
+                    }, 10000);
+
                     break;
             }
         },
