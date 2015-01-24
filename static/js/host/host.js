@@ -108,8 +108,8 @@ function GetGameState(id)
                         cache: false,
                         success: function (response)
                         {
-                            $("#questTitle").text(response.Title);
-                            $("#questText").text(response.Text);
+                            $("#questTitle").html(response.Title);
+                            $("#questText").html(response.Text);
                             //$("body").css('background-image', 'url(' + response.Imageurl + ')');
                             $("body").css('-webkit-background-size', 'cover');
 
@@ -148,8 +148,8 @@ function GetGameState(id)
                         cache: false,
                         success: function (response)
                         {
-                            $("#randTitle").text(response.Title);
-                            $("#rantText").text(response.Text);
+                            $("#randTitle").html(response.Title);
+                            $("#randText").html(response.Text);
 
                             // navigate to new screen
                             ShowPage("RandEventScreen");
@@ -186,8 +186,8 @@ function GetGameState(id)
                         cache: false,
                         success: function (response)
                         {
-                            $("#bossTitle").text(response.Title);
-                            $("#bossText").text(response.Text);
+                            $("#bossTitle").html(response.Title);
+                            $("#bossText").html(response.Text);
 
                             // navigate to new screen
                             ShowPage("BossStoryScreen");
