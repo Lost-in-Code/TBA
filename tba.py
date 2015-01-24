@@ -27,6 +27,17 @@ def joinGame():
     role = request.args.get('role')
     return json.dumps(join_game(room, nick, role))
 
+@app.route('/game/doClientAction')
+def doClientAction():
+    uid = request.avgs.get('uid')
+    action = request.avgs.get('action')
+    return json.dumps(do_client_action(uid, action))
+
+@app.route('/game/getPlayerStatus')
+def getPlayerStatus():
+    uid = request.avgs.get('uid')
+    return json.dumps(get_player_status(uid))
+
 @app.route('/game/start')
 def startGame():
     uid = request.args.get('uid')
@@ -51,6 +62,16 @@ def getHostStatus():
 def getHostQuestStory():
     room_id = request.args.get('room_id')
     return json.dumps({"Title": "Lorem Ipsum", "Text": "There once was a BEEP doing BEEP to a BEEP while singing", "Imgurl": url_for('static', filename="images/bg_cave_blur_10.jpg")})
+
+@app.route('/game/getHostRandomEvent')
+def getHostRandomEvent():
+    room_id = request.args.get('room_id')
+    return json.dumps("Pew")
+
+@app.route('/game/getHostBossStory')
+def getHostBossStory():
+    room_id = request.args.get('room_id')
+    return json.dumps("Pew")
 
 @app.route('/game/preGameDone')
 def setPreGameDone():

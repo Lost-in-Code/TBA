@@ -9,4 +9,10 @@ def start_game(uid):
     return database.db_game_ready(uid)
 
 def get_player_state(uid):
-    return database.db_get_status(uid)
+    return database.db_get_client_state(uid)
+
+def do_client_action(uid, action):
+    return database.db_do_client_action(uid, action)
+
+def get_player_status(uid):
+    return database.db_get_client_status(uid)

@@ -39,9 +39,11 @@ def create_db():
     c.execute('''DROP TABLE IF EXISTS games''')
     c.execute('''DROP TABLE IF EXISTS players''')
     c.execute('''CREATE TABLE players
-                (room_id, nick, role, uid, ready, state, hp, mana)''')
-    c.execute(''' CREATE TABLE games
+                (room_id, nick, role, uid, ready, state, hp, mana, action)''')
+    c.execute('''CREATE TABLE games
                 (room_id, ready_countdown, state, round_countdown)''')
+    c.execute('''CREATE TABLE bosses
+                (room_id, name, hp)''')
     db_close_conn(conn)
     logging.info("Created DB")
 
@@ -123,7 +125,7 @@ def db_get_host_state(room_id):
     c.execute('''SELECT state FROM games WHERE room_id=?''', [room_id])
     return c.fetchone()[0]
 
-def db_get_status(uid):
+def db_get_client_state(uid):
     conn = db_get_conn()
     c = conn.cursor()
     c.execute('''SELECT state FROM players WHERE uid=?''', [uid])
@@ -169,3 +171,21 @@ def db_set_roundResultDone(room_id):
     db_close_conn(conn)
     return True
     # Implement new states based on stuff that has happend. HP on people, boss etc.
+
+def db_do_client_action(uid, action):
+    conn = db_get_conn()
+    c = conn.cursor()
+    c.execute('''SELECT * FROM players WHERE uid = ?''', [uid])
+    if c.fetchone() is None: return False
+    c.execute('''UPDATE players SET action = ? WHERE uid = ?''', [action, uid])
+    db_close_conn(conn)
+    return True
+
+def db_get_client_status(uid):
+    conn = db_get_conn()
+    conn.row_factory = sqlite3.Row
+    c = conn.cursor()
+    c.execute('''SELECT * FROM players WHERE uid = ?''', [uid])
+    client = c.fetchone()
+    if client is None: return False
+    return {"HP": client['hp'], "Mana": client['mana']}
