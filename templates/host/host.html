@@ -13,8 +13,15 @@
 <div id="main">
 
     <div id="PreGameScreen" class="container initial">
-        <center><h1>TBA, join link: {{ url_for('join') }}</h1></center>
+<<<<<<< HEAD
+        <center><h1>Random Dungeon Crawler, join link: {{ url_for('join') }}</h1></center>
+=======
+        <center><h1>Random Dungeon Crawler</h1><h3>Join link: {{ url_for('join') }}</h3></center>
+>>>>>>> origin/master
         <hr />
+		
+		<center style="margin-top:50px;"><h1 class="text-danger">Game ID: <span id="gameID"></span></h1></center>
+		
         <div id="RoleDescriptions" class="row">
             <div class="col-md-4 dps">
                 <div class="roleheader">
@@ -92,18 +99,17 @@
         <div class="row">
             <div class="col-md-4 dps">
                 <h3>Joined DPS</h3>
-                <div id="dpslist"></div>
+                <div class="text-danger" id="dpslist"></div>
             </div>
             <div class="col-md-4 tanks">
                 <h3>Joined Tanks</h3>
-                <div id="tanklist"></div>
+                <div class="text-success" id="tanklist"></div>
             </div>
             <div class="col-md-4 healers">
                 <h3>Joined Healers</h3>
-                <div id="healerlist"></div>
+                <div class="text-success" id="healerlist"></div>
             </div>
         </div>
-        <center style="margin-top:50px;"><p>Game ID: <span id="gameID"></span></p></center>
         <center style="margin-top:50px;"><p>Countdown: <span id="countDown"></span></p></center>
     </div>
 
