@@ -8,5 +8,5 @@ def start_game(uid):
     if not database.db_set_ready(uid): return False
     return database.db_game_ready(uid)
 
-def get_player_status(uid):
-    return database.db_get_status(uid)
+def get_player_state(uid):
+    return database.db_get_state(uid)

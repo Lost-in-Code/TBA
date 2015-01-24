@@ -37,6 +37,7 @@ def loop():
         t.start()
         logging.info("Started timer for game: %s" % (row["room_id"]))
         print("Started timer for game: %s" % (row["room_id"]))
+
     db_close_conn(conn)
 
 if __name__ == '__main__':

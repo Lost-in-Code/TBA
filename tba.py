@@ -34,10 +34,10 @@ def startGame():
     uid = request.args.get('uid')
     return json.dumps(start_game(uid))
 
-@app.route('/game/player_status')
+@app.route('/game/getPlayerState')
 def gameStatus():
     uid = request.args.get('uid')
-    return json.dumps(get_player_status(uid))
+    return json.dumps(get_player_state(uid))
 
 @app.route('/game/getHostState')
 def getHostState():
