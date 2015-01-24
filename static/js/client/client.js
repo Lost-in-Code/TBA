@@ -160,10 +160,10 @@ function startRound() {
         $('.action3').text("Boost Attack");
     } else if (selClass === 2) {
         $('.action1').text("Taunt");
-        $('.action2').text("Boost Defense");
-        $('.action3').text("Attack");
+        $('.action2').text("Guard");
+        $('.action3').text("Boost Defense");
     } else if (selClass === 3) {
-        $('.action1').text("Focused Heal");
+        $('.action1').text("Tank Heal");
         $('.action2').text("Group Heal");
         $('.action3').text("Recover Mana");
         $('.mana').show();
