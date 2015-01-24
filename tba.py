@@ -61,7 +61,7 @@ def getHostStatus():
 @app.route('/game/getHostQuestStory')
 def getHostQuestStory():
     room_id = request.args.get('room_id')
-    return json.dumps({"Title": "Lorem Ipsum", "Text": "There once was a BEEP doing BEEP to a BEEP while singing", "Imgurl": url_for('static', filename="images/bg_cave_blur_10.jpg")})
+    return json.dumps(get_host_questStory(room_id))
 
 @app.route('/game/getHostRandomEvent')
 def getHostRandomEvent():
@@ -71,7 +71,7 @@ def getHostRandomEvent():
 @app.route('/game/getHostBossStory')
 def getHostBossStory():
     room_id = request.args.get('room_id')
-    return json.dumps("Pew")
+    return json.dumps(get_host_bossStory(room_id))
 
 @app.route('/game/preGameDone')
 def setPreGameDone():

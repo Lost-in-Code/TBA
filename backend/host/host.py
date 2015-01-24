@@ -34,3 +34,13 @@ def get_host_randomEvent(room_id):
     event = random.choice(data['events'])
     database.db_set_randomEvent(room_id, event['id'])
     return event
+
+def get_host_bossStory(room_id):
+    json_data = open('content/bosses.json')
+    data = json.load(json_data)
+    return random.choice(data['bosses'])
+
+def get_host_questStory(room_id):
+    json_data = open('content/quests.json')
+    data = json.load(json_data)
+    return random.choice(data['quests'])
