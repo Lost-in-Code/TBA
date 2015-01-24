@@ -56,3 +56,5 @@ target/
 #pycharm
 .idea
 database.db
+
+Thumbs.db

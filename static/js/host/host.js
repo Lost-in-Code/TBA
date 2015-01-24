@@ -1,19 +1,28 @@
-$(document).ready(function() {
-    $.ajax( {
-        url: '/game/create',
+$(document).ready(function () {
+
+    var gameId;
+
+    $.ajax({
+        url: 'http://127.0.0.0:5000/game/create',
         dataType: 'json',
         cache: false,
-        success: function(response){
-            var gameID = response.room_id;
+        success: function (response)
+        {
+            gameID = response.room_id;
             $('#gameID').text(gameID);
+
             addPlayersToLists(gameID);
+
             console.log(gameID);
         },
-        failure: function(response){
+        failure: function (response)
+        {
             alert("Error hosting game, could not retrieve game ID");
+
             console.log(response);
         }
     });
+
 });
 
 function addPlayersToLists(gameID) {
