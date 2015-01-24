@@ -19,7 +19,7 @@
     <![endif]-->
   </head>
   <body>
-  <marquee><center><h1>TBA</h1></center></marquee>
+  <center><h1>Random Dungeon Crawler</h1></center>
    <hr />
    
    
@@ -41,7 +41,7 @@
         <div class="col-md-4 col-centered">
             <h2>Class</h2>
             <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle" type="button" id="chooseClass" data-toggle="dropdown">Choose class<span class="caret"></span></button>
+                <button class="btn btn-info dropdown-toggle" type="button" id="chooseClass" data-toggle="dropdown">Choose class<span class="caret"></span></button>
                 <ul class="dropdown-menu" role="menu" aria-labelledby="chooseClass">
                     <li id = "role_dps" role="presentation"><a role="menuitem" tabindex="-1" href="#">DPS</a></li>
                     <li id = "role_tank" role="presentation"><a role="menuitem" tabindex="-1" href="#">Tank</a></li>   
@@ -49,13 +49,18 @@
                 </ul>
             </div>
         </div>
-        <center><button style="margin-top:50px;" class="btn btn-default" type="button" id="joinGame">Join game</button></center>
+        <button style="margin-top:50px; margin-left:15px;" class="btn btn-success" type="button" id="joinGame">Join game</button>
     </div>
     
     <div class="container game">
        <center>
-        <div class="progress">
-          <div class="progress-bar" role="progressbar"  style="width: 90%;">
+        <div class="progress hp">
+          <div class="progress-bar hp_bar" role="progressbar"  style="width: 90%;">
+            60%
+          </div>
+        </div>
+        <div class="progress mana">
+          <div class="progress-bar mana_bar" role="progressbar"  style="width: 90%;">
             60%
           </div>
         </div>

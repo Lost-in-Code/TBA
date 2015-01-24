@@ -1,15 +1,15 @@
 {
   "bosses" : [{
-    "title" : "Irnaul Kinslayer",
-    "text" : "<p>This fearsome creature is the terror if the Hidden Dales of Midgard. It is rumored that it has killed and devoured almost all of it's kind.</p>"
+    "Title" : "Irnaul Kinslayer",
+    "Text" : "<p>This fearsome creature is the terror if the Hidden Dales of Midgard. It is rumored that it has killed and devoured almost all of it's kind.</p>"
   } , {
-    "title" : "Havab the Breaker",
-    "text" : "<p>This brute is probably the dumbest creature to walk the Nine Realms in that last century, but it understands the promise of slaughter and revel in symphony of battle.</p>"
+    "Title" : "Havab the Breaker",
+    "Text" : "<p>This brute is probably the dumbest creature to walk the Nine Realms in that last century, but it understands the promise of slaughter and revel in symphony of battle.</p>"
   } , {
-    "title" : "Grand Cleric Bamet",
-    "text" : "<p>A zealous follower of the dark god Hel whose ambition is to cover the Nine Realms in the blood of the innocent.</p>"
+    "Title" : "Grand Cleric Bamet",
+    "Text" : "<p>A zealous follower of the dark god Hel whose ambition is to cover the Nine Realms in the blood of the innocent.</p>"
   } , {
-    "title" : "The Dark One of Svartalfheim, Vancair",
-    "text" : "<p>Given the title Dark One of Svartalfheim after the slaughter of ten villages and the mansions of several nobles. Its very existence has been declared a danger to the safety of the Nine Realms</p>"
+    "Title" : "The Dark One of Svartalfheim, Vancair",
+    "Text" : "<p>Given the title Dark One of Svartalfheim after the slaughter of ten villages and the mansions of several nobles. Its very existence has been declared a danger to the safety of the Nine Realms</p>"
   }]
 }

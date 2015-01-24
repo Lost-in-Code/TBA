@@ -41,7 +41,7 @@ def create_db():
     c.execute('''CREATE TABLE players
                 (room_id, nick, role, uid, ready, state, hp, mana, action)''')
     c.execute('''CREATE TABLE games
-                (room_id, ready_countdown, state, round_countdown)''')
+                (room_id, ready_countdown, state, round_countdown, event)''')
     c.execute('''CREATE TABLE bosses
                 (room_id, name, hp)''')
     db_close_conn(conn)
@@ -54,7 +54,7 @@ def db_insert_game(room_id):
     c = conn.cursor()
     c.execute('''SELECT * FROM games WHERE room_id = ?''', [room_id])
     if c.fetchone() is None:
-        c.execute('''INSERT INTO games VALUES (?, 0, 0, 0)''', [str(room_id)])
+        c.execute('''INSERT INTO games VALUES (?, 0, 0, 0, 0)''', [str(room_id)])
         db_close_conn(conn)
         logging.info("Created new room with ID: %s" % (room_id))
         return True
@@ -189,3 +189,12 @@ def db_get_client_status(uid):
     client = c.fetchone()
     if client is None: return False
     return {"HP": client['hp'], "Mana": client['mana']}
+
+def db_set_randomEvent(room_id, event_id):
+    conn = db_get_conn()
+    c = conn.cursor()
+    c.execute('''SELECT * FROM games WHERE room_id = ?''', [room_id])
+    if c.fetchone() is None: return False
+    c.execute('''UPDATE games SET event = ? WHERE room_id = ?''', [event_id, room_id])
+    db_close_conn(conn)
+    return True
