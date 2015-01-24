@@ -170,7 +170,7 @@ def db_set_roundResultDone(room_id):
     boss_dead = c.fetchone() is None
     c.execute('''SELECT hp FROM players WHERE room_id = ? AND hp > 0''', [room_id])
     players_dead = c.fetchone() is None
-    if boss_dead is True:
+    if boss_dead:
         num_bosses = c.execute('''SELECT count(*) FROM bosses WHERE room_id = ?''', [room_id]).fetchone()[0]
         if num_bosses < 4:
             c.execute('''UPDATE games SET state = 3 WHERE room_id = ?''', [room_id])
@@ -192,7 +192,7 @@ def db_do_client_action(uid, action):
     c = conn.cursor()
     c.execute('''SELECT * FROM players WHERE uid = ?''', [uid])
     if c.fetchone() is None: return False
-    c.execute('''UPDATE players SET action = ? WHERE uid = ?''', [action, uid])
+    c.execute('''UPDATE players SET action = ?, state = 5 WHERE uid = ?''', [action, uid])
     db_close_conn(conn)
     return True
 
@@ -246,4 +246,7 @@ def db_get_boss_action(room_id):
     c.execute('''SELECT * FROM games WHERE room_id = ?''', [room_id])
     if c.fetchone() is None: return False
     c.execute('''SELECT action FROM bosses WHERE room_id = ? AND hp > 0''', [room_id])
-    return c.fetchone()[0]
+    boss = c.fetchone()
+    if boss is not None:
+        return boss[0]
+    else: return False

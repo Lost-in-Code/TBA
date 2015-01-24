@@ -61,4 +61,6 @@ def get_host_round_result(room_id):
     json_data = open('content/encounters.json')
     data = json.load(json_data)
     boss_action = database.db_get_boss_action(room_id)
-    return {"Action": data['actions'][boss_action]['name']}
+    if boss_action is not None:
+        return {"Action": data['actions'][boss_action]['name']}
+    else: return {"Action": "Dead"}
