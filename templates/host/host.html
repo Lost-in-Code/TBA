@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Host game</title>
-    <link href="../../static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../static/css/bootstrap.min.css" rel="stylesheet" >
+    <link href="../../static/css/host/custom.css" rel="stylesheet" />
   </head>
   <body>
 
@@ -16,14 +17,71 @@
               <hr />
               <div class="col-md-4 dps">
                   <h1>DPS</h1>
+                  <div id="dpsdesc" class="roledesc">
+                      <span class="roledescheader">Description:</span>
+                      <div class="roledescText">Your job is to deal as much damage to the enemy as possible.</div>
+                      <span class="actionslistheader">Actions:</span>
+                      <ul class="actionslist">
+                          <li>
+                              <span class="actionheader">Melee Attack</span>
+                              <span class="actiondesc">You deal a heavy blow to the enemy from close range.</span>
+                          </li>
+                          <li>
+                              <span class="actionheader">Ranged Attack</span>
+                              <span class="actiondesc">You deal moderate damage to the enemy from a distance.</span>
+                          </li>
+                          <li>
+                              <span class="actionheader">Boost Attack</span>
+                              <span class="actiondesc">You boost your own damage for the next few rounds.</span>
+                          </li>
+                      </ul>
+                  </div>
                   <div id="dpslist"></div>
               </div>
               <div class="col-md-4 tanks">
                   <h2>Tank</h2>
+                  <div id="tankdesc" class="roledesc">
+                      <span class="roledescheader">Description:</span>
+                      <div class="roledescText">Your job is to control the enemy and negate the damage it can do to your group.</div>
+                      <span class="actionslistheader">Actions:</span>
+                      <ul class="actionslist">
+                          <li>
+                              <span class="actionheader">Shield Bash</span>
+                              <span class="actiondesc">You deal moderate damage to the enemy from close range.</span>
+                          </li>
+                          <li>
+                              <span class="actionheader">Taunt</span>
+                              <span class="actiondesc">You attempt to force the enemy to focus on you during the next round.</span>
+                          </li>
+                          <li>
+                              <span class="actionheader">Boost Defense</span>
+                              <span class="actiondesc">You boost your own defense for the next few rounds.</span>
+                          </li>
+                      </ul>
+                  </div>
                   <div id="tanklist"></div>
               </div>
               <div class="col-md-4 healers">
                   <h2>Healer</h2>
+                  <div id="healerdesc" class="roledesc">
+                      <span class="roledescheader">Description:</span>
+                      <div class="roledescText">Your job is to keep the group alive with powerful healing spells.</div>
+                      <span class="actionslistheader">Actions:</span>
+                      <ul class="actionslist">
+                          <li>
+                              <span class="actionheader">Focused Heal</span>
+                              <span class="actiondesc">You heal the tanks for a moderate amount of damage.</span>
+                          </li>
+                          <li>
+                              <span class="actionheader">Group Heal</span>
+                              <span class="actiondesc">You heal the entire group for a low amount of damage each.</span>
+                          </li>
+                          <li>
+                              <span class="actionheader">Recover Mana</span>
+                              <span class="actiondesc">You recover a portion of your mana.</span>
+                          </li>
+                      </ul>
+                  </div>
                   <div id="healerlist"></div>
               </div>
               <center style="margin-top:50px;"><p>Game ID: <span id="gameID"></span></p></center>
@@ -59,11 +117,11 @@
           </div>
 
           <div id="VictoryScreen">
-              you have won
+              <img src="/static/images/frame_win.png" style="width: 100%; padding: 200px; margin-top: -100px;">
           </div>
 
           <div id="DeathScreen">
-              you have lost
+              <img src="/static/images/frame_die.png" style="width: 100%; padding: 200px; margin-top: -100px;">
           </div>
 
       </div>
