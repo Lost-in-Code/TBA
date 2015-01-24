@@ -91,7 +91,7 @@ setInterval(function() {
         } else if (userState === 2){
             goWaiting();
         } else if (userState === 3) {
-            startRound();
+            goWaiting();
         } else if (userState === 4) {
             startRound();
         } else if (userState === 5) {
@@ -118,8 +118,13 @@ setInterval(function() {
         cache: false,
         success: function(response) {
             hp = response.HP;
+            $('.hp_bar').text(hp + "%");
+            $('.hp_bar').css("width", hp+"%");
             mana = response.Mana;
+            $('.mana_bar').text(mana + "%");
+            $('.mana_bar').css("width", hp+"%");
         }
+    });
 }, 2000);
 
 
@@ -167,6 +172,9 @@ function startRound() {
             data: {uid:uid, action: 1},
             dataType: 'json',
             cache: false,
+            success: function() {
+                console.log("sent attack");
+            },
             error: function(response) {
                 alert("Could not send your action!");
                 console.log(response);
@@ -179,6 +187,9 @@ function startRound() {
             data: {uid:uid, action: 2},
             dataType: 'json',
             cache: false,
+            success: function() {
+                console.log("sent attack");
+            },
             error: function(response) {
                 alert("Could not send your action!");
                 console.log(response);
@@ -191,12 +202,18 @@ function startRound() {
             data: {uid:uid, action: 3},
             dataType: 'json',
             cache: false,
+            success: function() {
+                console.log("sent attack");
+            },
             error: function(response) {
                 alert("Could not send your action!");
                 console.log(response);
             }
         });
     });
+}
+
+
 
 function goWaiting() {
     $('.readyPage').hide();

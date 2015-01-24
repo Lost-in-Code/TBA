@@ -29,13 +29,13 @@ def joinGame():
 
 @app.route('/game/doClientAction')
 def doClientAction():
-    uid = request.avgs.get('uid')
-    action = request.avgs.get('action')
+    uid = request.args.get('uid')
+    action = request.args.get('action')
     return json.dumps(do_client_action(uid, action))
 
 @app.route('/game/getPlayerStatus')
 def getPlayerStatus():
-    uid = request.avgs.get('uid')
+    uid = request.args.get('uid')
     return json.dumps(get_player_status(uid))
 
 @app.route('/game/start')
