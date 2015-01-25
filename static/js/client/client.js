@@ -49,7 +49,7 @@ $(document).ready(function() {
                         console.log(uid);
                         userState = 1;
                     } else {
-                        alert("Error on join, same nick different class?");
+                        alert("Error on join, same nick different class or invalid game ID?");
                         console.log(response.uid);
                     } 
                 },
@@ -85,11 +85,11 @@ $(document).ready(function() {
 
 setInterval(function() {
     if (selClass === 1) {
-        $('#playerInfo').html("<img id=\"classImg\" alt=\"\" src=\""+$('#imagesURL').html()+"/ic_dps.png\">"+"<p id=\"infoName\">"+userNick+"</p>");
+        $('#playerInfo').html("<img id=\"classImg\" alt=\"\" src=\""+$('#imagesURL').html()+"/ic_dps.png\">"+"<p class=\"infoName\">"+userNick+"</p>");
     } else if (selClass === 2) {
-        $('#playerInfo').html("<img id=\"classImg\" alt=\"\" src=\""+$('#imagesURL').html()+"/ic_tank.png\">"+"<p id=\"infoName\">"+userNick+"</p>");
+        $('#playerInfo').html("<img id=\"classImg\" alt=\"\" src=\""+$('#imagesURL').html()+"/ic_tank.png\">"+"<p class=\"infoName\">"+userNick+"</p>");
     } else if (selClass === 3) {
-        $('#playerInfo').html("<img id=\"classImg\" alt=\"\" src=\""+$('#imagesURL').html()+"/ic_heal.png\">"+"<p id=\"infoName\">"+userNick+"</p>");
+        $('#playerInfo').html("<img id=\"classImg\" alt=\"\" src=\""+$('#imagesURL').html()+"/ic_heal.png\">"+"<p class=\"infoName\">"+userNick+"</p>");
     }
     if (userState != oldState) {
         if (userState === 1) {

@@ -2,8 +2,9 @@
     #classImg {
         height:60px;
     }
-    #infoName {
-        margin-left:70px;
+    .infoName {
+        margin-left:
+        100px;
         margin-top: -40px;
         font-size:16px;
     }
@@ -12,10 +13,11 @@
 @media (max-width: 992px) {
     #classImg {
         height:60px;
+        margin-bottom:20px;
     }
-    #infoName {
-        margin-left:70px;
-        margin-top: -40px;
+    .infoName {
+        margin-left:100px;
+        margin-top: -60px;
         font-size:16px;
     }
 }
@@ -23,11 +25,11 @@
 @media (max-width: 767px) {
     #classImg {
         height:70px;
-        padding-bottom:20px;
     }
 
-    #infoName {
-        margin-left:0px;
+    .infoName {
+        margin-left:auto;
+        margin-right:auto;
         margin-top:-15px;
         font-size:16px;
     }
@@ -35,6 +37,10 @@
 }
 body, h1, h2 {
     font-family: 'Slabo 27px', serif;
+}
+
+#playerInfo {
+    padding-bottom: 30px;
 }
 
 .caret {
