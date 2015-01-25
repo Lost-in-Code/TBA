@@ -73,7 +73,7 @@ def db_insert_player(room_id, nick, role):
         uid = random.randint(10000,99999)
         while c.execute('''SELECT * FROM players WHERE uid = ?''', [str(uid)]).fetchone() != None:
             uid = random.randint(10000, 99999)
-        c.execute('''INSERT INTO players (room_id, nick, role, uid, ready, state, hp, mana) VALUES(?, ?, ?, ?, 0, 1, 100, 100)''', [room_id, nick, role, str(uid)])
+        c.execute('''INSERT INTO players (room_id, nick, role, uid, ready, state, hp, mana, action) VALUES(?, ?, ?, ?, 0, 1, 100, 100, "0")''', [room_id, nick, role, str(uid)])
         db_close_conn(conn)
         logging.info("Added new player %s to room %s with nick %s and role %s" % (uid, room_id, nick, role))
         return (True, uid)
