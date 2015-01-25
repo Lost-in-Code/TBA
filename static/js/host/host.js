@@ -46,44 +46,46 @@ function GetGameState(id)
                     console.log("GAME STATE 0: GROUP ASSEMBLY");
                     curState = 0;
                     // fetch players
-                    $.ajax({
-                        url: '/game/getHostStatus?room_id=' + id,
-                        dataType: 'json',
-                        cache: false,
-                        success: function (response)
-                        {
-                            // update UI
-                            // add the player in the right group onscreen
-                            var arrayLength = response.Players.length;
-                            for (var i = 0; i < arrayLength; i++)
-                            {                                
-                                var player = response.Players[i];                              
-
-                                if ($.inArray(player.Nick, players) == -1)
-                                {
-                                    console.log("Player " + player.Nick + " (role "+ player.Role +") joined the game.")
-
-                                    switch (player.Role) 
-                                    {
-                                        case "1":       // DPS list
-                                            $("#dpslist").append("<div>" + player.Nick + "</div>");
-                                            break;
-                                        case "2":       // Tank list
-                                            $("#tanklist").append("<div>" + player.Nick + "</div>");
-                                            break;
-                                        case "3":       // Healer list
-                                            $("#healerlist").append("<div>" + player.Nick + "</div>");
-                                            break;
-                                    }
-
-                                    players.push(player.Nick);
-                                }                                
-                            }
-
-                            // fetch new status
-                            GetNewGameState();
-                        }
-                    });
+                    updatePlayers();
+//                    $.ajax({
+//                        url: '/game/getHostStatus?room_id=' + id,
+//                        dataType: 'json',
+//                        cache: false,
+//                        success: function (response)
+//                        {
+//                            // update UI
+//                            // add the player in the right group onscreen
+//                            var arrayLength = response.Players.length;
+//                            for (var i = 0; i < arrayLength; i++)
+//                            {
+//                                var player = response.Players[i];
+//
+//                                if ($.inArray(player.Nick, players) == -1)
+//                                {
+//                                    console.log("Player " + player.Nick + " (role "+ player.Role +") joined the game.")
+//
+//                                    switch (player.Role)
+//                                    {
+//                                        case "1":       // DPS list
+//                                            $("#dpslist").append("<div>" + player.Nick + "</div>");
+//                                            break;
+//                                        case "2":       // Tank list
+//                                            $("#tanklist").append("<div>" + player.Nick + "</div>");
+//                                            break;
+//                                        case "3":       // Healer list
+//                                            $("#healerlist").append("<div>" + player.Nick + "</div>");
+//                                            break;
+//                                    }
+//
+//                                    players.push(player.Nick);
+//                                }
+//                            }
+//
+//                            // fetch new status
+//                            GetNewGameState();
+//                        }
+//                    });
+                    GetNewGameState();
 
                     break;
 
@@ -154,8 +156,9 @@ function GetGameState(id)
                             // update UI
                             $("#randTitle").html(response.Title);
                             $("#randText").html(response.Text);
-                            $("body").css('background-image', 'url(/static/images/' + response.Imageurl + ')');
-                            $("body").css('-webkit-background-size', 'cover');
+                            $("#randImage").attr('src', response.Imageurl);
+//                            $("body").css('background-image', 'url(/static/images/' + response.Imageurl + ')');
+//                            $("body").css('-webkit-background-size', 'cover');
 							
 
                             // navigate to new screen
@@ -378,5 +381,89 @@ function ShowPage(id)
 function CharacterAnim(elem, dist, speed) {
     $("."+elem).animate({ top: "+="+dist+"px" }, speed, 'linear', function () {
         $("."+elem).animate({ top: "-="+dist+"px" }, speed, 'linear', function() { CharacterAnim(elem, dist, speed); });
+    });
+}
+
+function updatePlayers() {
+    $.ajax({
+        url: '/game/getHostStatus?room_id=' + gameID,
+        dataType: 'json',
+        cache: false,
+        success: function (response)
+        {
+            // update UI
+            // add the player in the right group onscreen
+            $.each(response.Players, function (key, value) {
+                if ($.inArray(value.Nick, players) == -1)
+                {
+                    console.log("Player " + value.Nick + " (role "+ value.Role +") joined the game.")
+
+                    var statusRoleImg = '<img class="statusRoleImg" src="../../static/images/icons/';
+
+                    switch (value.Role)
+                    {
+                        case "1":       // DPS list
+                            statusRoleImg += 'ic_dps.png" id="pImg' + value.Uid + '"';
+//                            $("#dpslist").append("<div>" + player.Nick + "</div>");
+                            break;
+                        case "2":       // Tank list
+                            statusRoleImg += 'ic_tank.png" id="pImg' + value.Uid + '"';
+//                            $("#tanklist").append("<div>" + player.Nick + "</div>");
+                            break;
+                        case "3":       // Healer list
+                            statusRoleImg += 'ic_heal.png" id="pImg' + value.Uid + '"';
+//                            $("#healerlist").append("<div>" + player.Nick + "</div>");
+                            break;
+                    }
+
+                    if (curState === 0 && value.Ready === 0) {
+                        statusRoleImg += 'style="display: none;" />';
+                    } else {
+                        statusRoleImg += 'style="display: inline;" />';
+                    }
+
+                    var assignedCol = Math.floor(players.length / 5);
+                    var pSpan = '<span class="playerName">' + value.Nick + '</span>';
+                    $('#pCol' + assignedCol).append('<div class="playerStatus">' + statusRoleImg + pSpan + '</div>');
+
+                    players.push(value.Nick);
+                } else {
+                    if (value.Ready === 1  && curState === 0) {
+                        $('#pImg' + value.Uid).css('display', 'inline');
+                    } else if (value.Ready === 0 && curState === 0) {
+                        $('#pImg' + value.Uid).css('display', 'none');
+                    }
+                }
+            });
+
+            if (curState !== 0) {
+                $('.statusRoleImg').css('display', 'inline');
+            }
+//            var arrayLength = response.Players.length;
+//            for (var i = 0; i < arrayLength; i++)
+//            {
+//                var player = response.Players[i];
+//
+//                if ($.inArray(player.Nick, players) == -1)
+//                {
+//                    console.log("Player " + player.Nick + " (role "+ player.Role +") joined the game.")
+//
+//                    switch (player.Role)
+//                    {
+//                        case "1":       // DPS list
+//                            $("#dpslist").append("<div>" + player.Nick + "</div>");
+//                            break;
+//                        case "2":       // Tank list
+//                            $("#tanklist").append("<div>" + player.Nick + "</div>");
+//                            break;
+//                        case "3":       // Healer list
+//                            $("#healerlist").append("<div>" + player.Nick + "</div>");
+//                            break;
+//                    }
+//
+//                    players.push(player.Nick);
+//                }
+//            }
+        }
     });
 }

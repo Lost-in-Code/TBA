@@ -104,6 +104,7 @@
             <div id="RandEventScreen" class="container">
                 <h2 id="randTitle"></h2>
                 <p id="randText"></p>
+                <img src="{{ url_for('static', filename='images/empty.png') }}" id="randImage" />
             </div>
 
             <div id="BossStoryScreen" class="container">
@@ -131,27 +132,21 @@
             </div>
 
         </div>
-        <div id="playerList" class="row lowerHalf">
-            <div class="col-md-4 dps">
-                <h3>Joined DPS</h3>
-                <div class="text-danger" id="dpslist"></div>
-            </div>
-            <div class="col-md-4 tanks">
-                <h3>Joined Tanks</h3>
-                <div class="text-success" id="tanklist"></div>
-            </div>
-            <div class="col-md-4 healers">
-                <h3>Joined Healers</h3>
-                <div class="text-success" id="healerlist"></div>
+        <div id="playerStatus" class="row lowerHalf">
+            <span id="pStatusHeader">Active Players:</span>
+            <div id="playerList" class="container">
+                {% for colId in range(0, 12) %}
+                    <div id="pCol{{ colId }}" class="col-md-1"></div>
+                {% endfor %}
             </div>
         </div>
     </div>
 </div>
 
 
- <div id="countdownTimer">
-     <span>10</span>
- </div>
+<div id="countdownTimer">
+    <span>10</span>
+</div>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
