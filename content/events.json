@@ -3,31 +3,31 @@
     "id" : 1,
     "Title" : "Treasure!",
     "Text" : "<p>You have found a chest with various enchanted weapons.</p>",
-    "Imageurl" : "stages/bg_cave_blur_10.jpg"
+    "Imageurl" : "stages/1_treasure.png"
   } , {
     "id" : 2,
     "Title" : "Well of Tranquility",
     "Text" : "<p>You stumble upon a Well of Tranquility where you can rest and recover before the next challenge.</p>",
-    "Imageurl" : "stages/bg_cave_blur_10.jpg"
+    "Imageurl" : "stages/2_welloftranquility.png"
   } , {
     "id" : 3,
     "Title" : "An Abandoned Armory",
     "Text" : "<p>An abandoned armory provides you with an opportunity to pilfer some new armor and weapons.</p>",
-    "Imageurl" : "stages/bg_cave_blur_10.jpg"
+    "Imageurl" : "stages/3_armory.png"
   } , {
     "id" : 4,
     "Title" : "Rockslide!",
     "Text" : "<p>A sudden rockslide injures some of your party.</p>",
-    "Imageurl" : "stages/bg_cave_blur_10.jpg"
+    "Imageurl" : "stages/4_rockslide.png"
   } , {
     "id" : 5,
     "Title" : "Enemy Patrols",
     "Text" : "<p>You stumble into an enemy patrol!<br />They are easily dispatched, but they manage to do some damage to your party before dying.</p>",
-    "Imageurl" : "stages/bg_cave_blur_10.jpg"
+    "Imageurl" : "stages/5_enemyattack.png"
   } , {
     "id" : 6,
     "Title" : "Magical Wards",
     "Text" : "<p>The way is trapped with magical wards that dispels all your beneficent status effects.</p>",
-    "Imageurl" : "stages/bg_cave_blur_10.jpg"
+    "Imageurl" : "stages/6_wards.png"
   }]
 }
