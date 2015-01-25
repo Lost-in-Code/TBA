@@ -120,7 +120,7 @@ def generateBoss():
     rightarm = random.choice(os.listdir(os.path.join(os.path.dirname(__file__), 'static/images/boss/rightarm')))
     legs = random.choice(os.listdir(os.path.join(os.path.dirname(__file__), 'static/images/boss/legs')))
     weapon = random.choice(os.listdir(os.path.join(os.path.dirname(__file__), 'static/images/boss/weapon')))
-    return render_template('boss.html', head=head, torso=torso, leftarm=leftarm, rightarm=rightarm, legs=legs, weapon=weapon)
+    return render_template('/host/boss.html', head=head, torso=torso, leftarm=leftarm, rightarm=rightarm, legs=legs, weapon=weapon)
 
 if __name__ == '__main__':
     app.Debug = True
