@@ -47,7 +47,6 @@ $(document).ready(function() {
                         uid = response.uid;
                         console.log(uid);
                         userState = 1;
-                        
                     } else {
                         alert("Error on join, same nick different class?");
                         console.log(response.uid);
