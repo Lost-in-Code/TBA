@@ -3,8 +3,12 @@ var players = [];
 var countDownToGameStart = -1;
 
 var countDownTimer = 10;
+
+<<<<<<< HEAD
 var curState = 0;
+=======
 var bossHtml;
+>>>>>>> 5c660606b2253d8df1f85cbfd2d8ce4c15e00234
 
 $(document).ready(function () {
 

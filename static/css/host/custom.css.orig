@@ -34,6 +34,7 @@
     padding-left: 1%;
 }
 
+<<<<<<< HEAD
 #countdownTimer {
     display:none;
 }
@@ -45,8 +46,7 @@
     margin-right:50px;
     bottom: 0;
     right: 0;
-}
-
+=======
 #character img { float:left; position:relative; border:0; }
 .head { top: 40px; clear:left; left: 153px; z-index: 50; }
 .leftArm { clear:left; left: 80px; z-index: 100; }
@@ -60,4 +60,5 @@
     left: -250px;
     top: -460px;
     z-index: 90;
+>>>>>>> 5c660606b2253d8df1f85cbfd2d8ce4c15e00234
 }
