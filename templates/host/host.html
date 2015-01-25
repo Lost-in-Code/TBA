@@ -20,7 +20,7 @@
         </div>
         <div id="content" class="row">
 
-            <div id="PreGameScreen">
+            <div id="PreGameScreen" class="container">
                 <div class="col-md-4 dps">
                     <div class="row">
                         <div class="col-md-5">
@@ -115,17 +115,18 @@
                 </div>
             </div>
 
-            <div id="QuestBackgroundScreen">
+            <div id="QuestBackgroundScreen" class="container">
                 <h2 id="questTitle"></h2>
                 <p id="questText"></p>
             </div>
 
-            <div id="RandEventScreen">
+            <div id="RandEventScreen" class="container">
                 <h2 id="randTitle"></h2>
                 <p id="randText"></p>
+                <img src="{{ url_for('static', filename='images/empty.png') }}" id="randImage" />
             </div>
 
-            <div id="BossStoryScreen">
+            <div id="BossStoryScreen" class="container">
                 <h1>You Encountered <span id="bossTitle"></span>!</h1>
                 <div class="row">
                     <div class="col-md-6">
@@ -139,45 +140,39 @@
             </div>
 
 
-            <div id="RoundScreen">
+            <div id="RoundScreen" class="container">
                 <div class="character"></div>
             </div>
 
-            <div id="RoundResultScreen">
+            <div id="RoundResultScreen" class="container">
                 <div class="character"></div>
                 <div class="CountdownTimer"></div>
             </div>
 
-            <div id="VictoryScreen">
+            <div id="VictoryScreen" class="container">
                 <img src="/static/images/frame_win.png" style="width: 100%; padding: 200px; margin-top: -100px;">
             </div>
 
-            <div id="DeathScreen">
+            <div id="DeathScreen" class="container">
                 <img src="/static/images/frame_die.png" style="width: 100%; padding: 200px; margin-top: -100px;">
             </div>
 
         </div>
-        <div id="playerList" class="row lowerHalf">
-            <div class="col-md-4 dps">
-                <h3>Joined DPS</h3>
-                <div class="text-danger" id="dpslist"></div>
-            </div>
-            <div class="col-md-4 tanks">
-                <h3>Joined Tanks</h3>
-                <div class="text-success" id="tanklist"></div>
-            </div>
-            <div class="col-md-4 healers">
-                <h3>Joined Healers</h3>
-                <div class="text-success" id="healerlist"></div>
+        <div id="playerStatus" class="row lowerHalf">
+            <span id="pStatusHeader">Active Players:</span>
+            <div id="playerList" class="container">
+                {% for colId in range(0, 12) %}
+                    <div id="pCol{{ colId }}" class="col-md-1"></div>
+                {% endfor %}
             </div>
         </div>
     </div>
 </div>
 
 
- <div id="countdownTimer">
-     <span>10</span>
- </div>
+<div id="countdownTimer">
+    <span>10</span>
+</div>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>

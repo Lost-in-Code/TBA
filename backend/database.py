@@ -115,8 +115,8 @@ def db_game_ready(uid):
 def db_get_host_status(room_id):
     conn = db_get_conn()
     c = conn.cursor()
-    c.execute('''SELECT nick, ready, role FROM players WHERE room_id=?''', [room_id])
-    returnValue = {"Players": [{"Nick": row[0], "Ready": row[1], "Role": row[2] } for row in c.fetchall()]}
+    c.execute('''SELECT nick, ready, role, uid FROM players WHERE room_id=?''', [room_id])
+    returnValue = {"Players": [{"Nick": row[0], "Ready": row[1], "Role": row[2], "Uid": row[3] } for row in c.fetchall()]}
     return returnValue
 
 def db_get_host_state(room_id):
