@@ -66,6 +66,7 @@ $(document).ready(function() {
             url: '/game/start',
             data: {uid: uid},
             dataType: 'json',
+            
             cache: false,
             success: function(response) {
                 console.log(response);
@@ -96,8 +97,6 @@ setInterval(function() {
         } else if (userState === 5) {
             oldState = userState;
             goWaiting();
-        } else if(!userState) {
-            joinPage();
         }
     }
     $.ajax({
@@ -231,11 +230,19 @@ function goWaiting() {
     $('.bars').show();
     if (selClass != 3) {
         $('.mana').hide();
-    }
-        
+    } 
     $('.joinPage').hide();
     $('.game').hide();
     $('.waiting').show();
+    setInterval(prikk, 500);
 }
 
-
+function prikk() {
+        if (prikk < 3) {
+            $('#prikkprikkprikk').append('.');
+            prikk++;
+        } else {
+            $('#prikkprikkprikk').html('');
+            prikk = 0;
+        }
+}
