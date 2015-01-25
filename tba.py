@@ -120,7 +120,22 @@ def generateBoss():
     rightarm = random.choice(os.listdir(os.path.join(os.path.dirname(__file__), 'static/images/boss/rightarm')))
     legs = random.choice(os.listdir(os.path.join(os.path.dirname(__file__), 'static/images/boss/legs')))
     weapon = random.choice(os.listdir(os.path.join(os.path.dirname(__file__), 'static/images/boss/weapon')))
-    return render_template('/host/boss.html', head=head, torso=torso, leftarm=leftarm, rightarm=rightarm, legs=legs, weapon=weapon)
+    return json.dumps({"head": url_for('static', filename='images/boss/head/' + head),
+                       "leftarm": url_for('static', filename='images/boss/leftarm/' + leftarm),
+                       "legs": url_for('static', filename='images/boss/legs/' + legs),
+                       "rightarm": url_for('static', filename='images/boss/rightarm/' + rightarm),
+                       "torso": url_for('static', filename='images/boss/torso/' + torso),
+                       "weapon": url_for('static', filename='images/boss/weapon/' + weapon)})
+
+@app.route("/game/boss")
+def getBoss():
+    head = random.choice(os.listdir(os.path.join(os.path.dirname(__file__), 'static/images/boss/head')))
+    torso = random.choice(os.listdir(os.path.join(os.path.dirname(__file__), 'static/images/boss/torso')))
+    leftarm = random.choice(os.listdir(os.path.join(os.path.dirname(__file__), 'static/images/boss/leftarm')))
+    rightarm = random.choice(os.listdir(os.path.join(os.path.dirname(__file__), 'static/images/boss/rightarm')))
+    legs = random.choice(os.listdir(os.path.join(os.path.dirname(__file__), 'static/images/boss/legs')))
+    weapon = random.choice(os.listdir(os.path.join(os.path.dirname(__file__), 'static/images/boss/weapon')))
+    return render_template('boss.html', head=head, torso=torso, leftarm=leftarm, rightarm=rightarm, legs=legs, weapon=weapon)
 
 if __name__ == '__main__':
     app.Debug = True

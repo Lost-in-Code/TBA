@@ -4,12 +4,13 @@ var countDownToGameStart = -1;
 
 var countDownTimer = 10;
 var curState = 0;
-var bossHtml;
+var bossImages;
 
 $(document).ready(function () {
 
     //<!-- Hide all pages -->
     $("#content").children().hide();
+    $('#joinUrl').text('http://' + location.hostname + '/join');
 
     ShowPage("PreGameScreen");
 
@@ -113,8 +114,8 @@ function GetGameState(id)
                             // update UI
                             $("#questTitle").html(response.Title);
                             $("#questText").html(response.Text);
-                            $("body").css('background-image', 'url(/static/images/' + response.Imageurl + ')');
-                            $("body").css('-webkit-background-size', 'cover');
+                            //$("body").css('background-image', 'url(/static/images/' + response.Imageurl + ')');
+                            //$("body").css('-webkit-background-size', 'cover');
 
                             // navigate to new screen
                             ShowPage("QuestBackgroundScreen");
@@ -154,8 +155,8 @@ function GetGameState(id)
                             // update UI
                             $("#randTitle").html(response.Title);
                             $("#randText").html(response.Text);
-                            $("body").css('background-image', 'url(/static/images/' + response.Imageurl + ')');
-                            $("body").css('-webkit-background-size', 'cover');
+                            //$("body").css('background-image', 'url(/static/images/' + response.Imageurl + ')');
+                            //$("body").css('-webkit-background-size', 'cover');
 							
 
                             // navigate to new screen
@@ -200,14 +201,15 @@ function GetGameState(id)
                             $.ajax({
                                 url: 'game/generateBoss',
                                 cache: false,
+                                dataType: "json",
                                 success: function (bossResponse) {
-                                    bossHtml = bossResponse;
-                                    $("#BossStoryScreen .character").html(bossHtml);
-                                    CharacterAnim("leftArm", "10", 1200);
-                                    CharacterAnim("rightArm", "10", 1200);
-                                    CharacterAnim("weapon", "10", 1200);
-                                    CharacterAnim("torso", "5", 1500);
-                                    CharacterAnim("head", "5", 1500);
+                                    bossImages = bossResponse;
+                                    $('.leftarm').attr("src", bossImages['leftarm'])
+                                    $('.legs').attr("src", bossImages['legs'])
+                                    $('.rightarm').attr("src", bossImages['rightarm'])
+                                    $('.weapon').attr("src", bossImages['weapon'])
+                                    $('.head').attr("src", bossImages['head'])
+                                    $('.torso').attr("src", bossImages['torso'])
                                 }
                             });
 
@@ -246,12 +248,6 @@ function GetGameState(id)
                         success: function(response) 
                         {
                             // update UI
-                            $("#RoundScreen .character").html(bossHtml);
-                            CharacterAnim("leftArm", "10", 1200);
-                            CharacterAnim("rightArm", "10", 1200);
-                            CharacterAnim("weapon", "10", 1200);
-                            CharacterAnim("torso", "5", 1500);
-                            CharacterAnim("head", "5", 1500);
 
                             // navigate to new screen
                             ShowPage("RoundScreen");
@@ -275,14 +271,7 @@ function GetGameState(id)
                         cache: false,
                         success: function (response)
                         {
-                            // update UI
-                            $("#RoundResultScreen .character").html(bossHtml);
-                            CharacterAnim("leftArm", "10", 1200);
-                            CharacterAnim("rightArm", "10", 1200);
-                            CharacterAnim("weapon", "10", 1200);
-                            CharacterAnim("torso", "5", 1500);
-                            CharacterAnim("head", "5", 1500);
-
+                            
                             // tell the server we are done (10 sec)
                             countDownToGameStart = 10;
                             CountDownToGameStart();

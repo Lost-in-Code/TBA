@@ -8,15 +8,6 @@ $(document).ready(function () {
 	CharacterAnim("weapon", "10", 1200);
 	CharacterAnim("torso", "5", 1500);
 	CharacterAnim("head", "5", 1500);
-	
-	$("#CharacterAttack").click(function() {
-		var attacks = ["claws.png", "shield.png", "slash.png", "swipe.png"];
-		var num = Math.floor( Math.random() * attacks.length );
-		var img = attacks[ num ];
-		
-		$(".attack").attr('src', 'static\\images\\boss\\attack\\' + img);
-		$(".attack").fadeIn().delay(500).fadeOut();
-	});
 });
 
 function CharacterAnim(elem, dist, speed) {
@@ -53,9 +44,6 @@ function CharacterAnim(elem, dist, speed) {
 </head>
 
 <body>
-<button type="button" id="CharacterAttack">Hit me bitch!</button>
-<img class="attack">
-
 <div id="character">
     <img src="{{ url_for('static', filename='images/boss/head/' + head) }}" class="head">
     <img src="{{ url_for('static', filename='images/boss/leftarm/' + leftarm) }}" class="leftarm">

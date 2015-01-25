@@ -2,6 +2,10 @@
     min-height: 100% !important;
 }
 
+body {
+    background-image: url("/static/images/stages/bg_cave_blur_10.jpg")
+}
+
 .roledescText {
     padding-bottom: 2%;
 }
@@ -47,17 +51,4 @@
     right: 0;
 }
 
-#character img { float:left; position:relative; border:0; }
-.head { top: 40px; clear:left; left: 153px; z-index: 50; }
-.leftArm { clear:left; left: 80px; z-index: 100; }
-.rightArm { left: -80px; z-index: 80; }
-.legs { top: -75px; clear: left; z-index: 70; }
-.torso { z-index: 60; }
-.weapon {
-    -ms-transform: rotate(80deg);
-    -webkit-transform: rotate(80deg);
-    transform: rotate(80deg);
-    left: -250px;
-    top: -460px;
-    z-index: 90;
-}
+

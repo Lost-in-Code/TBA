@@ -13,22 +13,29 @@
 <div id="main">
     <div id="mainContainer" class="container initial">
         <div id="headerArea">
-            <center><h1>Random Dungeon Crawler</h1><h3>Join link: {{ url_for('join') }}</h3></center>
-
-            <hr />
-
-            <center style="margin-top:10px;"><h4 class="text-danger">Game ID: <span id="gameID"></span></h4></center>
+            <div class="page-header">
+            <center><h1>Random Dungeon Crawler</h1><h3>Go to: <span id="joinUrl" class="text-danger"></span> on your mobile phone to join</h3></center>
+                </div>
+            <center style="margin-top:10px;margin-bottom:10px"><h1 class="text-danger">Game ID: <span id="gameID"></span></h1></center>
         </div>
         <div id="content" class="row">
 
             <div id="PreGameScreen">
                 <div class="col-md-4 dps">
-                    <div class="roleheader">
-                        <img src="../../static/images/icons/ic_dps.png" class="roleimg" />
-                        <h2>DPS</h2>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <img src="../../static/images/icons/ic_dps.png" class="img-responsive" />
+                        </div>
+                        <div class="col-md-7">
+                            <h1>DPS</h1>
+                        </div>
+                        <div class="col-md-16">
+                            <div id="dpsdesc" class="roledesc">
+                                <div class="roledescText">Your job is to deal as much damage to the enemy as possible.</div>
+                            </div>
+                        </div>
                     </div>
-                    <div id="dpsdesc" class="roledesc">
-                        <div class="roledescText">Your job is to deal as much damage to the enemy as possible.</div>
+                    <div class="row">
                         <span class="actionslistheader">Actions:</span>
                         <ul class="actionslist">
                             <li>
@@ -47,36 +54,48 @@
                     </div>
                 </div>
                 <div class="col-md-4 tanks">
-                    <div class="roleheader">
-                        <img src="../../static/images/icons/ic_tank.png" class="roleimg" />
-                        <h2>Tank</h2>
-                    </div>
-                    <div id="tankdesc" class="roledesc">
-                        <div class="roledescText">Your job is to control the enemy and negate the damage it can do to your group.</div>
-                        <span class="actionslistheader">Actions:</span>
-                        <ul class="actionslist">
-                            <li>
-                                <span class="actionheader">Shield Bash</span>
-                                <span class="actiondesc">You deal moderate damage to the enemy from close range.</span>
-                            </li>
-                            <li>
-                                <span class="actionheader">Taunt</span>
-                                <span class="actiondesc">You attempt to force the enemy to focus on you during the next round.</span>
-                            </li>
-                            <li>
-                                <span class="actionheader">Boost Defense</span>
-                                <span class="actiondesc">You boost your own defense for the next few rounds.</span>
-                            </li>
-                        </ul>
+                    <div class="row">
+                        <div class="col-md-5">
+                                <img src="../../static/images/icons/ic_tank.png" class="img-responsive" />
+                            </div>
+                        <div class="col-md-7">
+                            <h1>Tank</h1>
+                        </div>
+                        <div class="col-md-16">
+                            <div id="tankdesc" class="roledesc">
+                                <div class="roledescText">Your job is to control the enemy and negate the damage it can do to your group.</div>
+                                <span class="actionslistheader">Actions:</span>
+                                <ul class="actionslist">
+                                    <li>
+                                        <span class="actionheader">Shield Bash</span>
+                                        <span class="actiondesc">You deal moderate damage to the enemy from close range.</span>
+                                    </li>
+                                    <li>
+                                        <span class="actionheader">Taunt</span>
+                                        <span class="actiondesc">You attempt to force the enemy to focus on you during the next round.</span>
+                                    </li>
+                                    <li>
+                                        <span class="actionheader">Boost Defense</span>
+                                        <span class="actiondesc">You boost your own defense for the next few rounds.</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-4 healers">
-                    <div class="roleheader">
-                        <img src="../../static/images/icons/ic_heal.png" class="roleimg" />
-                        <h2>Healer</h2>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <img src="{{ url_for('static', filename='images/icons/ic_heal.png')}}" class="img-responsive" />
+                        </div>
+                        <div class="col-md-7">
+                            <h1>Healer</h1>
+                        </div>
+                        <div id="healerdesc" class="col-md-16">
+                            <div class="roledescText">Your job is to keep the group alive with powerful healing spells.</div>
+                        </div>
                     </div>
-                    <div id="healerdesc" class="roledesc">
-                        <div class="roledescText">Your job is to keep the group alive with powerful healing spells.</div>
+                    <div class="row">
                         <span class="actionslistheader">Actions:</span>
                         <ul class="actionslist">
                             <li>
@@ -107,9 +126,16 @@
             </div>
 
             <div id="BossStoryScreen">
-                <h1 id="bossTitle"></h1>
-                <p id="bossText"></p>
-                <div class="character"></div>
+                <h1>You Encountered <span id="bossTitle"></span>!</h1>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p id="bossText"></p>
+                    </div>
+                    <div class="col-md-6">
+                        <img src="/static/images/boss/boss1.png" style="width:60%" />
+                    </div>
+                </div>
+
             </div>
 
 
