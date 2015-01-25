@@ -215,9 +215,6 @@ function GetGameState(id)
                                 }
                             });
 
-							// Animate Boss
-							// 2 Do: animate
-							
                             // navigate to new screen
                             ShowPage("BossStoryScreen");
 
