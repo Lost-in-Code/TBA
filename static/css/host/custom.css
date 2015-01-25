@@ -1,3 +1,6 @@
+body, h1, h2, h3, h4 {
+    font-family: 'Slabo 27px', serif;
+}
 .dps, .healers, .tanks {
     min-height: 100% !important;
 }
@@ -13,8 +16,16 @@ body {
     width: 50%;
 }
 	
+.col-md-7 h1 {
+    margin-left: -15px
+    
+}
+
 .roledescText {
     padding-bottom: 2%;
+    font-size:16px;
+    margin-bottom:20px;
+    
 }
 
 .roleimg {
@@ -27,21 +38,31 @@ body {
 .roleheader h2 {
     vertical-align: middle;
     display: inline;
+
 }
 
 .actionslist {
     padding-left: 2%;
     padding-right: 2%;
     list-style-type: none;
+    font-size: 16px;
 }
-
-.actionheader {
-    font-style: oblique;
+#PreGameScreen {
+    margin-bottom: 20px;
+}
+#pStatusHeader {
+    margin-left:23px;
+    font-size: 18px;
     font-weight: bold;
 }
 
+.actionheader {
+    font-weight: bold;
+    font-size: 20px;
+}
+
 .actiondesc {
-    font-size: small;
+    font-size: 16px;
     padding-left: 1%;
 }
 
@@ -56,6 +77,12 @@ body {
     margin-right:50px;
     bottom: 0;
     right: 0;
+}
+
+.actionslistheader {
+    font-size: 20px;
+    margin-left:10px;
+    
 }
 
 .statusRoleImg {

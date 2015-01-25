@@ -178,8 +178,8 @@ function startRound() {
         $('.action2').text("Ranged Attack");
         $('.action3').text("Boost Attack");
     } else if (selClass === 2) {
-        $('.action1').text("Taunt");
-        $('.action2').text("Guard");
+        $('.action1').text("Guard");
+        $('.action2').text("Taunt");
         $('.action3').text("Boost Defense");
     } else if (selClass === 3) {
         $('.action1').text("Tank Heal");
