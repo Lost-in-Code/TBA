@@ -64,5 +64,5 @@ def get_host_round_result(room_id):
     boss_action = database.db_get_boss_action(room_id)
     boss_hp = database.db_get_boss_hp(room_id)
     if boss_action is not None:
-        return {"Action": data['actions'][boss_action]['name'], "hp": boss_hp}
+        return {"Action": data['actions'][int(boss_action)]['name'], "hp": boss_hp}
     else: return {"Action": "Dead"}
