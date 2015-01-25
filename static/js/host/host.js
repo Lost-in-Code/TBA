@@ -336,15 +336,19 @@ function GetNewGameState()
 
 function CountDownToGameStart()
 {
-    if (countDownToGameStart > 0) {
+    if (countDownToGameStart > 0)
+    {
         $("#countdownTimer").show();
+
         $("#countdownTimer span").fadeOut(function() {
             $(this).text(countDownToGameStart);
         }).fadeIn();
     }
 
     countDownToGameStart -= 1;
-    if (countDownToGameStart == 3) {
+
+    if (countDownToGameStart == 3)
+    {
         $('#countdownTimer span').css('position','fixed');
         $('#countdownTimer span').css('font-size','3500%');
         $('#countdownTimer span').css("left", ($(window).width()/2-$('#countdownTimer span').width()/2) + "px");
@@ -352,8 +356,11 @@ function CountDownToGameStart()
         $('#countdownTimer span').css('color','red');
 
     }
-    if (countDownToGameStart == 0) {
+
+    if (countDownToGameStart <= 0)
+    {
         countDownToGameStart = -1;
+
         $('#countdownTimer span').text("")
         $('#countdownTimer span').css('position','absolute');
         $('#countdownTimer span').css('left','');
