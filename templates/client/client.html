@@ -10,6 +10,7 @@
     <link href="{{ url_for('static', filename='css/client/custom.css') }}" rel="stylesheet">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Slabo+27px' rel='stylesheet' type='text/css'>
     <script src="{{ url_for('static', filename='js/client/client.js') }}"></script>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -23,10 +24,10 @@
    <hr />
    
    
-    <div class="container readyPage">    
-    <div class="col-md-4 col-md-offset-4">
-        <button type="button" class="btn btn-default readyButton">Ready</button>
-    </div>
+    <div class="container readyPage text-center">    
+    <p>Countdown will start when half of the players are ready.</p>
+    <button type="button" class="btn btn-default readyButton">Ready</button>
+
     </div>
     
     <div class="container bars">
@@ -43,29 +44,31 @@
         </div>
         </div>
     <div class="container joinPage">
-        <div class="col-md-4 centered">
-            <h1>Choose nick</h1>
+        <div class="col-md-4 text-center">
+            <h2>Choose nick</h2>
             <input type="text" placeholder="Nick" class="userNick">
         </div>
-        <div class="col-md-4 centered">
+        <div class="col-md-4 text-center">
             <h2>Enter game ID</h2>
-            <input type="text" placeholder="ID" class="userID">
+            <input type="tel" placeholder="ID" class="userID">
+            
         </div>
-        <div class="col-md-4 col-centered">
+        <div class="col-md-4 text-center">
             <h2>Class</h2>
             <div class="dropdown">
-                <button class="btn btn-info dropdown-toggle" type="button" id="chooseClass" data-toggle="dropdown">Choose class<span class="caret"></span></button>
-                <ul class="dropdown-menu" role="menu" aria-labelledby="chooseClass">
+                <button class="btn btn-info btn-sm dropdown-toggle" type="button" id="chooseClass" data-toggle="dropdown">Choose class<span class="caret"></span></button>
+                <ul class="dropdown-menu class-choose" role="menu" aria-labelledby="chooseClass">
                     <li id = "role_dps" role="presentation"><a role="menuitem" tabindex="-1" href="#">DPS</a></li>
                     <li id = "role_tank" role="presentation"><a role="menuitem" tabindex="-1" href="#">Tank</a></li>   
                     <li id = "role_support" role="presentation"><a role="menuitem" tabindex="-1" href="#">Healer</a></li>
                 </ul>
             </div>
         </div>
-        <button style="margin-top:50px; margin-left:15px;" class="btn btn-success" type="button" id="joinGame">Join game</button>
+        <br />
+        <center><button style="margin-top:50px; margin-left:15px;" class="btn btn-success" type="button" id="joinGame">Join game</button></center>
     </div>
     
-    <div class="container game">
+    <div class="container text-center game">
        
        <div class="btn-group-vertical attack_buttons" rule="group" aria-label="...">
        
