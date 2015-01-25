@@ -8,21 +8,25 @@ from backend.client.client import *
 
 app = Flask(__name__)
 
-@app.route('/')
-def joinGame():
-    room = request.args.get('room')
-    nick = request.args.get('nick')
-    role = request.args.get('role')
-    return json.dumps(join_game(room, nick, role))
-
 @app.route('/create_db')
 def createDb():
     create_db()
     return "OK, Database (re)created"
 
+@app.route('/')
+def join():
+    return render_template("/client/client.html")
+
 @app.route('/game/create')
 def createGame():
     return json.dumps(create_game())
+
+@app.route('/game/join')
+def joinGame():
+    room = request.args.get('room')
+    nick = request.args.get('nick')
+    role = request.args.get('role')
+    return json.dumps(join_game(room, nick, role))
 
 @app.route('/game/doClientAction')
 def doClientAction():
@@ -103,10 +107,6 @@ def getHostRoundResult():
 @app.route('/host')
 def host():
     return render_template('/host/host.html')
-
-@app.route('/join')
-def join():
-    return render_template("/client/client.html")
 
 @app.route("/game/generateBoss")
 def generateBoss():
