@@ -73,7 +73,13 @@ $(document).ready(function() {
             cache: false,
             success: function(response) {
                 console.log(response);
-                
+                if (selClass === 1) {
+                    $('#playerInfo').html("<img id=\"classImg\" alt=\"\" src=\""+$('#imagesURL').html()+"/ic_dps.png\">"+"<p class=\"infoName\">"+userNick+"</p>");
+                } else if (selClass === 2) {
+                    $('#playerInfo').html("<img id=\"classImg\" alt=\"\" src=\""+$('#imagesURL').html()+"/ic_tank.png\">"+"<p class=\"infoName\">"+userNick+"</p>");
+                } else if (selClass === 3) {
+                    $('#playerInfo').html("<img id=\"classImg\" alt=\"\" src=\""+$('#imagesURL').html()+"/ic_heal.png\">"+"<p class=\"infoName\">"+userNick+"</p>");
+                }
                 // State is 2
             },
             error: function(response) {
@@ -82,17 +88,8 @@ $(document).ready(function() {
             }
         });
     });
-    
 }); 
-
 setInterval(function() {
-    if (selClass === 1) {
-        $('#playerInfo').html("<img id=\"classImg\" alt=\"\" src=\""+$('#imagesURL').html()+"/ic_dps.png\">"+"<p class=\"infoName\">"+userNick+"</p>");
-    } else if (selClass === 2) {
-        $('#playerInfo').html("<img id=\"classImg\" alt=\"\" src=\""+$('#imagesURL').html()+"/ic_tank.png\">"+"<p class=\"infoName\">"+userNick+"</p>");
-    } else if (selClass === 3) {
-        $('#playerInfo').html("<img id=\"classImg\" alt=\"\" src=\""+$('#imagesURL').html()+"/ic_heal.png\">"+"<p class=\"infoName\">"+userNick+"</p>");
-    }
     if (userState != oldState) {
         if (userState === 1) {
             oldState = userState;
