@@ -11,7 +11,7 @@ var mana      = 100;
 
 $(document).ready(function() {
    
-	$('#hostUrl').text('http://' + location.hostname + '/host');
+	$('#hostUrl').text('http://' + document.URL + '/host');
    
     $('.readyPage').hide();
     $('.game').hide();
