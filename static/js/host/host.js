@@ -10,7 +10,7 @@ $(document).ready(function () {
 
     //<!-- Hide all pages -->
     $("#content").children().hide();
-    $('#joinUrl').text('http://' + location.hostname + '/join');
+    $('#joinUrl').text('http://' + location.hostname);
 
     ShowPage("PreGameScreen");
 
