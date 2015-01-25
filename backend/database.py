@@ -250,3 +250,14 @@ def db_get_boss_action(room_id):
     if boss is not None:
         return boss[0]
     else: return False
+
+def db_get_boss_hp(room_id):
+    conn = db_get_conn()
+    c = conn.cursor()
+    c.execute('''SELECT * FROM games WHERE room_id = ?''', [room_id])
+    if c.fetchone() is None: return False
+    c.execute('''SELECT hp FROM bosses WHERE room_id = ? AND hp > 0''', [room_id])
+    boss_hp = c.fetchone()
+    if boss_hp is not None:
+        return boss_hp[0]
+    else: return False

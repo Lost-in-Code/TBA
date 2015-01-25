@@ -55,7 +55,8 @@ def get_host_round(room_id):
     action = random.choice(actions)
     attack = data['actions'][action]
     database.db_boss_attack(room_id, action)
-    return {"Target": attack['target']}
+    boss_hp = database.db_get_boss_hp(room_id)
+    return {"Target": attack['target'], "hp": boss_hp}
 
 def get_host_round_result(room_id):
     json_data = open('content/encounters.json')
