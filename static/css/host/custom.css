@@ -52,7 +52,11 @@ body {
 }
 
 .statusRoleImg {
-    width: 24px;
-    height: 24px;
+    width: 33px;
+    height: 33px;
+    vertical-align: text-bottom;
 }
 
+.playerName {
+    font-size: 25px;
+}

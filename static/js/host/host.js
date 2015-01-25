@@ -34,6 +34,7 @@ $(document).ready(function () {
 
 function GetGameState(id)
 {
+    updatePlayers();
     $.ajax({
         url: '/game/getHostState',
         dataType: 'json',
@@ -47,7 +48,6 @@ function GetGameState(id)
                     console.log("GAME STATE 0: GROUP ASSEMBLY");
                     curState = 0;
                     // fetch players
-                    updatePlayers();
 //                    $.ajax({
 //                        url: '/game/getHostStatus?room_id=' + id,
 //                        dataType: 'json',
@@ -386,72 +386,51 @@ function updatePlayers() {
                 {
                     console.log("Player " + value.Nick + " (role "+ value.Role +") joined the game.")
 
-                    var statusRoleImg = '<img class="statusRoleImg" src="../../static/images/icons/';
+                    playerIndicator = '<div class="col-md-2">'
+                    playerIndicator += '<img class="statusRoleImg" src="/static/images/icons/';
 
                     switch (value.Role)
                     {
                         case "1":       // DPS list
-                            statusRoleImg += 'ic_dps.png" id="pImg' + value.Uid + '"';
+                            playerIndicator += 'ic_dps_clear.png" id="pImg' + value.Uid + '"';
 //                            $("#dpslist").append("<div>" + player.Nick + "</div>");
                             break;
                         case "2":       // Tank list
-                            statusRoleImg += 'ic_tank.png" id="pImg' + value.Uid + '"';
+                            playerIndicator += 'ic_tank_clear.png" id="pImg' + value.Uid + '"';
 //                            $("#tanklist").append("<div>" + player.Nick + "</div>");
                             break;
                         case "3":       // Healer list
-                            statusRoleImg += 'ic_heal.png" id="pImg' + value.Uid + '"';
+                            playerIndicator += 'ic_heal_clear.png" id="pImg' + value.Uid + '"';
 //                            $("#healerlist").append("<div>" + player.Nick + "</div>");
                             break;
                     }
 
-                    if (curState === 0 && value.Ready === 0) {
-                        statusRoleImg += 'style="display: none;" />';
-                    } else {
-                        statusRoleImg += 'style="display: inline;" />';
-                    }
+                    playerIndicator += ' />'
+                    playerIndicator += '<span class="playerName">' + value.Nick + '</span>';
 
-                    var assignedCol = Math.floor(players.length / 5);
-                    var pSpan = '<span class="playerName">' + value.Nick + '</span>';
-                    $('#pCol' + assignedCol).append('<div class="playerStatus">' + statusRoleImg + pSpan + '</div>');
-
+                    $('#playerList').append(playerIndicator);
                     players.push(value.Nick);
+
                 } else {
                     if (value.Ready === 1  && curState === 0) {
-                        $('#pImg' + value.Uid).css('display', 'inline');
-                    } else if (value.Ready === 0 && curState === 0) {
-                        $('#pImg' + value.Uid).css('display', 'none');
+                        switch (value.Role)
+                        {
+                            case "1":       // DPS list
+                                  $('#pImg' + value.Uid).attr('src', '/static/images/icons/ic_dps.png');
+    //                            $("#dpslist").append("<div>" + player.Nick + "</div>");
+                                break;
+                            case "2":       // Tank list
+                                $('#pImg' + value.Uid).attr('src', '/static/images/icons/ic_tank.png');
+    //                            $("#tanklist").append("<div>" + player.Nick + "</div>");
+                                break;
+                            case "3":       // Healer list
+                               $('#pImg' + value.Uid).attr('src', '/static/images/icons/ic_heal.png');
+    //                            $("#healerlist").append("<div>" + player.Nick + "</div>");
+                                break;
+                        }
                     }
                 }
             });
-
-            if (curState !== 0) {
-                $('.statusRoleImg').css('display', 'inline');
-            }
-//            var arrayLength = response.Players.length;
-//            for (var i = 0; i < arrayLength; i++)
-//            {
-//                var player = response.Players[i];
-//
-//                if ($.inArray(player.Nick, players) == -1)
-//                {
-//                    console.log("Player " + player.Nick + " (role "+ player.Role +") joined the game.")
-//
-//                    switch (player.Role)
-//                    {
-//                        case "1":       // DPS list
-//                            $("#dpslist").append("<div>" + player.Nick + "</div>");
-//                            break;
-//                        case "2":       // Tank list
-//                            $("#tanklist").append("<div>" + player.Nick + "</div>");
-//                            break;
-//                        case "3":       // Healer list
-//                            $("#healerlist").append("<div>" + player.Nick + "</div>");
-//                            break;
-//                    }
-//
-//                    players.push(player.Nick);
-//                }
-//            }
         }
     });
 }
