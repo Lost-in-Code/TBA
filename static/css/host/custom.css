@@ -3,6 +3,10 @@ body, h1, h2, h3, h4 {
 }
 .dps, .healers, .tanks {
     min-height: 100% !important;
+	background-color: hsla(0,0%,0%,0.3);
+	border-radius: 2px;
+	margin: 1%;
+	padding: 15px;
 }
 
 body {
@@ -12,6 +16,11 @@ body {
 
 h1 {
     font-size: 50px;
+}
+
+.classicon {
+	width: 100px;
+	height:100px;
 }
 
 .eventimg {
@@ -25,8 +34,9 @@ h1 {
     background-color: #EE5F5B;
 }
 
-.col-md-7 h1 {
+.col-md-8 h1 {
     margin-left: -15px
+	clear:left;
     
 }
 
@@ -39,9 +49,10 @@ h1 {
 }
 
 .roledescText {
+	padding-top: 2%;
     padding-bottom: 2%;
     font-size:16px;
-    margin-bottom:20px;
+    margin-bottom:15px;
     
 }
 
