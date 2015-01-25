@@ -60,3 +60,41 @@ body {
 .playerName {
     font-size: 25px;
 }
+
+.boss-container {
+    position: fixed;
+}
+
+.boss-container img {
+    width: 80%;
+}
+
+.leftarm {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100}
+.legs{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 70}
+.rightarm{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 80}
+.weapon
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 90}
+.head {
+}
+
+.torso {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 60}

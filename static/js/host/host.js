@@ -406,7 +406,7 @@ function updatePlayers() {
                     }
 
                     playerIndicator += ' />'
-                    playerIndicator += '<span class="playerName">' + value.Nick + '</span>';
+                    playerIndicator += ' <span class="playerName">' + value.Nick + '</span>';
 
                     $('#playerList').append(playerIndicator);
                     players.push(value.Nick);
