@@ -120,8 +120,8 @@ function GetGameState(id)
                             ShowPage("QuestBackgroundScreen");
 
                             // tell the server we are done (10 sec)
-                            countDownTimer = 10;
-                            CountDownTimerCountDown();
+                            countDownToGameStart = 10;
+                            CountDownToGameStart();
 
                             setTimeout(function ()
                             {
@@ -162,8 +162,8 @@ function GetGameState(id)
                             ShowPage("RandEventScreen");
 
                             // tell the server we are done (10 sec)
-                            countDownTimer = 10;
-                            CountDownTimerCountDown();
+                            countDownToGameStart = 10;
+                            CountDownToGameStart();
 
                             setTimeout(function () {
                                 $.ajax(
@@ -215,8 +215,8 @@ function GetGameState(id)
                             ShowPage("BossStoryScreen");
 
                             // tell the server we are done (10 sec)
-                            countDownTimer = 10;
-                            CountDownTimerCountDown();
+                            countDownToGameStart = 10;
+                            CountDownToGameStart();
 
                             setTimeout(function () {
                                 $.ajax(
@@ -284,8 +284,8 @@ function GetGameState(id)
                             CharacterAnim("head", "5", 1500);
 
                             // tell the server we are done (10 sec)
-                            countDownTimer = 10;
-                            CountDownTimerCountDown();
+                            countDownToGameStart = 10;
+                            CountDownToGameStart();
 
                             // navigate to new screen
                             ShowPage("RoundResultScreen");
