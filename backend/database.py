@@ -192,7 +192,7 @@ def db_do_client_action(uid, action):
     c = conn.cursor()
     c.execute('''SELECT * FROM players WHERE uid = ?''', [uid])
     if c.fetchone() is None: return False
-    c.execute('''UPDATE players SET action = ?, state = 5 WHERE uid = ?''', [action, uid])
+    c.execute('''UPDATE players SET action = ?, state = 5 WHERE uid = ?''', [str(action), uid])
     db_close_conn(conn)
     return True
 
@@ -236,7 +236,7 @@ def db_boss_attack(room_id, action):
     c = conn.cursor()
     c.execute('''SELECT * FROM games WHERE room_id = ?''', [room_id])
     if c.fetchone() is None: return False
-    c.execute('''UPDATE bosses SET action = ? WHERE room_id = ? AND hp > 0''', [action, room_id])
+    c.execute('''UPDATE bosses SET action = ? WHERE room_id = ? AND hp > 0''', [str(action), room_id])
     db_close_conn(conn)
     return True
 
