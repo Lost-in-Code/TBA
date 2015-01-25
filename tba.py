@@ -130,4 +130,4 @@ def generateBoss():
 
 if __name__ == '__main__':
     app.Debug = True
-    app.run()
+    app.run(host='0.0.0.0')
