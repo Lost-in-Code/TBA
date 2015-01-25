@@ -21,6 +21,14 @@ body {
     
 }
 
+#questText, #randText, #bossText {
+    font-size: 20px;
+}
+#questTitle, #randTitle, #bossTitle {
+    font-size: 24;
+    font-weight: bold;
+}
+
 .roledescText {
     padding-bottom: 2%;
     font-size:16px;
