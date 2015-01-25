@@ -215,6 +215,9 @@ function GetGameState(id)
                                 }
                             });
 
+							// Animate Boss
+							// 2 Do: animate
+							
                             // navigate to new screen
                             ShowPage("BossStoryScreen");
 
@@ -364,12 +367,6 @@ function ShowPage(id)
     $("#content").children().hide();
 
     $("#" + id).show();
-}
-
-function CharacterAnim(elem, dist, speed) {
-    $("."+elem).animate({ top: "+="+dist+"px" }, speed, 'linear', function () {
-        $("."+elem).animate({ top: "-="+dist+"px" }, speed, 'linear', function() { CharacterAnim(elem, dist, speed); });
-    });
 }
 
 function updatePlayers() {
