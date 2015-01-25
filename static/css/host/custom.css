@@ -36,10 +36,7 @@ h1 {
 }
 
 .eventimg {
-    vertical-align: middle;
-    display: inline;
-    height: 50%;
-    width: 50%;
+    width: 200px;
 }
 
 .hp_bar {
