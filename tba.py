@@ -8,25 +8,21 @@ from backend.client.client import *
 
 app = Flask(__name__)
 
-@app.route('/create_db')
-def createDb():
-    create_db()
-    return "OK, Database (re)created"
-
 @app.route('/')
-def index():
-    return "HEI HEI WHOOOO"
-
-@app.route('/game/create')
-def createGame():
-    return json.dumps(create_game())
-
-@app.route('/game/join')
 def joinGame():
     room = request.args.get('room')
     nick = request.args.get('nick')
     role = request.args.get('role')
     return json.dumps(join_game(room, nick, role))
+
+@app.route('/create_db')
+def createDb():
+    create_db()
+    return "OK, Database (re)created"
+
+@app.route('/game/create')
+def createGame():
+    return json.dumps(create_game())
 
 @app.route('/game/doClientAction')
 def doClientAction():
