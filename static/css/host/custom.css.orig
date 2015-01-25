@@ -2,6 +2,10 @@
     min-height: 100% !important;
 }
 
+body {
+    background-image: url("/static/images/stages/bg_cave_blur_10.jpg")
+}
+
 .roledescText {
     padding-bottom: 2%;
 }
@@ -34,7 +38,6 @@
     padding-left: 1%;
 }
 
-<<<<<<< HEAD
 #countdownTimer {
     display:none;
 }
@@ -46,7 +49,16 @@
     margin-right:50px;
     bottom: 0;
     right: 0;
+}
+
+<<<<<<< HEAD
+
 =======
+.statusRoleImg {
+    width: 24px;
+    height: 24px;
+}
+
 #character img { float:left; position:relative; border:0; }
 .head { top: 40px; clear:left; left: 153px; z-index: 50; }
 .leftArm { clear:left; left: 80px; z-index: 100; }
@@ -60,5 +72,5 @@
     left: -250px;
     top: -460px;
     z-index: 90;
->>>>>>> 5c660606b2253d8df1f85cbfd2d8ce4c15e00234
 }
+>>>>>>> d88d6b2dc02bf1901cd5acbb212f9d63f6157c40

@@ -5,35 +5,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Host game</title>
-<<<<<<< HEAD
     <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet" />
     <link href="{{ url_for('static', filename='css/host/custom.css') }}" rel="stylesheet" >
-=======
-    <link href="{{ url_for('static', filename='css/host/custom.css') }}" rel="stylesheet" >
-    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet" />
->>>>>>> 5c660606b2253d8df1f85cbfd2d8ce4c15e00234
 </head>
 <body>
 
 <div id="main">
     <div id="mainContainer" class="container initial">
         <div id="headerArea">
-            <center><h1>Random Dungeon Crawler</h1><h3>Join link: {{ url_for('join') }}</h3></center>
-
-            <hr />
-
-            <center style="margin-top:10px;"><h4 class="text-danger">Game ID: <span id="gameID"></span></h4></center>
+            <div class="page-header">
+            <center><h1>Random Dungeon Crawler</h1><h3>Go to: <span id="joinUrl" class="text-danger"></span> on your mobile phone to join</h3></center>
+                </div>
+            <center style="margin-top:10px;margin-bottom:10px"><h1 class="text-danger">Game ID: <span id="gameID"></span></h1></center>
         </div>
         <div id="content" class="row">
 
-            <div id="PreGameScreen">
+            <div id="PreGameScreen" class="container">
                 <div class="col-md-4 dps">
-                    <div class="roleheader">
-                        <img src="../../static/images/icons/ic_dps.png" class="roleimg" />
-                        <h2>DPS</h2>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <img src="../../static/images/icons/ic_dps.png" class="img-responsive" />
+                        </div>
+                        <div class="col-md-7">
+                            <h1>DPS</h1>
+                        </div>
+                        <div class="col-md-16">
+                            <div id="dpsdesc" class="roledesc">
+                                <div class="roledescText">Your job is to deal as much damage to the enemy as possible.</div>
+                            </div>
+                        </div>
                     </div>
-                    <div id="dpsdesc" class="roledesc">
-                        <div class="roledescText">Your job is to deal as much damage to the enemy as possible.</div>
+                    <div class="row">
                         <span class="actionslistheader">Actions:</span>
                         <ul class="actionslist">
                             <li>
@@ -52,36 +54,48 @@
                     </div>
                 </div>
                 <div class="col-md-4 tanks">
-                    <div class="roleheader">
-                        <img src="../../static/images/icons/ic_tank.png" class="roleimg" />
-                        <h2>Tank</h2>
-                    </div>
-                    <div id="tankdesc" class="roledesc">
-                        <div class="roledescText">Your job is to control the enemy and negate the damage it can do to your group.</div>
-                        <span class="actionslistheader">Actions:</span>
-                        <ul class="actionslist">
-                            <li>
-                                <span class="actionheader">Shield Bash</span>
-                                <span class="actiondesc">You deal moderate damage to the enemy from close range.</span>
-                            </li>
-                            <li>
-                                <span class="actionheader">Taunt</span>
-                                <span class="actiondesc">You attempt to force the enemy to focus on you during the next round.</span>
-                            </li>
-                            <li>
-                                <span class="actionheader">Boost Defense</span>
-                                <span class="actiondesc">You boost your own defense for the next few rounds.</span>
-                            </li>
-                        </ul>
+                    <div class="row">
+                        <div class="col-md-5">
+                                <img src="../../static/images/icons/ic_tank.png" class="img-responsive" />
+                            </div>
+                        <div class="col-md-7">
+                            <h1>Tank</h1>
+                        </div>
+                        <div class="col-md-16">
+                            <div id="tankdesc" class="roledesc">
+                                <div class="roledescText">Your job is to control the enemy and negate the damage it can do to your group.</div>
+                                <span class="actionslistheader">Actions:</span>
+                                <ul class="actionslist">
+                                    <li>
+                                        <span class="actionheader">Shield Bash</span>
+                                        <span class="actiondesc">You deal moderate damage to the enemy from close range.</span>
+                                    </li>
+                                    <li>
+                                        <span class="actionheader">Taunt</span>
+                                        <span class="actiondesc">You attempt to force the enemy to focus on you during the next round.</span>
+                                    </li>
+                                    <li>
+                                        <span class="actionheader">Boost Defense</span>
+                                        <span class="actiondesc">You boost your own defense for the next few rounds.</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-4 healers">
-                    <div class="roleheader">
-                        <img src="../../static/images/icons/ic_heal.png" class="roleimg" />
-                        <h2>Healer</h2>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <img src="{{ url_for('static', filename='images/icons/ic_heal.png')}}" class="img-responsive" />
+                        </div>
+                        <div class="col-md-7">
+                            <h1>Healer</h1>
+                        </div>
+                        <div id="healerdesc" class="col-md-16">
+                            <div class="roledescText">Your job is to keep the group alive with powerful healing spells.</div>
+                        </div>
                     </div>
-                    <div id="healerdesc" class="roledesc">
-                        <div class="roledescText">Your job is to keep the group alive with powerful healing spells.</div>
+                    <div class="row">
                         <span class="actionslistheader">Actions:</span>
                         <ul class="actionslist">
                             <li>
@@ -101,62 +115,71 @@
                 </div>
             </div>
 
-            <div id="QuestBackgroundScreen">
+            <div id="QuestBackgroundScreen" class="container">
                 <h2 id="questTitle"></h2>
                 <p id="questText"></p>
             </div>
 
-            <div id="RandEventScreen">
+            <div id="RandEventScreen" class="container">
                 <h2 id="randTitle"></h2>
                 <p id="randText"></p>
+                <img src="{{ url_for('static', filename='images/empty.png') }}" id="randImage" />
             </div>
 
+<<<<<<< HEAD
             <div id="BossStoryScreen">
+                <h1>You Encountered <span id="bossTitle"></span>!</h1>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p id="bossText"></p>
+                    </div>
+                    <div class="col-md-6">
+                        <img src="/static/images/boss/boss1.png" style="width:60%" />
+                    </div>
+                </div>
+
+=======
+            <div id="BossStoryScreen" class="container">
                 <h1 id="bossTitle"></h1>
                 <p id="bossText"></p>
                 <div class="character"></div>
+>>>>>>> d88d6b2dc02bf1901cd5acbb212f9d63f6157c40
             </div>
 
 
-            <div id="RoundScreen">
+            <div id="RoundScreen" class="container">
                 <div class="character"></div>
             </div>
 
-            <div id="RoundResultScreen">
+            <div id="RoundResultScreen" class="container">
                 <div class="character"></div>
                 <div class="CountdownTimer"></div>
             </div>
 
-            <div id="VictoryScreen">
+            <div id="VictoryScreen" class="container">
                 <img src="/static/images/frame_win.png" style="width: 100%; padding: 200px; margin-top: -100px;">
             </div>
 
-            <div id="DeathScreen">
+            <div id="DeathScreen" class="container">
                 <img src="/static/images/frame_die.png" style="width: 100%; padding: 200px; margin-top: -100px;">
             </div>
 
         </div>
-        <div id="playerList" class="row lowerHalf">
-            <div class="col-md-4 dps">
-                <h3>Joined DPS</h3>
-                <div class="text-danger" id="dpslist"></div>
-            </div>
-            <div class="col-md-4 tanks">
-                <h3>Joined Tanks</h3>
-                <div class="text-success" id="tanklist"></div>
-            </div>
-            <div class="col-md-4 healers">
-                <h3>Joined Healers</h3>
-                <div class="text-success" id="healerlist"></div>
+        <div id="playerStatus" class="row lowerHalf">
+            <span id="pStatusHeader">Active Players:</span>
+            <div id="playerList" class="container">
+                {% for colId in range(0, 12) %}
+                    <div id="pCol{{ colId }}" class="col-md-1"></div>
+                {% endfor %}
             </div>
         </div>
     </div>
 </div>
 
 
- <div id="countdownTimer">
-     <span>10</span>
- </div>
+<div id="countdownTimer">
+    <span>10</span>
+</div>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>

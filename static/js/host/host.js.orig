@@ -3,17 +3,14 @@ var players = [];
 var countDownToGameStart = -1;
 
 var countDownTimer = 10;
-
-<<<<<<< HEAD
 var curState = 0;
-=======
-var bossHtml;
->>>>>>> 5c660606b2253d8df1f85cbfd2d8ce4c15e00234
+var bossImages;
 
 $(document).ready(function () {
 
     //<!-- Hide all pages -->
     $("#content").children().hide();
+    $('#joinUrl').text('http://' + location.hostname + '/join');
 
     ShowPage("PreGameScreen");
 
@@ -50,44 +47,46 @@ function GetGameState(id)
                     console.log("GAME STATE 0: GROUP ASSEMBLY");
                     curState = 0;
                     // fetch players
-                    $.ajax({
-                        url: '/game/getHostStatus?room_id=' + id,
-                        dataType: 'json',
-                        cache: false,
-                        success: function (response)
-                        {
-                            // update UI
-                            // add the player in the right group onscreen
-                            var arrayLength = response.Players.length;
-                            for (var i = 0; i < arrayLength; i++)
-                            {                                
-                                var player = response.Players[i];                              
-
-                                if ($.inArray(player.Nick, players) == -1)
-                                {
-                                    console.log("Player " + player.Nick + " (role "+ player.Role +") joined the game.")
-
-                                    switch (player.Role) 
-                                    {
-                                        case "1":       // DPS list
-                                            $("#dpslist").append("<div>" + player.Nick + "</div>");
-                                            break;
-                                        case "2":       // Tank list
-                                            $("#tanklist").append("<div>" + player.Nick + "</div>");
-                                            break;
-                                        case "3":       // Healer list
-                                            $("#healerlist").append("<div>" + player.Nick + "</div>");
-                                            break;
-                                    }
-
-                                    players.push(player.Nick);
-                                }                                
-                            }
-
-                            // fetch new status
-                            GetNewGameState();
-                        }
-                    });
+                    updatePlayers();
+//                    $.ajax({
+//                        url: '/game/getHostStatus?room_id=' + id,
+//                        dataType: 'json',
+//                        cache: false,
+//                        success: function (response)
+//                        {
+//                            // update UI
+//                            // add the player in the right group onscreen
+//                            var arrayLength = response.Players.length;
+//                            for (var i = 0; i < arrayLength; i++)
+//                            {
+//                                var player = response.Players[i];
+//
+//                                if ($.inArray(player.Nick, players) == -1)
+//                                {
+//                                    console.log("Player " + player.Nick + " (role "+ player.Role +") joined the game.")
+//
+//                                    switch (player.Role)
+//                                    {
+//                                        case "1":       // DPS list
+//                                            $("#dpslist").append("<div>" + player.Nick + "</div>");
+//                                            break;
+//                                        case "2":       // Tank list
+//                                            $("#tanklist").append("<div>" + player.Nick + "</div>");
+//                                            break;
+//                                        case "3":       // Healer list
+//                                            $("#healerlist").append("<div>" + player.Nick + "</div>");
+//                                            break;
+//                                    }
+//
+//                                    players.push(player.Nick);
+//                                }
+//                            }
+//
+//                            // fetch new status
+//                            GetNewGameState();
+//                        }
+//                    });
+                    GetNewGameState();
 
                     break;
 
@@ -117,15 +116,15 @@ function GetGameState(id)
                             // update UI
                             $("#questTitle").html(response.Title);
                             $("#questText").html(response.Text);
-                            $("body").css('background-image', 'url(/static/images/' + response.Imageurl + ')');
-                            $("body").css('-webkit-background-size', 'cover');
+                            //$("body").css('background-image', 'url(/static/images/' + response.Imageurl + ')');
+                            //$("body").css('-webkit-background-size', 'cover');
 
                             // navigate to new screen
                             ShowPage("QuestBackgroundScreen");
 
                             // tell the server we are done (10 sec)
-                            countDownTimer = 10;
-                            CountDownTimerCountDown();
+                            countDownToGameStart = 10;
+                            CountDownToGameStart();
 
                             setTimeout(function ()
                             {
@@ -158,16 +157,22 @@ function GetGameState(id)
                             // update UI
                             $("#randTitle").html(response.Title);
                             $("#randText").html(response.Text);
-                            $("body").css('background-image', 'url(/static/images/' + response.Imageurl + ')');
-                            $("body").css('-webkit-background-size', 'cover');
+<<<<<<< HEAD
+                            //$("body").css('background-image', 'url(/static/images/' + response.Imageurl + ')');
+                            //$("body").css('-webkit-background-size', 'cover');
+=======
+                            $("#randImage").attr('src', response.Imageurl);
+//                            $("body").css('background-image', 'url(/static/images/' + response.Imageurl + ')');
+//                            $("body").css('-webkit-background-size', 'cover');
+>>>>>>> d88d6b2dc02bf1901cd5acbb212f9d63f6157c40
 							
 
                             // navigate to new screen
                             ShowPage("RandEventScreen");
 
                             // tell the server we are done (10 sec)
-                            countDownTimer = 10;
-                            CountDownTimerCountDown();
+                            countDownToGameStart = 10;
+                            CountDownToGameStart();
 
                             setTimeout(function () {
                                 $.ajax(
@@ -204,14 +209,15 @@ function GetGameState(id)
                             $.ajax({
                                 url: 'game/generateBoss',
                                 cache: false,
+                                dataType: "json",
                                 success: function (bossResponse) {
-                                    bossHtml = bossResponse;
-                                    $("#BossStoryScreen .character").html(bossHtml);
-                                    CharacterAnim("leftArm", "10", 1200);
-                                    CharacterAnim("rightArm", "10", 1200);
-                                    CharacterAnim("weapon", "10", 1200);
-                                    CharacterAnim("torso", "5", 1500);
-                                    CharacterAnim("head", "5", 1500);
+                                    bossImages = bossResponse;
+                                    $('.leftarm').attr("src", bossImages['leftarm'])
+                                    $('.legs').attr("src", bossImages['legs'])
+                                    $('.rightarm').attr("src", bossImages['rightarm'])
+                                    $('.weapon').attr("src", bossImages['weapon'])
+                                    $('.head').attr("src", bossImages['head'])
+                                    $('.torso').attr("src", bossImages['torso'])
                                 }
                             });
 
@@ -219,8 +225,8 @@ function GetGameState(id)
                             ShowPage("BossStoryScreen");
 
                             // tell the server we are done (10 sec)
-                            countDownTimer = 10;
-                            CountDownTimerCountDown();
+                            countDownToGameStart = 10;
+                            CountDownToGameStart();
 
                             setTimeout(function () {
                                 $.ajax(
@@ -250,12 +256,6 @@ function GetGameState(id)
                         success: function(response) 
                         {
                             // update UI
-                            $("#RoundScreen .character").html(bossHtml);
-                            CharacterAnim("leftArm", "10", 1200);
-                            CharacterAnim("rightArm", "10", 1200);
-                            CharacterAnim("weapon", "10", 1200);
-                            CharacterAnim("torso", "5", 1500);
-                            CharacterAnim("head", "5", 1500);
 
                             // navigate to new screen
                             ShowPage("RoundScreen");
@@ -279,17 +279,10 @@ function GetGameState(id)
                         cache: false,
                         success: function (response)
                         {
-                            // update UI
-                            $("#RoundResultScreen .character").html(bossHtml);
-                            CharacterAnim("leftArm", "10", 1200);
-                            CharacterAnim("rightArm", "10", 1200);
-                            CharacterAnim("weapon", "10", 1200);
-                            CharacterAnim("torso", "5", 1500);
-                            CharacterAnim("head", "5", 1500);
-
+                            
                             // tell the server we are done (10 sec)
-                            countDownTimer = 10;
-                            CountDownTimerCountDown();
+                            countDownToGameStart = 10;
+                            CountDownToGameStart();
 
                             // navigate to new screen
                             ShowPage("RoundResultScreen");
@@ -382,5 +375,89 @@ function ShowPage(id)
 function CharacterAnim(elem, dist, speed) {
     $("."+elem).animate({ top: "+="+dist+"px" }, speed, 'linear', function () {
         $("."+elem).animate({ top: "-="+dist+"px" }, speed, 'linear', function() { CharacterAnim(elem, dist, speed); });
+    });
+}
+
+function updatePlayers() {
+    $.ajax({
+        url: '/game/getHostStatus?room_id=' + gameID,
+        dataType: 'json',
+        cache: false,
+        success: function (response)
+        {
+            // update UI
+            // add the player in the right group onscreen
+            $.each(response.Players, function (key, value) {
+                if ($.inArray(value.Nick, players) == -1)
+                {
+                    console.log("Player " + value.Nick + " (role "+ value.Role +") joined the game.")
+
+                    var statusRoleImg = '<img class="statusRoleImg" src="../../static/images/icons/';
+
+                    switch (value.Role)
+                    {
+                        case "1":       // DPS list
+                            statusRoleImg += 'ic_dps.png" id="pImg' + value.Uid + '"';
+//                            $("#dpslist").append("<div>" + player.Nick + "</div>");
+                            break;
+                        case "2":       // Tank list
+                            statusRoleImg += 'ic_tank.png" id="pImg' + value.Uid + '"';
+//                            $("#tanklist").append("<div>" + player.Nick + "</div>");
+                            break;
+                        case "3":       // Healer list
+                            statusRoleImg += 'ic_heal.png" id="pImg' + value.Uid + '"';
+//                            $("#healerlist").append("<div>" + player.Nick + "</div>");
+                            break;
+                    }
+
+                    if (curState === 0 && value.Ready === 0) {
+                        statusRoleImg += 'style="display: none;" />';
+                    } else {
+                        statusRoleImg += 'style="display: inline;" />';
+                    }
+
+                    var assignedCol = Math.floor(players.length / 5);
+                    var pSpan = '<span class="playerName">' + value.Nick + '</span>';
+                    $('#pCol' + assignedCol).append('<div class="playerStatus">' + statusRoleImg + pSpan + '</div>');
+
+                    players.push(value.Nick);
+                } else {
+                    if (value.Ready === 1  && curState === 0) {
+                        $('#pImg' + value.Uid).css('display', 'inline');
+                    } else if (value.Ready === 0 && curState === 0) {
+                        $('#pImg' + value.Uid).css('display', 'none');
+                    }
+                }
+            });
+
+            if (curState !== 0) {
+                $('.statusRoleImg').css('display', 'inline');
+            }
+//            var arrayLength = response.Players.length;
+//            for (var i = 0; i < arrayLength; i++)
+//            {
+//                var player = response.Players[i];
+//
+//                if ($.inArray(player.Nick, players) == -1)
+//                {
+//                    console.log("Player " + player.Nick + " (role "+ player.Role +") joined the game.")
+//
+//                    switch (player.Role)
+//                    {
+//                        case "1":       // DPS list
+//                            $("#dpslist").append("<div>" + player.Nick + "</div>");
+//                            break;
+//                        case "2":       // Tank list
+//                            $("#tanklist").append("<div>" + player.Nick + "</div>");
+//                            break;
+//                        case "3":       // Healer list
+//                            $("#healerlist").append("<div>" + player.Nick + "</div>");
+//                            break;
+//                    }
+//
+//                    players.push(player.Nick);
+//                }
+//            }
+        }
     });
 }
