@@ -1,7 +1,7 @@
 var gameID;
 var players = [];
 var countDownToGameStart = -1;
-
+var gotRoundInfo = false;
 var countDownTimer = 10;
 var curState = 0;
 var bossImages;
@@ -96,6 +96,9 @@ function GetGameState(id)
                         countDownToGameStart = 10;
                         CountDownToGameStart();
                         curState = 1;
+                        $('h1.text-danger').css('position', 'absolute');
+                        $('h1.text-danger').css('top', '0');
+                        $('h1.text-danger').css('left', '0');
                     }
                     // fetch new status
                     GetNewGameState();
@@ -231,6 +234,7 @@ function GetGameState(id)
                                     data: { room_id: id },
                                     cache: false,
                                     success: function (response) {
+                                        gotRoundInfo = false;
                                         GetNewGameState();
                                     }
                                 });
@@ -242,30 +246,32 @@ function GetGameState(id)
                 case 5:
 
                     console.log("GAME STATE 5: ROUND");
-
-                    $.ajax(
-                    {
-                        url: '/game/getHostRound',
-                        data: { room_id: gameID },
-                        dataType: 'json',
-                        cache: false,
-                        success: function(response) 
+                    if(gotRoundInfo == false) {
+                        gotRoundInfo = true;
+                        $.ajax(
                         {
-                            // update UI
+                            url: '/game/getHostRound',
+                            data: { room_id: gameID },
+                            dataType: 'json',
+                            cache: false,
+                            success: function(response)
+                            {
+                                // update UI
 
-                            // navigate to new screen
-                            ShowPage("RoundScreen");
-                            console.log(response);
-                            $('#roundText').text("The enemy is focusing on " + response.Target.target);
-                            // fetch new status
-                            GetNewGameState();
-                        }
-                    });                    
-
+                                // navigate to new screen
+                                gotRoundInfo = true;
+                                ShowPage("RoundScreen");
+                                console.log(response);
+                                $('#roundText').text("The enemy is focusing on " + response.Target.target);
+                                // fetch new status
+                            }
+                        });
+                    }
+                    GetNewGameState()
                     break;
 
                 case 6:
-
+                    gotRoundInfo = false;
                     console.log("GAME STATE 6: ROUND RESULT");
 
                     $.ajax(
@@ -285,10 +291,17 @@ function GetGameState(id)
                             ShowPage("RoundResultScreen");
 
                             hp = response.hp;
-                            $('.hp_bar').text(hp + "%");
-                            $('.hp_bar').css("width", hp+"%");
+                            $('.hp_bar').text(Math.max(hp, 0) + "%");
+                            $('.hp_bar').css("width", Math.max(hp, 0)+"%");
 
                             $('#roundResultText').text("The enemy used " + response.Action);
+
+                            if (response.Action == "Focused Attack") {
+                                $("#slash").fadeIn().fadeOut();
+                            }
+                            else if (response.Action == "Swipe Attack"){
+                                $("#swipe").fadeIn().fadeOut();
+                            }
 
                             setTimeout(function () {
                                 $.ajax(
