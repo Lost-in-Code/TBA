@@ -10,6 +10,7 @@ var mana      = 100;
 
 
 $(document).ready(function() {
+   
     $('.readyPage').hide();
     $('.game').hide();
     $('.waiting').hide();
@@ -70,6 +71,7 @@ $(document).ready(function() {
             cache: false,
             success: function(response) {
                 console.log(response);
+                
                 // State is 2
             },
             error: function(response) {
@@ -78,10 +80,18 @@ $(document).ready(function() {
             }
         });
     });
+    
 }); 
 
 setInterval(function() {
-   if (userState != oldState) {
+    if (selClass === 1) {
+        $('#playerInfo').html("<img id=\"classImg\" alt=\"\" src=\""+$('#imagesURL').html()+"/ic_dps.png\">"+"<p id=\"infoName\">"+userNick+"</p>");
+    } else if (selClass === 2) {
+        $('#playerInfo').html("<img id=\"classImg\" alt=\"\" src=\""+$('#imagesURL').html()+"/ic_tank.png\">"+"<p id=\"infoName\">"+userNick+"</p>");
+    } else if (selClass === 3) {
+        $('#playerInfo').html("<img id=\"classImg\" alt=\"\" src=\""+$('#imagesURL').html()+"/ic_heal.png\">"+"<p id=\"infoName\">"+userNick+"</p>");
+    }
+    if (userState != oldState) {
         if (userState === 1) {
             oldState = userState;
             readyPage();
@@ -97,8 +107,12 @@ setInterval(function() {
         } else if (userState === 5) {
             oldState = userState;
             goWaiting();
+        } else if (userState === 0) {
+            oldState = userState;
+            joinPage();
         }
     }
+    
     $.ajax({
         url: '/game/getPlayerState',
         data: {uid: uid},
@@ -164,8 +178,8 @@ function startRound() {
         $('.action2').text("Ranged Attack");
         $('.action3').text("Boost Attack");
     } else if (selClass === 2) {
-        $('.action1').text("Taunt");
-        $('.action2').text("Guard");
+        $('.action1').text("Guard");
+        $('.action2').text("Taunt");
         $('.action3').text("Boost Defense");
     } else if (selClass === 3) {
         $('.action1').text("Tank Heal");

@@ -375,12 +375,6 @@ function ShowPage(id)
     $("#" + id).show();
 }
 
-function CharacterAnim(elem, dist, speed) {
-    $("."+elem).animate({ top: "+="+dist+"px" }, speed, 'linear', function () {
-        $("."+elem).animate({ top: "-="+dist+"px" }, speed, 'linear', function() { CharacterAnim(elem, dist, speed); });
-    });
-}
-
 function updatePlayers() {
     $.ajax({
         url: '/game/getHostStatus?room_id=' + gameID,
