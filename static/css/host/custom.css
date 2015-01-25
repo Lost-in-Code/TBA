@@ -33,3 +33,16 @@
     font-size: small;
     padding-left: 1%;
 }
+
+#countdownTimer {
+    display:none;
+}
+
+#countdownTimer span {
+    font-size: 1200%;
+    position: absolute;
+    margin: 20px;
+    margin-right:50px;
+    bottom: 0;
+    right: 0;
+}

@@ -1,8 +1,10 @@
 var gameID;
 var players = [];
-var countDownToGameStart = null;
+var countDownToGameStart = -1;
 
 var countDownTimer = 10;
+
+var curState = 0;
 
 $(document).ready(function () {
 
@@ -42,7 +44,7 @@ function GetGameState(id)
             {
                 case 0:
                     console.log("GAME STATE 0: GROUP ASSEMBLY");
-
+                    curState = 0;
                     // fetch players
                     $.ajax({
                         url: '/game/getHostStatus?room_id=' + id,
@@ -86,16 +88,12 @@ function GetGameState(id)
                     break;
 
                 case 1:
-
-                    console.log("GAME STATE 1: COUNT DOWN");
-
-                    if (countDownToGameStart == null)
-                    {
+                    if (curState != 1) {
+                        console.log("GAME STATE 1: COUNT DOWN");
                         countDownToGameStart = 10;
-
                         CountDownToGameStart();
+                        curState = 1;
                     }
-
                     // fetch new status
                     GetNewGameState();
 
@@ -312,24 +310,38 @@ function GetNewGameState()
 
 function CountDownToGameStart()
 {
-    $("#countDown").text(countDownToGameStart);
+    if (countDownToGameStart > 0) {
+        $("#countdownTimer").show();
+        $("#countdownTimer span").fadeOut(function() {
+            $(this).text(countDownToGameStart);
+        }).fadeIn();
+    }
 
     countDownToGameStart -= 1;
+    if (countDownToGameStart == 3) {
+        $('#countdownTimer span').css('position','fixed');
+        $('#countdownTimer span').css('font-size','3500%');
+        $('#countdownTimer span').css("left", ($(window).width()/2-$('#countdownTimer span').width()/2) + "px");
+        $('#countdownTimer span').css("top", ($(window).height()/2-$('#countdownTimer span').height()/2) + "px");
+        $('#countdownTimer span').css('color','red');
 
-    if (countDownToGameStart < 0) countDownToGameStart = 0;
-
-    setTimeout(CountDownToGameStart, 1000);
+    }
+    if (countDownToGameStart == 0) {
+        countDownToGameStart = -1;
+        $('#countdownTimer span').text("")
+        $('#countdownTimer span').css('position','absolute');
+        $('#countdownTimer span').css('left','');
+        $('#countdownTimer span').css('top','');
+        $('#countdownTimer span').css('right','0');
+        $('#countdownTimer span').css('bottom','0');
+        $('#countdownTimer span').css('font-size','1200%');
+        $('#countdownTimer span').css('color','');
+        $("#countdownTimer").hide();
+        return;
+    } else {
+        setTimeout(CountDownToGameStart, 1000);
+    }
 }
-
-function CountDownTimerCountDown()
-{
-    $(".CountdownTimer").text(countDownTimer);
-
-    countDownTimer -= 1;
-
-    if (countDownTimer >= 0) setTimeout(CountDownTimerCountDown, 1000);
-}
-
 function ShowPage(id)
 {
     $("#content").children().hide();
