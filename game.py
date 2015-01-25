@@ -99,7 +99,7 @@ def round_countdown_done(room_id):
             elif player['action'] == "3":
                 mana_used = +50
             c.execute('''UPDATE players SET hp = ?, action = 0, mana = ? WHERE uid = ? AND hp > 0''', [min(player['hp'] - dmg_taken_group + healing_done_group, 100),
-                                                                                            min(player['mana'] + mana_used, 100)])
+                                                                                            min(player['mana'] + mana_used, 100), player['uid']])
     logging.info("Updated round state for players in game: %s" % (room_id))
     print("Updated round state for players in game: %s" % (room_id))
     db_close_conn(conn)
