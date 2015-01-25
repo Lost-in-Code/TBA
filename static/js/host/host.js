@@ -10,7 +10,7 @@ $(document).ready(function () {
 
     //<!-- Hide all pages -->
     $("#content").children().hide();
-    $('#joinUrl').text('http://' + location.hostname + '/join');
+    $('#joinUrl').text('http://' + location.hostname);
 
     ShowPage("PreGameScreen");
 
@@ -212,8 +212,8 @@ function GetGameState(id)
                                     $('.weapon').attr("src", bossImages['weapon'])
                                     $('.head').attr("src", bossImages['head'])
                                     $('.torso').attr("src", bossImages['torso'])
-                                    $('.hp_bar').text(hp + "%");
-                                    $('.hp_bar').css("width", hp+"%");
+                                    $('.hp_bar').text(100 + "%");
+                                    $('.hp_bar').css("width", 100+"%");
                                 }
                             });
 

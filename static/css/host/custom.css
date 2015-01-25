@@ -85,6 +85,7 @@ h1 {
 
 #countdownTimer {
     display:none;
+	z-index: 999;
 }
 
 #countdownTimer span {
@@ -94,6 +95,7 @@ h1 {
     margin-right:50px;
     bottom: 0;
     right: 0;
+	z-index: 999;
 }
 
 .actionslistheader {
@@ -114,6 +116,7 @@ h1 {
 
 .boss-container {
     position: fixed;
+	z-index: 100;
 }
 
 .boss-container img {
