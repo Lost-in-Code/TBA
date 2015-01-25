@@ -119,12 +119,17 @@
                 <h2 id="questTitle"></h2>
                 <p id="questText"></p>
             </div>
-
-            <div id="RandEventScreen" class="container">
-                <h2 id="randTitle"></h2>
-                <p id="randText"></p>
-                <img src="{{ url_for('static', filename='images/empty.png') }}" id="randImage" />
-            </div>
+			
+			
+				<div id="RandEventScreen" class="container">
+					<h2 id="randTitle"></h2>
+					<div class="col-md-6">
+						<img class="eventimg" src="" />
+					</div>
+					<div class="col-md-6">		
+						<p id="randText"></p>
+					</div>
+				</div>
 
             <div id="BossStoryScreen" class="container">
                 <h1>You Encountered <span id="bossTitle"></span>!</h1>

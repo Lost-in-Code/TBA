@@ -6,6 +6,13 @@ body {
     background-image: url("/static/images/stages/bg_cave_blur_10.jpg")
 }
 
+.eventimg {
+    vertical-align: middle;
+    display: inline;
+    height: 50%;
+    width: 50%;
+}
+	
 .roledescText {
     padding-bottom: 2%;
 }
