@@ -156,7 +156,8 @@ function GetGameState(id)
                             // update UI
                             $("#randTitle").html(response.Title);
                             $("#randText").html(response.Text);
-							//$("#randImg").html('background-image', 'url(/static/images/' + response.Imageurl + ')');
+                            $("body").css('background-image', 'url(/static/images/' + response.Imageurl + ')');
+                            $("body").css('-webkit-background-size', 'cover');
 							
 
                             // navigate to new screen
