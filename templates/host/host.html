@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Host game</title>
-    <link href="{{ url_for('static', filename='css/host/custom.css }}" rel="stylesheet" >
-    <link href="{{ url_for('static', filename='css/bootstrap.min.css }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/host/custom.css') }}" rel="stylesheet" >
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet" />
 </head>
 <body>
 
@@ -128,20 +128,18 @@
             </div>
 
         </div>
-        <div id="playerList">
-            <div class="row lowerHalf">
-                <div class="col-md-4 dps">
-                    <h3>Joined DPS</h3>
-                    <div class="text-danger" id="dpslist"></div>
-                </div>
-                <div class="col-md-4 tanks">
-                    <h3>Joined Tanks</h3>
-                    <div class="text-success" id="tanklist"></div>
-                </div>
-                <div class="col-md-4 healers">
-                    <h3>Joined Healers</h3>
-                    <div class="text-success" id="healerlist"></div>
-                </div>
+        <div id="playerList" class="row lowerHalf">
+            <div class="col-md-4 dps">
+                <h3>Joined DPS</h3>
+                <div class="text-danger" id="dpslist"></div>
+            </div>
+            <div class="col-md-4 tanks">
+                <h3>Joined Tanks</h3>
+                <div class="text-success" id="tanklist"></div>
+            </div>
+            <div class="col-md-4 healers">
+                <h3>Joined Healers</h3>
+                <div class="text-success" id="healerlist"></div>
             </div>
         </div>
         <div id="footerArea">
