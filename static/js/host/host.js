@@ -96,9 +96,12 @@ function GetGameState(id)
                         countDownToGameStart = 10;
                         CountDownToGameStart();
                         curState = 1;
-                        $('h1.text-danger').css('position', 'absolute');
-                        $('h1.text-danger').css('top', '0');
-                        $('h1.text-danger').css('left', '0');
+                        $('h1.text-danger').fadeOut(400, function() {
+                            $('h1.text-danger').css('position', 'absolute');
+                            $('h1.text-danger').css('top', '0');
+                            $('h1.text-danger').css('left', '0');
+                            $('h1.text-danger').fadeIn(400);
+                        });
                     }
                     // fetch new status
                     GetNewGameState();
