@@ -56,12 +56,13 @@ def get_host_round(room_id):
     attack = data['actions'][action]
     database.db_boss_attack(room_id, action)
     boss_hp = database.db_get_boss_hp(room_id)
-    return {"Target": attack['target'], "hp": boss_hp}
+    return {"Target": attack, "hp": boss_hp}
 
 def get_host_round_result(room_id):
     json_data = open('content/encounters.json')
     data = json.load(json_data)
     boss_action = database.db_get_boss_action(room_id)
+    boss_hp = database.db_get_boss_hp(room_id)
     if boss_action is not None:
-        return {"Action": data['actions'][boss_action]['name']}
+        return {"Action": data['actions'][boss_action]['name'], "hp": boss_hp}
     else: return {"Action": "Dead"}

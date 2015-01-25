@@ -212,6 +212,8 @@ function GetGameState(id)
                                     $('.weapon').attr("src", bossImages['weapon'])
                                     $('.head').attr("src", bossImages['head'])
                                     $('.torso').attr("src", bossImages['torso'])
+                                    $('.hp_bar').text(hp + "%");
+                                    $('.hp_bar').css("width", hp+"%");
                                 }
                             });
 
@@ -253,7 +255,8 @@ function GetGameState(id)
 
                             // navigate to new screen
                             ShowPage("RoundScreen");
-
+                            console.log(response);
+                            $('#roundText').text("The enemy is focusing on " + response.Target.target);
                             // fetch new status
                             GetNewGameState();
                         }
@@ -280,6 +283,12 @@ function GetGameState(id)
 
                             // navigate to new screen
                             ShowPage("RoundResultScreen");
+
+                            hp = response.hp;
+                            $('.hp_bar').text(hp + "%");
+                            $('.hp_bar').css("width", hp+"%");
+
+                            $('#roundResultText').text("The enemy used " + response.Action);
 
                             setTimeout(function () {
                                 $.ajax(
