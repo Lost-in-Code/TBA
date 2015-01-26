@@ -4,8 +4,8 @@ from flask import Flask, request, render_template, url_for
 import json
 from game import *
 from backend.database import *
-from backend.host.host import *
-from backend.client.client import *
+from backend.host import *
+from backend.client import *
 
 app = Flask(__name__)
 
