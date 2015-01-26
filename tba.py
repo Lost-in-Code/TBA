@@ -1,7 +1,8 @@
 __author__ = 'Atle'
-import os, random
+import os, random, threading
 from flask import Flask, request, render_template, url_for
 import json
+from game import *
 from backend.database import *
 from backend.host.host import *
 from backend.client.client import *
@@ -125,5 +126,10 @@ def generateBoss():
 
 
 if __name__ == '__main__':
+    #start the game thread
+    t = threading.Thread(target=loop)
+    t.start()
+    
+    #start the web server
     app.Debug = True
     app.run(host='0.0.0.0')
