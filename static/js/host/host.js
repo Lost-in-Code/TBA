@@ -267,6 +267,7 @@ function GetGameState(id)
                                 console.log(response);
                                 $('#roundText').text("The enemy is focusing on " + response.Target.target);
                                 // fetch new status
+				GetNewGameState()
                             }
                         });
                     }

@@ -7,6 +7,8 @@ from backend.host.host import *
 from backend.client.client import *
 
 app = Flask(__name__)
+os.chdir(os.path.dirname(os.path.realpath(__file__)))
+
 
 @app.route('/create_db')
 def createDb():
