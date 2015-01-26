@@ -106,25 +106,33 @@ def round_countdown_done(room_id):
 
 def loop():
     time.sleep(2)
+    
     conn = db_get_conn()
     conn.row_factory = sqlite3.Row
+    
     c = conn.cursor()
     c.execute('''SELECT * FROM games WHERE ready_countdown = 1 and state=0''')
+    
     rows = c.fetchall()
+    
     for row in rows:
         c.execute('''UPDATE games SET state=1 WHERE room_id=?''', [row["room_id"]])
         t = Timer(15.0,ready_countdown_done, args=[row["room_id"]])
         t.start()
         logging.info("Started timer for game: %s" % (row["room_id"]))
         print("Started timer for game: %s" % (row["room_id"]))
+    
     c.execute('''SELECT * FROM games WHERE state = 5 and round_countdown = 0''')
+    
     rows = c.fetchall()
+    
     for row in rows:
         c.execute('''UPDATE games SET round_countdown = 1 WHERE room_id = ?''', [row["room_id"]])
         t = Timer(15.0, round_countdown_done, args=[row["room_id"]])
         t.start()
         logging.info("Started timer for game: %s" % (row["room_id"]))
         print("Started timer for game: %s" % (row["room_id"]))
+    
     db_close_conn(conn)
 
 if __name__ == '__main__':
